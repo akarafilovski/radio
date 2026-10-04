@@ -1,0 +1,20 @@
+from playwright.sync_api import sync_playwright
+with sync_playwright() as p:
+    b = p.chromium.launch(channel='chrome')
+    pg = b.new_context(viewport={'width': 390, 'height': 844}, is_mobile=True, has_touch=True).new_page()
+    errs = []
+    pg.on('pageerror', lambda e: errs.append(str(e)))
+    pg.goto('http://localhost:8766/')
+    pg.wait_for_timeout(2000)
+    print('open: tiles', pg.locator('.app').count(), pg.locator('[data-toggle="countries"]').inner_text().replace('\n', ' '))
+    pg.locator('[data-toggle="countries"]').click()
+    pg.wait_for_timeout(300)
+    print('collapsed: tiles', pg.locator('.app').count(), 'aria', pg.locator('[data-toggle="countries"]').get_attribute('aria-expanded'))
+    pg.reload(); pg.wait_for_timeout(1800)
+    print('after reload: tiles', pg.locator('.app').count())
+    pg.fill('#q', 'cro'); pg.wait_for_timeout(500)
+    print('searching while collapsed: tiles', pg.locator('.app').count(), '(search always shows matches)')
+    pg.fill('#q', ''); pg.wait_for_timeout(300)
+    pg.locator('[data-toggle="countries"]').click(); pg.wait_for_timeout(300)
+    print('reopened: tiles', pg.locator('.app').count(), errs)
+    b.close()
