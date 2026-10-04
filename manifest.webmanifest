@@ -1,6 +1,6 @@
 {
-  "name": "aXar Radio",
-  "short_name": "aXar Radio",
+  "name": "World Radio",
+  "short_name": "World Radio",
   "description": "Live radio, free and without ads.",
   "start_url": "./",
   "scope": "./",

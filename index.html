@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>aXar Radio</title>
+<title>World Radio</title>
 <meta name="description" content="Live radio from 239 countries in your browser. Search a country, tap a station and listen. Free, no ads, no sign-up.">
 <meta name="theme-color" content="#000000">
 <link rel="manifest" href="manifest.webmanifest">
@@ -12,8 +12,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="aXar Radio">
-<meta property="og:title" content="aXar Radio">
+<meta name="apple-mobile-web-app-title" content="World Radio">
+<meta property="og:title" content="World Radio">
 <meta property="og:description" content="Live radio from 239 countries. Free, no ads.">
 <meta property="og:image" content="icons/app-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -171,7 +171,7 @@
   </div>
 </div>
 
-<div class="install" id="install" role="dialog" aria-label="Install aXar Radio">
+<div class="install" id="install" role="dialog" aria-label="Install World Radio">
   <img src="icons/app-192.png" alt="">
   <div class="t" id="install-text"></div>
   <div class="acts">
@@ -297,10 +297,10 @@ let listState = { q: '', cat: 'all', limit: PAGE };
 
 async function renderHome() {
   route = { code: null };
-  document.title = 'aXar Radio';
+  document.title = 'World Radio';
   setAccent('#FF8A3D');
   view.innerHTML = `
-    <div class="top"><img src="icons/app-192.png" alt=""><h1>aXar Radio</h1></div>
+    <div class="top"><img src="icons/app-192.png" alt=""><h1>World Radio</h1></div>
     <div class="fixed">${supportHtml()}
       <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search a country" autocomplete="off" aria-label="Search a country"></div></div>
     <div id="home-lists"><div class="empty">Loading…</div></div>
@@ -335,7 +335,7 @@ async function renderCountry(code) {
   await Promise.all([getIndex(), getCountries()]);
   const pick = app(code);
   const name = pick.name;
-  document.title = name + ' · aXar Radio';
+  document.title = name + ' · World Radio';
   setAccent(pick.accent);
   view.innerHTML = `
     <div class="hero"><div class="top"><button class="iconbtn" id="back" type="button" aria-label="All radios">${ICON.back}</button>
@@ -487,7 +487,7 @@ audio.addEventListener('error', () => { if (current && !hls) failed(); });
 function mediaSession(s) {
   if (!('mediaSession' in navigator)) return;
   const art = s.logoUrl ? [{ src: s.logoUrl.replace(/^http:/, 'https:'), sizes: '256x256' }] : [{ src: 'icons/app-512.png', sizes: '512x512', type: 'image/png' }];
-  navigator.mediaSession.metadata = new MediaMetadata({ title: s.name, artist: countryName(s.country), album: 'aXar Radio', artwork: art });
+  navigator.mediaSession.metadata = new MediaMetadata({ title: s.name, artist: countryName(s.country), album: 'World Radio', artwork: art });
   navigator.mediaSession.setActionHandler('play', () => play(current));
   navigator.mediaSession.setActionHandler('pause', () => audio.pause());
 }
@@ -570,10 +570,10 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catc
   function show(mode) {
     if (standalone || snoozed) return;
     if (mode === 'ios') {
-      text.innerHTML = '<b>Install aXar Radio</b><span>Tap Share, then <b style="display:inline;font-size:inherit;color:var(--text)">Add to Home Screen</b>.</span>';
+      text.innerHTML = '<b>Install World Radio</b><span>Tap Share, then <b style="display:inline;font-size:inherit;color:var(--text)">Add to Home Screen</b>.</span>';
       go.style.display = 'none';
     } else {
-      text.innerHTML = '<b>Install aXar Radio</b><span>Listen from your home screen.</span>';
+      text.innerHTML = '<b>Install World Radio</b><span>Listen from your home screen.</span>';
     }
     box.classList.add('show');
   }
