@@ -352,6 +352,7 @@ let route = { code: null };
 const findStation = (id) => shown.find((x) => x.id === id) || favs.find((x) => x.id === id) || recent.find((x) => x.id === id);
 let homeDraw = null;
 let recentOpen = load('radio.recentOpen', true);
+let favsOpen = load('radio.favsOpen', true);
 let countryDraw = null;
 let shown = [];       // stations currently in the list, for click lookup
 let listState = { q: '', cat: 'all', limit: PAGE };
@@ -377,9 +378,12 @@ async function renderHome() {
     const match = (a) => !term || a.name.replace(/^Radio /, '').toLowerCase().includes(term) || a.name.toLowerCase().includes(term) || countryName(a.code).toLowerCase().includes(term) || a.code.toLowerCase() === term;
     const m = list.filter(match);
     let html = '';
-    if (!term) html += `<div class="label">Favorites</div>` + (favs.length
-      ? `<div class="list">${favs.map(stationRow).join('')}</div>`
-      : `<div class="favempty"><span>${ICON.star}</span><p>Your favorite stations will be here.<br>Tap the star next to a station to add it.</p></div>`);
+    if (!term) {
+      html += `<button type="button" class="label fold${favsOpen ? ' open' : ''}" data-toggle="favs" aria-expanded="${favsOpen}">Favorites${favs.length ? `<span>${favs.length}</span>` : ''}${ICON.chev}</button>`;
+      if (favsOpen) html += favs.length
+        ? `<div class="list">${favs.map(stationRow).join('')}</div>`
+        : `<div class="favempty"><span>${ICON.star}</span><p>Your favorite stations will be here.<br>Tap the star next to a station to add it.</p></div>`;
+    }
     const rec = recent.filter((r) => !isFav(r.id)).slice(0, 6);
     if (!term && rec.length) {
       html += `<button type="button" class="label fold${recentOpen ? ' open' : ''}" data-toggle="recent" aria-expanded="${recentOpen}">Recently played<span>${rec.length}</span>${ICON.chev}</button>`;
@@ -455,9 +459,10 @@ function redrawRows() {
 function setAccent(c) { document.documentElement.style.setProperty('--accent', c); }
 
 view.addEventListener('click', (e) => {
-  if (e.target.closest('[data-toggle="recent"]')) {
-    recentOpen = !recentOpen;
-    save('radio.recentOpen', recentOpen);
+  const fold = e.target.closest('[data-toggle]');
+  if (fold) {
+    if (fold.dataset.toggle === 'recent') { recentOpen = !recentOpen; save('radio.recentOpen', recentOpen); }
+    else { favsOpen = !favsOpen; save('radio.favsOpen', favsOpen); }
     if (homeDraw) homeDraw();
     return;
   }
