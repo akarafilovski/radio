@@ -125,8 +125,6 @@
   .coin.sol { background: linear-gradient(135deg, #9945FF, #14F195); color: #000; } .coin.usdc { background: #2775CA; }
   .dep .k { display: block; font-size: 13px; color: #848E9C; }
   .dep .v { display: block; font-weight: 700; font-size: 16px; color: #EAECEF; margin-top: 4px; }
-  .netcard { background: var(--card); border-radius: 14px; padding: 12px 16px; }
-  .netcard .v { font-size: 20px; margin-top: 2px; } .netcard .v i { font-style: normal; } .netcard .v em { font-style: normal; font-weight: 500; font-size: 13px; color: #848E9C; margin-left: 4px; }
   .card { background: var(--card); border-radius: 16px; padding: 18px 16px 16px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
   .qrbox { display: grid; justify-items: center; margin-bottom: 20px; }
   .qrbox img { width: 180px; height: 180px; border-radius: 18px; background: #fff; padding: 10px; }
@@ -505,7 +503,6 @@ function supportHtml() {
       <span class="t"><b>Support our work</b><span>Free, no ads. A tip keeps it running.</span></span>${ICON.chev}</button>
     <div class="body"><div class="dep">
       <div class="tabs" role="tablist">${tab('sol')}${tab('usdc')}</div>
-      <div class="netcard"><span class="k">Network</span><span class="v"><i id="dep-net-t">SOL</i> <em id="dep-net-n">Solana</em></span></div>
       <div class="card">
         <div class="qrbox"><img id="dep-qr" src="icons/qr-sol.png" alt="QR code of the wallet address" width="180" height="180"></div>
         <div class="k">Wallet address</div>
@@ -532,8 +529,6 @@ function wireSupport() {
     const t = TOKENS[id];
     root.querySelectorAll('.tab').forEach((b) => { const on = b.dataset.token === id; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); });
     $('dep-qr').src = t.qr;
-    $('dep-net-t').textContent = t.ticker;
-    $('dep-net-n').textContent = t.network;
     $('dep-note').textContent = t.note;
     $('dep-token').textContent = t.name + ' (' + t.ticker + ')';
     $('dep-min').textContent = '>' + t.min;
