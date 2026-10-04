@@ -166,7 +166,7 @@ const WALLET = '8x1G15KgVzHdTeVhULGPThfVfP68FeLiuTEy4AFmJRrT';
 const PICKS = [
   { code: 'HR', name: 'Radio Croatia', slug: 'croatia', accent: '#EF4B55', app: 'com.axar.croatianradios', live: true },
   { code: 'RS', name: 'Radio Serbia', slug: 'serbia', accent: '#F0586A', app: 'com.axar.serbianradios', live: true },
-  { code: 'MK', name: 'Radio MK', slug: 'mk', accent: '#FFA43A', app: 'com.axar.makmedia', live: false },
+  { code: 'MK', name: 'Radio North Macedonia', slug: 'mk', generated: true, accent: '#EF4C51', app: 'com.axar.makmedia', live: false },
   { code: 'SI', name: 'Radio Slovenia', slug: 'slovenia', accent: '#4C9BFF', app: 'com.axar.slovenianradios', live: true },
   { code: 'BG', name: 'Radio Bulgaria', slug: 'bulgaria', accent: '#3DD68C', app: 'com.axar.bulgarianradios', live: true },
   { code: 'RO', name: 'Radio Romania', slug: 'romania', accent: '#FFD23F', app: 'com.axar.romanianradios', live: true },
@@ -189,7 +189,7 @@ function niceName(code) {
 function app(code) {
   const p = PICK[code];
   const c = COUNTRIES.find((x) => x.code === code);
-  if (p) return { ...p, icon: `icons/${p.slug}.png`, stations: c ? c.stations : 0 };
+  if (p) return { ...p, icon: p.generated ? 'icons/c/mk.png' : `icons/${p.slug}.png`, stations: c ? c.stations : 0 };
   return { code, name: 'Radio ' + niceName(code), accent: (c && c.accent) || '#FF8A3D', icon: `icons/c/${code.toLowerCase()}.png`, stations: c ? c.stations : 0, live: false };
 }
 async function getCountries() {
@@ -283,19 +283,16 @@ async function renderHome() {
   wireSupport();
   await Promise.all([getIndex(), getCountries()]);
   const q = $('q');
-  const ours = PICKS.map((p) => app(p.code));
-  const others = COUNTRIES.filter((c) => !PICK[c.code]).map((c) => app(c.code)).sort((a, b) => a.name.localeCompare(b.name));
+  const list = COUNTRIES.map((c) => app(c.code)).sort((a, b) => a.name.localeCompare(b.name));
   const card = (a) => `<button class="app" data-code="${a.code}" type="button" style="--a:${a.accent}">
         <img src="${a.icon}" alt="" loading="lazy" width="44" height="44"><b>${esc(a.name.replace(/^Radio /, ''))}</b><small>${a.stations}</small></button>`;
   const draw = () => {
     const term = q.value.trim().toLowerCase();
     const match = (a) => !term || a.name.replace(/^Radio /, '').toLowerCase().includes(term) || a.name.toLowerCase().includes(term) || countryName(a.code).toLowerCase().includes(term) || a.code.toLowerCase() === term;
-    const o = ours.filter(match);
-    const m = others.filter(match);
+    const m = list.filter(match);
     let html = '';
     if (!term && favs.length) html += `<div class="label">Favorites</div><div class="list">${favs.map(stationRow).join('')}</div>`;
-    if (o.length) html += `${term ? '' : '<div class="label">Our radio apps</div>'}<div class="apps">${o.map(card).join('')}</div>`;
-    if (m.length) html += `<div class="label">${term ? 'More countries' : `More countries · ${others.length}`}</div><div class="apps">${m.map(card).join('')}</div>`;
+    if (m.length) html += `${!term && favs.length ? '<div class="label">Countries</div>' : ''}<div class="apps">${m.map(card).join('')}</div>`;
     $('home-lists').innerHTML = html || '<div class="empty">No country found.</div>';
     shown = [];
   };
