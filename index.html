@@ -189,7 +189,7 @@ const WALLET = '8x1G15KgVzHdTeVhULGPThfVfP68FeLiuTEy4AFmJRrT';
 const PICKS = [
   { code: 'HR', name: 'Radio Croatia', slug: 'croatia', accent: '#EF4B55', app: 'com.axar.croatianradios', live: true },
   { code: 'RS', name: 'Radio Serbia', slug: 'serbia', accent: '#F0586A', app: 'com.axar.serbianradios', live: true },
-  { code: 'MK', name: 'Radio North Macedonia', slug: 'mk', generated: true, accent: '#EF4C51', app: 'com.axar.makmedia', live: false },
+  { code: 'MK', name: 'Radio Macedonia', slug: 'mk', generated: true, accent: '#EF4C51', app: 'com.axar.makmedia', live: false },
   { code: 'SI', name: 'Radio Slovenia', slug: 'slovenia', accent: '#4C9BFF', app: 'com.axar.slovenianradios', live: true },
   { code: 'BG', name: 'Radio Bulgaria', slug: 'bulgaria', accent: '#3DD68C', app: 'com.axar.bulgarianradios', live: true },
   { code: 'RO', name: 'Radio Romania', slug: 'romania', accent: '#FFD23F', app: 'com.axar.romanianradios', live: true },
@@ -251,6 +251,7 @@ async function getCountry(code) {
   return countryCache[code];
 }
 function countryName(code) {
+  if (code === 'MK') return 'Macedonia';
   const c = (index || []).find((x) => x.code === code);
   return c ? c.name : code;
 }
