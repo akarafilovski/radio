@@ -1,1 +1,1327 @@
-[{"code":"AD","stations":8,"accent":"#493DFF"},{"code":"AE","stations":276,"accent":"#FA425F"},{"code":"AF","stations":42,"accent":"#E95E52"},{"code":"AG","stations":3,"accent":"#F94257"},{"code":"AL","stations":26,"accent":"#FF3D3D"},{"code":"AM","stations":11,"accent":"#FF3D4C"},{"code":"AO","stations":10,"accent":"#FF3D62"},{"code":"AQ","stations":7,"accent":"#3DC9FF"},{"code":"AR","stations":222,"accent":"#57A1E4"},{"code":"AS","stations":9,"accent":"#3D3DFF"},{"code":"AT","stations":172,"accent":"#F24A64"},{"code":"AU","stations":95,"accent":"#3D77FF"},{"code":"AW","stations":3,"accent":"#4F9DEC"},{"code":"AZ","stations":16,"accent":"#3DD8FF"},{"code":"BA","stations":72},{"code":"BB","stations":6,"accent":"#3D75FF"},{"code":"BD","stations":16,"accent":"#3DFFCB"},{"code":"BE","stations":146,"accent":"#FFE03D"},{"code":"BF","stations":5,"accent":"#FB4143"},{"code":"BG","stations":151},{"code":"BH","stations":8,"accent":"#F1564B"},{"code":"BJ","stations":4,"accent":"#3DFFB1"},{"code":"BN","stations":3,"accent":"#FFEB3D"},{"code":"BO","stations":50,"accent":"#FB4F41"},{"code":"BQ","stations":8,"accent":"#3D81FF"},{"code":"BR","stations":237,"accent":"#3DFF91"},{"code":"BS","stations":4,"accent":"#3DE2FF"},{"code":"BY","stations":29,"accent":"#ED4E57"},{"code":"BZ","stations":3,"accent":"#4E4DEF"},{"code":"CA","stations":193,"accent":"#FF3D3D"},{"code":"CD","stations":9,"accent":"#3D9DFF"},{"code":"CF","stations":3,"accent":"#FFDA3D"},{"code":"CH","stations":122,"accent":"#FF3D3D"},{"code":"CI","stations":11,"accent":"#FFA03D"},{"code":"CL","stations":223,"accent":"#F25549"},{"code":"CN","stations":113,"accent":"#FB4048"},{"code":"CO","stations":224,"accent":"#FFD93D"},{"code":"CR","stations":38,"accent":"#ED584E"},{"code":"CU","stations":14,"accent":"#3D75FF"},{"code":"CV","stations":17,"accent":"#3D87FF"},{"code":"CW","stations":15,"accent":"#3D7EFF"},{"code":"CY","stations":20,"accent":"#F5A846"},{"code":"CZ","stations":98,"accent":"#F8434A"},{"code":"DE","stations":187,"accent":"#FF3D3D"},{"code":"DK","stations":97,"accent":"#F74461"},{"code":"DM","stations":6,"accent":"#3DFFA0"},{"code":"DO","stations":71,"accent":"#F74459"},{"code":"DZ","stations":11,"accent":"#3DFF9E"},{"code":"EC","stations":91,"accent":"#FFE43D"},{"code":"EE","stations":50,"accent":"#3DA7FF"},{"code":"EG","stations":22,"accent":"#F24A5C"},{"code":"ER","stations":3,"accent":"#FF3D61"},{"code":"ES","stations":220,"accent":"#F2494B"},{"code":"ET","stations":20,"accent":"#3DFF7A"},{"code":"FI","stations":90,"accent":"#3D8EFF"},{"code":"FK","stations":3,"accent":"#3D79FF"},{"code":"FO","stations":6,"accent":"#FD3E4A"},{"code":"FR","stations":160,"accent":"#F44759"},{"code":"GB","stations":157,"accent":"#EF4C67"},{"code":"GD","stations":4,"accent":"#F94255"},{"code":"GE","stations":21,"accent":"#FF3D3D"},{"code":"GF","stations":3,"accent":"#3DFF7B"},{"code":"GH","stations":74,"accent":"#3DFFB0"},{"code":"GI","stations":6,"accent":"#FF3D46"},{"code":"GL","stations":3,"accent":"#F74462"},{"code":"GN","stations":5,"accent":"#3DFFBB"},{"code":"GP","stations":12,"accent":"#3D70FF"},{"code":"GR","stations":182},{"code":"GT","stations":56,"accent":"#5AA8E1"},{"code":"GU","stations":5,"accent":"#3D7CFF"},{"code":"GY","stations":8,"accent":"#5EDDAC"},{"code":"HK","stations":24,"accent":"#FB4048"},{"code":"HN","stations":26,"accent":"#3DDDFE"},{"code":"HR","stations":78},{"code":"HT","stations":17,"accent":"#3D63FF"},{"code":"HU","stations":154},{"code":"ID","stations":228,"accent":"#FF3D3D"},{"code":"IE","stations":116,"accent":"#50EBA9"},{"code":"IL","stations":90,"accent":"#507EEB"},{"code":"IM","stations":4,"accent":"#F7445A"},{"code":"IN","stations":246,"accent":"#FF7B3D"},{"code":"IO","stations":6,"accent":"#4476F8"},{"code":"IQ","stations":14,"accent":"#F14A5B"},{"code":"IR","stations":17,"accent":"#F54646"},{"code":"IS","stations":10,"accent":"#3EA1FD"},{"code":"IT","stations":150,"accent":"#3DFF9A"},{"code":"JM","stations":27,"accent":"#FDC43E"},{"code":"JO","stations":11,"accent":"#3DFF9D"},{"code":"JP","stations":67,"accent":"#FE3E6B"},{"code":"KE","stations":27,"accent":"#FC4040"},{"code":"KG","stations":8,"accent":"#FF3D3D"},{"code":"KH","stations":5,"accent":"#3D70FF"},{"code":"KP","stations":5,"accent":"#FA4249"},{"code":"KR","stations":35,"accent":"#E45762"},{"code":"KW","stations":12,"accent":"#F2495B"},{"code":"KY","stations":7,"accent":"#3D77FF"},{"code":"KZ","stations":25,"accent":"#3DE8FF"},{"code":"LA","stations":4,"accent":"#FA4256"},{"code":"LB","stations":31,"accent":"#F54653"},{"code":"LC","stations":7,"accent":"#3DBDFF"},{"code":"LK","stations":36,"accent":"#FFC53D"},{"code":"LT","stations":41,"accent":"#FFC63D"},{"code":"LU","stations":11,"accent":"#FA4251"},{"code":"LV","stations":36,"accent":"#E6566C"},{"code":"LY","stations":5,"accent":"#FF3D4C"},{"code":"MA","stations":46,"accent":"#E85459"},{"code":"MC","stations":6,"accent":"#F94257"},{"code":"MD","stations":63,"accent":"#FF3D63"},{"code":"ME","stations":33},{"code":"MG","stations":9,"accent":"#FF483D"},{"code":"MH","stations":3,"accent":"#3D86FF"},{"code":"MK","stations":51},{"code":"ML","stations":11,"accent":"#46F670"},{"code":"MM","stations":4,"accent":"#FFD73D"},{"code":"MN","stations":6,"accent":"#F04C5A"},{"code":"MO","stations":18,"accent":"#49F2D3"},{"code":"MQ","stations":8,"accent":"#3DFF99"},{"code":"MT","stations":8,"accent":"#F7445B"},{"code":"MU","stations":13,"accent":"#F64555"},{"code":"MV","stations":5,"accent":"#FB4163"},{"code":"MW","stations":7,"accent":"#FA4156"},{"code":"MX","stations":251,"accent":"#F4475A"},{"code":"MY","stations":46,"accent":"#E75454"},{"code":"MZ","stations":4,"accent":"#FFEA3D"},{"code":"NA","stations":10,"accent":"#3DFF94"},{"code":"NC","stations":7,"accent":"#3D77FF"},{"code":"NG","stations":53,"accent":"#3DFFB2"},{"code":"NI","stations":19,"accent":"#3EA1FD"},{"code":"NL","stations":179},{"code":"NO","stations":93,"accent":"#FA4167"},{"code":"NP","stations":132,"accent":"#F14A6C"},{"code":"NZ","stations":119,"accent":"#3D77FF"},{"code":"OM","stations":4,"accent":"#F14B52"},{"code":"PA","stations":24,"accent":"#F7444B"},{"code":"PE","stations":199,"accent":"#F64556"},{"code":"PF","stations":5,"accent":"#F84358"},{"code":"PH","stations":155,"accent":"#3D7CFF"},{"code":"PK","stations":38,"accent":"#3DFF8E"},{"code":"PL","stations":137,"accent":"#F84367"},{"code":"PR","stations":40,"accent":"#FF3D3D"},{"code":"PS","stations":6,"accent":"#3DFF86"},{"code":"PT","stations":180,"accent":"#FF3D3D"},{"code":"PY","stations":33,"accent":"#EA5C51"},{"code":"QA","stations":12,"accent":"#EF4D7D"},{"code":"RE","stations":34,"accent":"#3D6EFF"},{"code":"RO","stations":194},{"code":"RS","stations":181},{"code":"RU","stations":119,"accent":"#3D7EFF"},{"code":"RW","stations":3,"accent":"#3DCAFF"},{"code":"SA","stations":48,"accent":"#3DFFAB"},{"code":"SC","stations":4,"accent":"#E7545B"},{"code":"SD","stations":6,"accent":"#F44768"},{"code":"SE","stations":128,"accent":"#3DA7FF"},{"code":"SG","stations":25,"accent":"#FA4251"},{"code":"SH","stations":3,"accent":"#3D77FF"},{"code":"SI","stations":38},{"code":"SK","stations":50,"accent":"#FB4048"},{"code":"SM","stations":4,"accent":"#4FB6EC"},{"code":"SN","stations":26,"accent":"#3DFF99"},{"code":"SO","stations":3,"accent":"#4F9DEC"},{"code":"SR","stations":5,"accent":"#FC3F65"},{"code":"SS","stations":3,"accent":"#3DFFA2"},{"code":"SV","stations":33,"accent":"#408DFC"},{"code":"SY","stations":16,"accent":"#3DFF9D"},{"code":"TG","stations":3,"accent":"#3DFFCD"},{"code":"TH","stations":55,"accent":"#E8546D"},{"code":"TM","stations":4,"accent":"#3DFF96"},{"code":"TN","stations":18,"accent":"#FF3D4D"},{"code":"TO","stations":3,"accent":"#FF3D3D"},{"code":"TR","stations":209},{"code":"TT","stations":18,"accent":"#F14A61"},{"code":"TW","stations":24,"accent":"#FF3D3D"},{"code":"TZ","stations":11,"accent":"#3DCCFF"},{"code":"UA","stations":93,"accent":"#3D9BFF"},{"code":"UG","stations":71,"accent":"#FF3D3D"},{"code":"UM","stations":24,"accent":"#DE5D7F"},{"code":"US","stations":177,"accent":"#DE5D7F"},{"code":"UY","stations":88,"accent":"#4F81EC"},{"code":"UZ","stations":5,"accent":"#3D8CFF"},{"code":"VA","stations":15,"accent":"#FFF53D"},{"code":"VC","stations":9,"accent":"#FFD73D"},{"code":"VE","stations":117,"accent":"#FFD83D"},{"code":"VI","stations":6,"accent":"#E5C056"},{"code":"VN","stations":20,"accent":"#FF3D3D"},{"code":"VU","stations":4,"accent":"#FB4163"},{"code":"XK","stations":5,"accent":"#5781E4"},{"code":"YE","stations":3,"accent":"#F14A5C"},{"code":"YT","stations":3,"accent":"#E76A55"},{"code":"ZA","stations":142,"accent":"#3DFFB2"},{"code":"ZM","stations":5,"accent":"#5FFF3D"},{"code":"ZW","stations":4,"accent":"#3DFF3D"}]
+[
+ {
+  "code": "AD",
+  "stations": 8,
+  "accent": "#493DFF",
+  "name": "Andorra",
+  "slug": "andorra"
+ },
+ {
+  "code": "AE",
+  "stations": 276,
+  "accent": "#FA425F",
+  "name": "United Arab Emirates",
+  "slug": "united-arab-emirates"
+ },
+ {
+  "code": "AF",
+  "stations": 42,
+  "accent": "#E95E52",
+  "name": "Afghanistan",
+  "slug": "afghanistan"
+ },
+ {
+  "code": "AG",
+  "stations": 3,
+  "accent": "#F94257",
+  "name": "Antigua & Barbuda",
+  "slug": "antigua-barbuda"
+ },
+ {
+  "code": "AL",
+  "stations": 26,
+  "accent": "#FF3D3D",
+  "name": "Albania",
+  "slug": "albania"
+ },
+ {
+  "code": "AM",
+  "stations": 11,
+  "accent": "#FF3D4C",
+  "name": "Armenia",
+  "slug": "armenia"
+ },
+ {
+  "code": "AO",
+  "stations": 10,
+  "accent": "#FF3D62",
+  "name": "Angola",
+  "slug": "angola"
+ },
+ {
+  "code": "AQ",
+  "stations": 7,
+  "accent": "#3DC9FF",
+  "name": "Antarctica",
+  "slug": "antarctica"
+ },
+ {
+  "code": "AR",
+  "stations": 222,
+  "accent": "#57A1E4",
+  "name": "Argentina",
+  "slug": "argentina"
+ },
+ {
+  "code": "AS",
+  "stations": 9,
+  "accent": "#3D3DFF",
+  "name": "American Samoa",
+  "slug": "american-samoa"
+ },
+ {
+  "code": "AT",
+  "stations": 172,
+  "accent": "#F24A64",
+  "name": "Austria",
+  "slug": "austria"
+ },
+ {
+  "code": "AU",
+  "stations": 95,
+  "accent": "#3D77FF",
+  "name": "Australia",
+  "slug": "australia"
+ },
+ {
+  "code": "AW",
+  "stations": 3,
+  "accent": "#4F9DEC",
+  "name": "Aruba",
+  "slug": "aruba"
+ },
+ {
+  "code": "AZ",
+  "stations": 16,
+  "accent": "#3DD8FF",
+  "name": "Azerbaijan",
+  "slug": "azerbaijan"
+ },
+ {
+  "code": "BA",
+  "stations": 72,
+  "name": "Bosnia",
+  "slug": "bosnia"
+ },
+ {
+  "code": "BB",
+  "stations": 6,
+  "accent": "#3D75FF",
+  "name": "Barbados",
+  "slug": "barbados"
+ },
+ {
+  "code": "BD",
+  "stations": 16,
+  "accent": "#3DFFCB",
+  "name": "Bangladesh",
+  "slug": "bangladesh"
+ },
+ {
+  "code": "BE",
+  "stations": 146,
+  "accent": "#FFE03D",
+  "name": "Belgium",
+  "slug": "belgium"
+ },
+ {
+  "code": "BF",
+  "stations": 5,
+  "accent": "#FB4143",
+  "name": "Burkina Faso",
+  "slug": "burkina-faso"
+ },
+ {
+  "code": "BG",
+  "stations": 151,
+  "name": "Bulgaria",
+  "slug": "bulgaria"
+ },
+ {
+  "code": "BH",
+  "stations": 8,
+  "accent": "#F1564B",
+  "name": "Bahrain",
+  "slug": "bahrain"
+ },
+ {
+  "code": "BJ",
+  "stations": 4,
+  "accent": "#3DFFB1",
+  "name": "Benin",
+  "slug": "benin"
+ },
+ {
+  "code": "BN",
+  "stations": 3,
+  "accent": "#FFEB3D",
+  "name": "Brunei",
+  "slug": "brunei"
+ },
+ {
+  "code": "BO",
+  "stations": 50,
+  "accent": "#FB4F41",
+  "name": "Bolivia",
+  "slug": "bolivia"
+ },
+ {
+  "code": "BQ",
+  "stations": 8,
+  "accent": "#3D81FF",
+  "name": "Caribbean Netherlands",
+  "slug": "caribbean-netherlands"
+ },
+ {
+  "code": "BR",
+  "stations": 237,
+  "accent": "#3DFF91",
+  "name": "Brazil",
+  "slug": "brazil"
+ },
+ {
+  "code": "BS",
+  "stations": 4,
+  "accent": "#3DE2FF",
+  "name": "Bahamas",
+  "slug": "bahamas"
+ },
+ {
+  "code": "BY",
+  "stations": 29,
+  "accent": "#ED4E57",
+  "name": "Belarus",
+  "slug": "belarus"
+ },
+ {
+  "code": "BZ",
+  "stations": 3,
+  "accent": "#4E4DEF",
+  "name": "Belize",
+  "slug": "belize"
+ },
+ {
+  "code": "CA",
+  "stations": 193,
+  "accent": "#FF3D3D",
+  "name": "Canada",
+  "slug": "canada"
+ },
+ {
+  "code": "CD",
+  "stations": 9,
+  "accent": "#3D9DFF",
+  "name": "DR Congo",
+  "slug": "dr-congo"
+ },
+ {
+  "code": "CF",
+  "stations": 3,
+  "accent": "#FFDA3D",
+  "name": "Central African Republic",
+  "slug": "central-african-republic"
+ },
+ {
+  "code": "CH",
+  "stations": 122,
+  "accent": "#FF3D3D",
+  "name": "Switzerland",
+  "slug": "switzerland"
+ },
+ {
+  "code": "CI",
+  "stations": 11,
+  "accent": "#FFA03D",
+  "name": "Côte d’Ivoire",
+  "slug": "cote-divoire"
+ },
+ {
+  "code": "CL",
+  "stations": 223,
+  "accent": "#F25549",
+  "name": "Chile",
+  "slug": "chile"
+ },
+ {
+  "code": "CN",
+  "stations": 113,
+  "accent": "#FB4048",
+  "name": "China",
+  "slug": "china"
+ },
+ {
+  "code": "CO",
+  "stations": 224,
+  "accent": "#FFD93D",
+  "name": "Colombia",
+  "slug": "colombia"
+ },
+ {
+  "code": "CR",
+  "stations": 38,
+  "accent": "#ED584E",
+  "name": "Costa Rica",
+  "slug": "costa-rica"
+ },
+ {
+  "code": "CU",
+  "stations": 14,
+  "accent": "#3D75FF",
+  "name": "Cuba",
+  "slug": "cuba"
+ },
+ {
+  "code": "CV",
+  "stations": 17,
+  "accent": "#3D87FF",
+  "name": "Cape Verde",
+  "slug": "cape-verde"
+ },
+ {
+  "code": "CW",
+  "stations": 15,
+  "accent": "#3D7EFF",
+  "name": "Curaçao",
+  "slug": "curacao"
+ },
+ {
+  "code": "CY",
+  "stations": 20,
+  "accent": "#F5A846",
+  "name": "Cyprus",
+  "slug": "cyprus"
+ },
+ {
+  "code": "CZ",
+  "stations": 98,
+  "accent": "#F8434A",
+  "name": "Czechia",
+  "slug": "czechia"
+ },
+ {
+  "code": "DE",
+  "stations": 187,
+  "accent": "#FF3D3D",
+  "name": "Germany",
+  "slug": "germany"
+ },
+ {
+  "code": "DK",
+  "stations": 97,
+  "accent": "#F74461",
+  "name": "Denmark",
+  "slug": "denmark"
+ },
+ {
+  "code": "DM",
+  "stations": 6,
+  "accent": "#3DFFA0",
+  "name": "Dominica",
+  "slug": "dominica"
+ },
+ {
+  "code": "DO",
+  "stations": 71,
+  "accent": "#F74459",
+  "name": "Dominican Republic",
+  "slug": "dominican-republic"
+ },
+ {
+  "code": "DZ",
+  "stations": 11,
+  "accent": "#3DFF9E",
+  "name": "Algeria",
+  "slug": "algeria"
+ },
+ {
+  "code": "EC",
+  "stations": 91,
+  "accent": "#FFE43D",
+  "name": "Ecuador",
+  "slug": "ecuador"
+ },
+ {
+  "code": "EE",
+  "stations": 50,
+  "accent": "#3DA7FF",
+  "name": "Estonia",
+  "slug": "estonia"
+ },
+ {
+  "code": "EG",
+  "stations": 22,
+  "accent": "#F24A5C",
+  "name": "Egypt",
+  "slug": "egypt"
+ },
+ {
+  "code": "ER",
+  "stations": 3,
+  "accent": "#FF3D61",
+  "name": "Eritrea",
+  "slug": "eritrea"
+ },
+ {
+  "code": "ES",
+  "stations": 220,
+  "accent": "#F2494B",
+  "name": "Spain",
+  "slug": "spain"
+ },
+ {
+  "code": "ET",
+  "stations": 20,
+  "accent": "#3DFF7A",
+  "name": "Ethiopia",
+  "slug": "ethiopia"
+ },
+ {
+  "code": "FI",
+  "stations": 90,
+  "accent": "#3D8EFF",
+  "name": "Finland",
+  "slug": "finland"
+ },
+ {
+  "code": "FK",
+  "stations": 3,
+  "accent": "#3D79FF",
+  "name": "Falkland Islands",
+  "slug": "falkland-islands"
+ },
+ {
+  "code": "FO",
+  "stations": 6,
+  "accent": "#FD3E4A",
+  "name": "Faroe Islands",
+  "slug": "faroe-islands"
+ },
+ {
+  "code": "FR",
+  "stations": 160,
+  "accent": "#F44759",
+  "name": "France",
+  "slug": "france"
+ },
+ {
+  "code": "GB",
+  "stations": 157,
+  "accent": "#EF4C67",
+  "name": "United Kingdom",
+  "slug": "united-kingdom"
+ },
+ {
+  "code": "GD",
+  "stations": 4,
+  "accent": "#F94255",
+  "name": "Grenada",
+  "slug": "grenada"
+ },
+ {
+  "code": "GE",
+  "stations": 21,
+  "accent": "#FF3D3D",
+  "name": "Georgia",
+  "slug": "georgia"
+ },
+ {
+  "code": "GF",
+  "stations": 3,
+  "accent": "#3DFF7B",
+  "name": "French Guiana",
+  "slug": "french-guiana"
+ },
+ {
+  "code": "GH",
+  "stations": 74,
+  "accent": "#3DFFB0",
+  "name": "Ghana",
+  "slug": "ghana"
+ },
+ {
+  "code": "GI",
+  "stations": 6,
+  "accent": "#FF3D46",
+  "name": "Gibraltar",
+  "slug": "gibraltar"
+ },
+ {
+  "code": "GL",
+  "stations": 3,
+  "accent": "#F74462",
+  "name": "Greenland",
+  "slug": "greenland"
+ },
+ {
+  "code": "GN",
+  "stations": 5,
+  "accent": "#3DFFBB",
+  "name": "Guinea",
+  "slug": "guinea"
+ },
+ {
+  "code": "GP",
+  "stations": 12,
+  "accent": "#3D70FF",
+  "name": "Guadeloupe",
+  "slug": "guadeloupe"
+ },
+ {
+  "code": "GR",
+  "stations": 182,
+  "name": "Greece",
+  "slug": "greece"
+ },
+ {
+  "code": "GT",
+  "stations": 56,
+  "accent": "#5AA8E1",
+  "name": "Guatemala",
+  "slug": "guatemala"
+ },
+ {
+  "code": "GU",
+  "stations": 5,
+  "accent": "#3D7CFF",
+  "name": "Guam",
+  "slug": "guam"
+ },
+ {
+  "code": "GY",
+  "stations": 8,
+  "accent": "#5EDDAC",
+  "name": "Guyana",
+  "slug": "guyana"
+ },
+ {
+  "code": "HK",
+  "stations": 24,
+  "accent": "#FB4048",
+  "name": "Hong Kong",
+  "slug": "hong-kong"
+ },
+ {
+  "code": "HN",
+  "stations": 26,
+  "accent": "#3DDDFE",
+  "name": "Honduras",
+  "slug": "honduras"
+ },
+ {
+  "code": "HR",
+  "stations": 78,
+  "name": "Croatia",
+  "slug": "croatia"
+ },
+ {
+  "code": "HT",
+  "stations": 17,
+  "accent": "#3D63FF",
+  "name": "Haiti",
+  "slug": "haiti"
+ },
+ {
+  "code": "HU",
+  "stations": 154,
+  "name": "Hungary",
+  "slug": "hungary"
+ },
+ {
+  "code": "ID",
+  "stations": 228,
+  "accent": "#FF3D3D",
+  "name": "Indonesia",
+  "slug": "indonesia"
+ },
+ {
+  "code": "IE",
+  "stations": 116,
+  "accent": "#50EBA9",
+  "name": "Ireland",
+  "slug": "ireland"
+ },
+ {
+  "code": "IL",
+  "stations": 90,
+  "accent": "#507EEB",
+  "name": "Israel",
+  "slug": "israel"
+ },
+ {
+  "code": "IM",
+  "stations": 4,
+  "accent": "#F7445A",
+  "name": "Isle of Man",
+  "slug": "isle-of-man"
+ },
+ {
+  "code": "IN",
+  "stations": 246,
+  "accent": "#FF7B3D",
+  "name": "India",
+  "slug": "india"
+ },
+ {
+  "code": "IO",
+  "stations": 6,
+  "accent": "#4476F8",
+  "name": "British Indian Ocean Territory",
+  "slug": "british-indian-ocean-territory"
+ },
+ {
+  "code": "IQ",
+  "stations": 14,
+  "accent": "#F14A5B",
+  "name": "Iraq",
+  "slug": "iraq"
+ },
+ {
+  "code": "IR",
+  "stations": 17,
+  "accent": "#F54646",
+  "name": "Iran",
+  "slug": "iran"
+ },
+ {
+  "code": "IS",
+  "stations": 10,
+  "accent": "#3EA1FD",
+  "name": "Iceland",
+  "slug": "iceland"
+ },
+ {
+  "code": "IT",
+  "stations": 150,
+  "accent": "#3DFF9A",
+  "name": "Italy",
+  "slug": "italy"
+ },
+ {
+  "code": "JM",
+  "stations": 27,
+  "accent": "#FDC43E",
+  "name": "Jamaica",
+  "slug": "jamaica"
+ },
+ {
+  "code": "JO",
+  "stations": 11,
+  "accent": "#3DFF9D",
+  "name": "Jordan",
+  "slug": "jordan"
+ },
+ {
+  "code": "JP",
+  "stations": 67,
+  "accent": "#FE3E6B",
+  "name": "Japan",
+  "slug": "japan"
+ },
+ {
+  "code": "KE",
+  "stations": 27,
+  "accent": "#FC4040",
+  "name": "Kenya",
+  "slug": "kenya"
+ },
+ {
+  "code": "KG",
+  "stations": 8,
+  "accent": "#FF3D3D",
+  "name": "Kyrgyzstan",
+  "slug": "kyrgyzstan"
+ },
+ {
+  "code": "KH",
+  "stations": 5,
+  "accent": "#3D70FF",
+  "name": "Cambodia",
+  "slug": "cambodia"
+ },
+ {
+  "code": "KP",
+  "stations": 5,
+  "accent": "#FA4249",
+  "name": "North Korea",
+  "slug": "north-korea"
+ },
+ {
+  "code": "KR",
+  "stations": 35,
+  "accent": "#E45762",
+  "name": "South Korea",
+  "slug": "south-korea"
+ },
+ {
+  "code": "KW",
+  "stations": 12,
+  "accent": "#F2495B",
+  "name": "Kuwait",
+  "slug": "kuwait"
+ },
+ {
+  "code": "KY",
+  "stations": 7,
+  "accent": "#3D77FF",
+  "name": "Cayman Islands",
+  "slug": "cayman-islands"
+ },
+ {
+  "code": "KZ",
+  "stations": 25,
+  "accent": "#3DE8FF",
+  "name": "Kazakhstan",
+  "slug": "kazakhstan"
+ },
+ {
+  "code": "LA",
+  "stations": 4,
+  "accent": "#FA4256",
+  "name": "Laos",
+  "slug": "laos"
+ },
+ {
+  "code": "LB",
+  "stations": 31,
+  "accent": "#F54653",
+  "name": "Lebanon",
+  "slug": "lebanon"
+ },
+ {
+  "code": "LC",
+  "stations": 7,
+  "accent": "#3DBDFF",
+  "name": "St. Lucia",
+  "slug": "st-lucia"
+ },
+ {
+  "code": "LK",
+  "stations": 36,
+  "accent": "#FFC53D",
+  "name": "Sri Lanka",
+  "slug": "sri-lanka"
+ },
+ {
+  "code": "LT",
+  "stations": 41,
+  "accent": "#FFC63D",
+  "name": "Lithuania",
+  "slug": "lithuania"
+ },
+ {
+  "code": "LU",
+  "stations": 11,
+  "accent": "#FA4251",
+  "name": "Luxembourg",
+  "slug": "luxembourg"
+ },
+ {
+  "code": "LV",
+  "stations": 36,
+  "accent": "#E6566C",
+  "name": "Latvia",
+  "slug": "latvia"
+ },
+ {
+  "code": "LY",
+  "stations": 5,
+  "accent": "#FF3D4C",
+  "name": "Libya",
+  "slug": "libya"
+ },
+ {
+  "code": "MA",
+  "stations": 46,
+  "accent": "#E85459",
+  "name": "Morocco",
+  "slug": "morocco"
+ },
+ {
+  "code": "MC",
+  "stations": 6,
+  "accent": "#F94257",
+  "name": "Monaco",
+  "slug": "monaco"
+ },
+ {
+  "code": "MD",
+  "stations": 63,
+  "accent": "#FF3D63",
+  "name": "Moldova",
+  "slug": "moldova"
+ },
+ {
+  "code": "ME",
+  "stations": 33,
+  "name": "Montenegro",
+  "slug": "montenegro"
+ },
+ {
+  "code": "MG",
+  "stations": 9,
+  "accent": "#FF483D",
+  "name": "Madagascar",
+  "slug": "madagascar"
+ },
+ {
+  "code": "MH",
+  "stations": 3,
+  "accent": "#3D86FF",
+  "name": "Marshall Islands",
+  "slug": "marshall-islands"
+ },
+ {
+  "code": "MK",
+  "stations": 51,
+  "name": "Macedonia",
+  "slug": "macedonia"
+ },
+ {
+  "code": "ML",
+  "stations": 11,
+  "accent": "#46F670",
+  "name": "Mali",
+  "slug": "mali"
+ },
+ {
+  "code": "MM",
+  "stations": 4,
+  "accent": "#FFD73D",
+  "name": "Myanmar",
+  "slug": "myanmar"
+ },
+ {
+  "code": "MN",
+  "stations": 6,
+  "accent": "#F04C5A",
+  "name": "Mongolia",
+  "slug": "mongolia"
+ },
+ {
+  "code": "MO",
+  "stations": 18,
+  "accent": "#49F2D3",
+  "name": "Macau",
+  "slug": "macau"
+ },
+ {
+  "code": "MQ",
+  "stations": 8,
+  "accent": "#3DFF99",
+  "name": "Martinique",
+  "slug": "martinique"
+ },
+ {
+  "code": "MT",
+  "stations": 8,
+  "accent": "#F7445B",
+  "name": "Malta",
+  "slug": "malta"
+ },
+ {
+  "code": "MU",
+  "stations": 13,
+  "accent": "#F64555",
+  "name": "Mauritius",
+  "slug": "mauritius"
+ },
+ {
+  "code": "MV",
+  "stations": 5,
+  "accent": "#FB4163",
+  "name": "Maldives",
+  "slug": "maldives"
+ },
+ {
+  "code": "MW",
+  "stations": 7,
+  "accent": "#FA4156",
+  "name": "Malawi",
+  "slug": "malawi"
+ },
+ {
+  "code": "MX",
+  "stations": 251,
+  "accent": "#F4475A",
+  "name": "Mexico",
+  "slug": "mexico"
+ },
+ {
+  "code": "MY",
+  "stations": 46,
+  "accent": "#E75454",
+  "name": "Malaysia",
+  "slug": "malaysia"
+ },
+ {
+  "code": "MZ",
+  "stations": 4,
+  "accent": "#FFEA3D",
+  "name": "Mozambique",
+  "slug": "mozambique"
+ },
+ {
+  "code": "NA",
+  "stations": 10,
+  "accent": "#3DFF94",
+  "name": "Namibia",
+  "slug": "namibia"
+ },
+ {
+  "code": "NC",
+  "stations": 7,
+  "accent": "#3D77FF",
+  "name": "New Caledonia",
+  "slug": "new-caledonia"
+ },
+ {
+  "code": "NG",
+  "stations": 53,
+  "accent": "#3DFFB2",
+  "name": "Nigeria",
+  "slug": "nigeria"
+ },
+ {
+  "code": "NI",
+  "stations": 19,
+  "accent": "#3EA1FD",
+  "name": "Nicaragua",
+  "slug": "nicaragua"
+ },
+ {
+  "code": "NL",
+  "stations": 179,
+  "name": "Netherlands",
+  "slug": "netherlands"
+ },
+ {
+  "code": "NO",
+  "stations": 93,
+  "accent": "#FA4167",
+  "name": "Norway",
+  "slug": "norway"
+ },
+ {
+  "code": "NP",
+  "stations": 132,
+  "accent": "#F14A6C",
+  "name": "Nepal",
+  "slug": "nepal"
+ },
+ {
+  "code": "NZ",
+  "stations": 119,
+  "accent": "#3D77FF",
+  "name": "New Zealand",
+  "slug": "new-zealand"
+ },
+ {
+  "code": "OM",
+  "stations": 4,
+  "accent": "#F14B52",
+  "name": "Oman",
+  "slug": "oman"
+ },
+ {
+  "code": "PA",
+  "stations": 24,
+  "accent": "#F7444B",
+  "name": "Panama",
+  "slug": "panama"
+ },
+ {
+  "code": "PE",
+  "stations": 199,
+  "accent": "#F64556",
+  "name": "Peru",
+  "slug": "peru"
+ },
+ {
+  "code": "PF",
+  "stations": 5,
+  "accent": "#F84358",
+  "name": "French Polynesia",
+  "slug": "french-polynesia"
+ },
+ {
+  "code": "PH",
+  "stations": 155,
+  "accent": "#3D7CFF",
+  "name": "Philippines",
+  "slug": "philippines"
+ },
+ {
+  "code": "PK",
+  "stations": 38,
+  "accent": "#3DFF8E",
+  "name": "Pakistan",
+  "slug": "pakistan"
+ },
+ {
+  "code": "PL",
+  "stations": 137,
+  "accent": "#F84367",
+  "name": "Poland",
+  "slug": "poland"
+ },
+ {
+  "code": "PR",
+  "stations": 40,
+  "accent": "#FF3D3D",
+  "name": "Puerto Rico",
+  "slug": "puerto-rico"
+ },
+ {
+  "code": "PS",
+  "stations": 6,
+  "accent": "#3DFF86",
+  "name": "Palestine",
+  "slug": "palestine"
+ },
+ {
+  "code": "PT",
+  "stations": 180,
+  "accent": "#FF3D3D",
+  "name": "Portugal",
+  "slug": "portugal"
+ },
+ {
+  "code": "PY",
+  "stations": 33,
+  "accent": "#EA5C51",
+  "name": "Paraguay",
+  "slug": "paraguay"
+ },
+ {
+  "code": "QA",
+  "stations": 12,
+  "accent": "#EF4D7D",
+  "name": "Qatar",
+  "slug": "qatar"
+ },
+ {
+  "code": "RE",
+  "stations": 34,
+  "accent": "#3D6EFF",
+  "name": "Réunion",
+  "slug": "reunion"
+ },
+ {
+  "code": "RO",
+  "stations": 194,
+  "name": "Romania",
+  "slug": "romania"
+ },
+ {
+  "code": "RS",
+  "stations": 181,
+  "name": "Serbia",
+  "slug": "serbia"
+ },
+ {
+  "code": "RU",
+  "stations": 119,
+  "accent": "#3D7EFF",
+  "name": "Russia",
+  "slug": "russia"
+ },
+ {
+  "code": "RW",
+  "stations": 3,
+  "accent": "#3DCAFF",
+  "name": "Rwanda",
+  "slug": "rwanda"
+ },
+ {
+  "code": "SA",
+  "stations": 48,
+  "accent": "#3DFFAB",
+  "name": "Saudi Arabia",
+  "slug": "saudi-arabia"
+ },
+ {
+  "code": "SC",
+  "stations": 4,
+  "accent": "#E7545B",
+  "name": "Seychelles",
+  "slug": "seychelles"
+ },
+ {
+  "code": "SD",
+  "stations": 6,
+  "accent": "#F44768",
+  "name": "Sudan",
+  "slug": "sudan"
+ },
+ {
+  "code": "SE",
+  "stations": 128,
+  "accent": "#3DA7FF",
+  "name": "Sweden",
+  "slug": "sweden"
+ },
+ {
+  "code": "SG",
+  "stations": 25,
+  "accent": "#FA4251",
+  "name": "Singapore",
+  "slug": "singapore"
+ },
+ {
+  "code": "SH",
+  "stations": 3,
+  "accent": "#3D77FF",
+  "name": "St. Helena",
+  "slug": "st-helena"
+ },
+ {
+  "code": "SI",
+  "stations": 38,
+  "name": "Slovenia",
+  "slug": "slovenia"
+ },
+ {
+  "code": "SK",
+  "stations": 50,
+  "accent": "#FB4048",
+  "name": "Slovakia",
+  "slug": "slovakia"
+ },
+ {
+  "code": "SM",
+  "stations": 4,
+  "accent": "#4FB6EC",
+  "name": "San Marino",
+  "slug": "san-marino"
+ },
+ {
+  "code": "SN",
+  "stations": 26,
+  "accent": "#3DFF99",
+  "name": "Senegal",
+  "slug": "senegal"
+ },
+ {
+  "code": "SO",
+  "stations": 3,
+  "accent": "#4F9DEC",
+  "name": "Somalia",
+  "slug": "somalia"
+ },
+ {
+  "code": "SR",
+  "stations": 5,
+  "accent": "#FC3F65",
+  "name": "Suriname",
+  "slug": "suriname"
+ },
+ {
+  "code": "SS",
+  "stations": 3,
+  "accent": "#3DFFA2",
+  "name": "South Sudan",
+  "slug": "south-sudan"
+ },
+ {
+  "code": "SV",
+  "stations": 33,
+  "accent": "#408DFC",
+  "name": "El Salvador",
+  "slug": "el-salvador"
+ },
+ {
+  "code": "SY",
+  "stations": 16,
+  "accent": "#3DFF9D",
+  "name": "Syria",
+  "slug": "syria"
+ },
+ {
+  "code": "TG",
+  "stations": 3,
+  "accent": "#3DFFCD",
+  "name": "Togo",
+  "slug": "togo"
+ },
+ {
+  "code": "TH",
+  "stations": 55,
+  "accent": "#E8546D",
+  "name": "Thailand",
+  "slug": "thailand"
+ },
+ {
+  "code": "TM",
+  "stations": 4,
+  "accent": "#3DFF96",
+  "name": "Turkmenistan",
+  "slug": "turkmenistan"
+ },
+ {
+  "code": "TN",
+  "stations": 18,
+  "accent": "#FF3D4D",
+  "name": "Tunisia",
+  "slug": "tunisia"
+ },
+ {
+  "code": "TO",
+  "stations": 3,
+  "accent": "#FF3D3D",
+  "name": "Tonga",
+  "slug": "tonga"
+ },
+ {
+  "code": "TR",
+  "stations": 209,
+  "name": "Turkey",
+  "slug": "turkey"
+ },
+ {
+  "code": "TT",
+  "stations": 18,
+  "accent": "#F14A61",
+  "name": "Trinidad & Tobago",
+  "slug": "trinidad-tobago"
+ },
+ {
+  "code": "TW",
+  "stations": 24,
+  "accent": "#FF3D3D",
+  "name": "Taiwan",
+  "slug": "taiwan"
+ },
+ {
+  "code": "TZ",
+  "stations": 11,
+  "accent": "#3DCCFF",
+  "name": "Tanzania",
+  "slug": "tanzania"
+ },
+ {
+  "code": "UA",
+  "stations": 93,
+  "accent": "#3D9BFF",
+  "name": "Ukraine",
+  "slug": "ukraine"
+ },
+ {
+  "code": "UG",
+  "stations": 71,
+  "accent": "#FF3D3D",
+  "name": "Uganda",
+  "slug": "uganda"
+ },
+ {
+  "code": "UM",
+  "stations": 24,
+  "accent": "#DE5D7F",
+  "name": "U.S. Outlying Islands",
+  "slug": "u-s-outlying-islands"
+ },
+ {
+  "code": "US",
+  "stations": 177,
+  "accent": "#DE5D7F",
+  "name": "United States",
+  "slug": "united-states"
+ },
+ {
+  "code": "UY",
+  "stations": 88,
+  "accent": "#4F81EC",
+  "name": "Uruguay",
+  "slug": "uruguay"
+ },
+ {
+  "code": "UZ",
+  "stations": 5,
+  "accent": "#3D8CFF",
+  "name": "Uzbekistan",
+  "slug": "uzbekistan"
+ },
+ {
+  "code": "VA",
+  "stations": 15,
+  "accent": "#FFF53D",
+  "name": "Vatican City",
+  "slug": "vatican-city"
+ },
+ {
+  "code": "VC",
+  "stations": 9,
+  "accent": "#FFD73D",
+  "name": "St. Vincent & Grenadines",
+  "slug": "st-vincent-grenadines"
+ },
+ {
+  "code": "VE",
+  "stations": 117,
+  "accent": "#FFD83D",
+  "name": "Venezuela",
+  "slug": "venezuela"
+ },
+ {
+  "code": "VI",
+  "stations": 6,
+  "accent": "#E5C056",
+  "name": "U.S. Virgin Islands",
+  "slug": "u-s-virgin-islands"
+ },
+ {
+  "code": "VN",
+  "stations": 20,
+  "accent": "#FF3D3D",
+  "name": "Vietnam",
+  "slug": "vietnam"
+ },
+ {
+  "code": "VU",
+  "stations": 4,
+  "accent": "#FB4163",
+  "name": "Vanuatu",
+  "slug": "vanuatu"
+ },
+ {
+  "code": "XK",
+  "stations": 5,
+  "accent": "#5781E4",
+  "name": "Kosovo",
+  "slug": "kosovo"
+ },
+ {
+  "code": "YE",
+  "stations": 3,
+  "accent": "#F14A5C",
+  "name": "Yemen",
+  "slug": "yemen"
+ },
+ {
+  "code": "YT",
+  "stations": 3,
+  "accent": "#E76A55",
+  "name": "Mayotte",
+  "slug": "mayotte"
+ },
+ {
+  "code": "ZA",
+  "stations": 142,
+  "accent": "#3DFFB2",
+  "name": "South Africa",
+  "slug": "south-africa"
+ },
+ {
+  "code": "ZM",
+  "stations": 5,
+  "accent": "#5FFF3D",
+  "name": "Zambia",
+  "slug": "zambia"
+ },
+ {
+  "code": "ZW",
+  "stations": 4,
+  "accent": "#3DFF3D",
+  "name": "Zimbabwe",
+  "slug": "zimbabwe"
+ }
+]
