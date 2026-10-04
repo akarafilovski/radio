@@ -124,10 +124,10 @@
   .coin { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 800 12px 'Sora', sans-serif; font-style: normal; flex: none; color: #fff; }
   .coin.sol { background: linear-gradient(135deg, #9945FF, #14F195); color: #000; } .coin.usdc { background: #2775CA; }
   .label2 { font: 700 11px 'Figtree', sans-serif; letter-spacing: .8px; text-transform: uppercase; color: var(--muted); margin-bottom: -4px; }
-  .addrline { min-width: 0; display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 14px; border-radius: 999px; background: #080808; border: 1px solid rgba(255,255,255,.08); }
-  .addr1 { flex: 1; min-width: 0; display: flex; font: 600 13px/1 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; color: #f2f2f6; }
-  .a-start { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .a-end { flex: none; color: var(--accent); }
+  .addrline { min-width: 0; display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 14px; border-radius: 18px; background: #080808; border: 1px solid rgba(255,255,255,.08); }
+  .addr2 { flex: 1; min-width: 0; display: grid; gap: 4px; font: 600 15px/1.2 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; color: #f2f2f6; letter-spacing: .2px; }
+  .addr2 span { white-space: nowrap; overflow: hidden; text-overflow: clip; }
+  .a-end { color: var(--accent); }
   .ibtn { all: unset; cursor: pointer; flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.1); transition: transform .1s, background .2s; }
   .ibtn svg { width: 19px; height: 19px; } .ibtn:active { transform: scale(.92); }
   .ibtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -494,7 +494,7 @@ function mediaSession(s) {
 // ---------- support ----------
 const TOKENS = {
   sol: { coin: 'S', name: 'Solana', ticker: 'SOL', network: 'Solana', min: '0.001 SOL' },
-  usdc: { coin: '$', name: 'USD Coin', ticker: 'USDC', network: 'Solana (SPL token)', min: '0.001 USDC' },
+  usdc: { coin: '$', name: 'USD Coin', ticker: 'USDC', network: 'Solana', min: '0.001 USDC' },
 };
 function supportHtml() {
   const chunks = WALLET.match(/.{1,4}/g).map((c) => `<span>${c}</span>`).join('');
@@ -507,7 +507,7 @@ function supportHtml() {
       <div class="tabs" role="tablist">${tab('sol', 'SOL')}${tab('usdc', 'USDC')}</div>
       <div class="label2">Wallet address</div>
       <div class="addrline">
-        <code class="addr1" title="${WALLET}"><span class="a-start">${WALLET.slice(0, -8)}</span><span class="a-end">${WALLET.slice(-8)}</span></code>
+        <code class="addr2" title="${WALLET}"><span>${WALLET.slice(0, 22)}</span><span class="a-end">${WALLET.slice(22)}</span></code>
         <button type="button" class="ibtn copy" aria-label="Copy address"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></button>
       </div>
       <dl class="info" id="support-info"></dl>
@@ -523,7 +523,7 @@ function wireSupport() {
     const t = TOKENS[id];
     root.querySelectorAll('.tab').forEach((b) => { const on = b.dataset.token === id; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); });
     info.innerHTML = `<div><dt>Token</dt><dd>${t.name} (${t.ticker})</dd></div><div><dt>Network</dt><dd>${t.network}</dd></div>
-      <div><dt>Minimum</dt><dd>more than ${t.min}</dd></div><div><dt>Note</dt><dd>Address is case sensitive</dd></div>`;
+      <div><dt>Minimum</dt><dd>more than ${t.min}</dd></div><div><dt>Address</dt><dd>Same for SOL and USDC, case sensitive</dd></div>`;
   };
   root.querySelectorAll('.tab').forEach((b) => b.addEventListener('click', () => pick(b.dataset.token)));
   pick('sol');
