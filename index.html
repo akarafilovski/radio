@@ -116,7 +116,7 @@
   .support .chev { color: var(--accent); transition: transform .25s; flex: none; } .support.open .chev { transform: rotate(180deg); }
   .support .body { display: none; padding: 0 12px 12px; } .support.open .body { display: block; animation: drop .25s ease; }
   @keyframes drop { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
-  .panel { background: rgba(0,0,0,.5); border: 1px solid var(--border); border-radius: 18px; padding: 12px; display: grid; gap: 12px; }
+  .panel { grid-template-columns: minmax(0, 1fr); background: rgba(0,0,0,.5); border: 1px solid var(--border); border-radius: 18px; padding: 12px; display: grid; gap: 12px; }
   .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(255,255,255,.07); }
   .tab { all: unset; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 8px; border-radius: 999px; font: 700 14px 'Figtree', sans-serif; color: var(--muted); transition: background .2s, color .2s; }
   .tab.on { background: var(--accent); color: #000; }
@@ -124,17 +124,16 @@
   .coin { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 800 12px 'Sora', sans-serif; font-style: normal; flex: none; color: #fff; }
   .coin.sol { background: linear-gradient(135deg, #9945FF, #14F195); color: #000; } .coin.usdc { background: #2775CA; }
   .label2 { font: 700 11px 'Figtree', sans-serif; letter-spacing: .8px; text-transform: uppercase; color: var(--muted); margin-bottom: -4px; }
-  .addr { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px 8px; padding: 12px; border-radius: 14px; background: #080808; border: 1px solid rgba(255,255,255,.06); }
-  .addr span { font: 600 14px/1.3 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; color: #f2f2f6; text-align: center; letter-spacing: .3px; padding: 5px 0; border-radius: 8px; background: rgba(255,255,255,.05); }
-  .addr span:nth-child(odd) { color: var(--accent); }
-  .actions { display: flex; gap: 8px; } .actions .copy { flex: 1; }
-  .qrbtn { all: unset; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0 16px; border-radius: 999px; background: rgba(255,255,255,.1); font-weight: 700; font-size: 14px; }
-  .qrbtn svg { width: 18px; height: 18px; } .qrbtn.on { background: var(--accent); color: #000; } .qrbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .qrbox { display: grid; justify-items: center; gap: 8px; text-align: center; } .qrbox[hidden] { display: none; }
-  .qrbox img { width: 160px; height: 160px; border-radius: 16px; background: #fff; padding: 8px; }
-  .copy { all: unset; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 999px; background: var(--accent); color: #000; font-weight: 700; font-size: 15px; transition: transform .1s, background .2s; }
-  .copy svg { width: 18px; height: 18px; } .copy:active { transform: scale(.97); } .copy.ok { background: #3DD68C; }
-  .copy:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .addrline { min-width: 0; display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 14px; border-radius: 999px; background: #080808; border: 1px solid rgba(255,255,255,.08); }
+  .addr1 { flex: 1; min-width: 0; display: flex; font: 600 13px/1 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; color: #f2f2f6; }
+  .a-start { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .a-end { flex: none; color: var(--accent); }
+  .ibtn { all: unset; cursor: pointer; flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.1); transition: transform .1s, background .2s; }
+  .ibtn svg { width: 19px; height: 19px; } .ibtn:active { transform: scale(.92); }
+  .ibtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .ibtn.copy { background: var(--accent); color: #000; } .ibtn.copy .i-ok { display: none; } .ibtn.copy.ok { background: #3DD68C; } .ibtn.copy.ok .i-copy { display: none; } .ibtn.copy.ok .i-ok { display: block; }
+  .qrbox { display: grid; justify-items: center; gap: 8px; text-align: center; }
+  .qrbox img { width: 156px; height: 156px; border-radius: 16px; background: #fff; padding: 8px; }
   .info { margin: 0; display: grid; border-radius: 14px; overflow: hidden; background: rgba(255,255,255,.04); }
   .info > div { display: flex; justify-content: space-between; gap: 12px; padding: 10px 12px; font-size: 13.5px; }
   .info > div + div { border-top: 1px solid rgba(255,255,255,.06); }
@@ -504,12 +503,13 @@ function supportHtml() {
     <button type="button" class="head" aria-expanded="false"><span class="heart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 2.7 4.5 6.3 4.5c2 0 3.7 1.1 4.6 2.7h2.2c.9-1.6 2.6-2.7 4.6-2.7 3.6 0 5.4 3.7 3.9 7.2C19.5 16.4 12 21 12 21z"/></svg></span>
       <span class="t"><b>Support our work</b><span>Free, no ads. A tip keeps it running.</span></span>${ICON.chev}</button>
     <div class="body"><div class="panel">
+      <div class="qrbox"><img src="icons/wallet-qr.png" alt="QR code of the Solana address" width="156" height="156"><p class="note">Scan with a wallet app, or copy the address below.</p></div>
       <div class="tabs" role="tablist">${tab('sol', 'SOL')}${tab('usdc', 'USDC')}</div>
       <div class="label2">Wallet address</div>
-      <div class="addr" aria-label="${WALLET}">${chunks}</div>
-      <div class="qrbox" id="qrbox" hidden><img src="icons/wallet-qr.png" alt="QR code of the Solana address" width="160" height="160"><p class="note">Scan with a wallet app on your phone.</p></div>
-      <div class="actions"><button type="button" class="copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg><span class="ct">Copy address</span></button>
-        <button type="button" class="qrbtn" aria-expanded="false" aria-label="Show QR code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM20 14v.1M14 20h3M20 17v4"/></svg><span>QR</span></button></div>
+      <div class="addrline">
+        <code class="addr1" title="${WALLET}"><span class="a-start">${WALLET.slice(0, -8)}</span><span class="a-end">${WALLET.slice(-8)}</span></code>
+        <button type="button" class="ibtn copy" aria-label="Copy address"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></button>
+      </div>
       <dl class="info" id="support-info"></dl>
       <div class="warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4.5M12 17.6v.1"/></svg>
         <p>Double-check every character before sending. Crypto transfers cannot be reversed.</p></div>
@@ -527,21 +527,12 @@ function wireSupport() {
   };
   root.querySelectorAll('.tab').forEach((b) => b.addEventListener('click', () => pick(b.dataset.token)));
   pick('sol');
-  const qrBtn = root.querySelector('.qrbtn');
-  qrBtn.addEventListener('click', () => {
-    const box = $('qrbox');
-    box.hidden = !box.hidden;
-    qrBtn.classList.toggle('on', !box.hidden);
-    qrBtn.setAttribute('aria-expanded', String(!box.hidden));
-  });
   const copy = root.querySelector('.copy');
   copy.addEventListener('click', () => {
     const done = () => {
       toast('Address copied');
-      const t = copy.querySelector('.ct');
-      t.textContent = 'Copied';
       copy.classList.add('ok');
-      setTimeout(() => { t.textContent = 'Copy address'; copy.classList.remove('ok'); }, 1800);
+      setTimeout(() => copy.classList.remove('ok'), 1800);
     };
     if (navigator.clipboard) navigator.clipboard.writeText(WALLET).then(done, done); else done();
   });
