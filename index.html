@@ -31,7 +31,9 @@
   html { -webkit-text-size-adjust: 100%; }
   body { margin: 0; background: var(--bg); color: var(--text); font: 400 16px/1.45 'Figtree', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
   button { font: inherit; color: inherit; }
-  .wrap { max-width: 860px; margin: 0 auto; padding: max(14px, env(safe-area-inset-top)) 16px calc(110px + env(safe-area-inset-bottom)); }
+  .wrap { max-width: 860px; margin: 0 auto; min-height: 100dvh; display: flex; flex-direction: column; padding: max(14px, env(safe-area-inset-top)) 16px calc(20px + env(safe-area-inset-bottom)); }
+  body:has(#player.show) .wrap { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
+  #home-lists { margin-bottom: 30px; }
   h1, h2, h3 { font-family: 'Sora', sans-serif; letter-spacing: -.3px; }
   .top { display: flex; align-items: center; gap: 12px; padding: 18px 0 14px; }
   .top img { width: 44px; height: 44px; border-radius: 12px; }
@@ -162,7 +164,7 @@
   .favempty { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 18px; background: var(--surface); border: 1px dashed rgba(255,255,255,.14); }
   .favempty span { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--chip); color: var(--accent); flex: none; }
   .favempty svg { width: 22px; height: 22px; } .favempty p { margin: 0; color: var(--muted); font-size: 14px; }
-  footer { margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  footer { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 18px; }
   footer a { color: var(--muted); }
 
   .install { position: fixed; left: 12px; right: 12px; bottom: calc(84px + env(safe-area-inset-bottom)); max-width: 520px; margin: 0 auto; z-index: 30;
