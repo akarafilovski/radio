@@ -2,6 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>
+// Fix the base address at load time: the app changes the page address as you move between countries, and relative icon and script paths must keep pointing at the radio root.
+(function () {
+  var b = document.querySelector('base') || document.head.insertBefore(document.createElement('base'), document.head.firstChild);
+  b.href = new URL(b.getAttribute('href') || '.', location.href).href;
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>World Radio</title>
 <meta name="description" content="Live radio from 191 countries in your browser. Search a country, tap a station and listen. Free, no ads, no sign-up.">
