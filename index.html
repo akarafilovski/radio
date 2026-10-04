@@ -258,6 +258,7 @@ function stationRow(s) {
 }
 
 let route = { code: null };
+let homeDraw = null;
 let shown = [];       // stations currently in the list, for click lookup
 let listState = { q: '', cat: 'all', limit: PAGE };
 
@@ -285,11 +286,13 @@ async function renderHome() {
     const o = ours.filter(match);
     const m = others.filter(match);
     let html = '';
+    if (!term && favs.length) html += `<div class="label">Favorites</div><div class="list">${favs.map(stationRow).join('')}</div>`;
     if (o.length) html += `${term ? '' : '<div class="label">Our radio apps</div>'}<div class="apps">${o.map(card).join('')}</div>`;
     if (m.length) html += `<div class="label">${term ? 'More countries' : `More countries · ${others.length}`}</div><div class="apps">${m.map(card).join('')}</div>`;
     $('home-lists').innerHTML = html || '<div class="empty">No country found.</div>';
     shown = [];
   };
+  homeDraw = draw;
   q.addEventListener('input', draw);
   draw();
   window.scrollTo(0, 0);
@@ -350,7 +353,11 @@ view.addEventListener('click', (e) => {
   if (favBtn) {
     e.stopPropagation();
     const s = shown.find((x) => x.id === favBtn.dataset.fav) || favs.find((x) => x.id === favBtn.dataset.fav);
-    if (s) { toggleFav(s); favBtn.classList.toggle('on', isFav(s.id)); toast(isFav(s.id) ? 'Added to favorites' : 'Removed from favorites'); }
+    if (s) {
+      toggleFav(s);
+      toast(isFav(s.id) ? 'Added to favorites' : 'Removed from favorites');
+      if (!route.code && homeDraw) homeDraw(); else favBtn.classList.toggle('on', isFav(s.id));
+    }
     return;
   }
   const c = e.target.closest('[data-code]');
