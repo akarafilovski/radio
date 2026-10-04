@@ -1,0 +1,27 @@
+from playwright.sync_api import sync_playwright
+S = 'C:/Users/ALEKSA~1/AppData/Local/Temp/claude/D--Development-Android-Mudras/9ea4b5eb-2ec9-478a-a90e-4a035ab60d6d/scratchpad/'
+with sync_playwright() as p:
+    b = p.chromium.launch(channel='chrome', args=['--autoplay-policy=no-user-gesture-required'])
+    pg = b.new_context(viewport={'width': 390, 'height': 844}, device_scale_factor=2, is_mobile=True, has_touch=True).new_page()
+    errs = []
+    pg.on('pageerror', lambda e: errs.append(str(e)))
+    pg.goto('http://localhost:8766/')
+    pg.wait_for_timeout(2000)
+    pg.fill('#q', 'naxi')
+    pg.wait_for_timeout(9000)
+    print('country tiles', pg.locator('.app').count(), 'station rows', pg.locator('.row').count(), 'labels', pg.locator('.label').all_inner_texts())
+    pg.screenshot(path=S + 'rf1.png')
+    pg.locator('.row').first.click()
+    pg.wait_for_timeout(4000)
+    print('playing', not pg.evaluate('audio.paused'))
+    pg.locator('#p-sleep').click()
+    pg.wait_for_timeout(300)
+    pg.screenshot(path=S + 'rf2.png')
+    pg.locator('#sleepmenu button[data-min="15"]').click()
+    pg.wait_for_timeout(1500)
+    print('sleep label', pg.inner_text('#p-sleep-t'), 'menu hidden', pg.locator('#sleepmenu').is_hidden())
+    pg.fill('#q', '')
+    pg.wait_for_timeout(500)
+    print('labels after clear', pg.locator('.label').all_inner_texts(), 'recent rows', pg.locator('.row').count(), errs)
+    pg.screenshot(path=S + 'rf3.png')
+    b.close()
