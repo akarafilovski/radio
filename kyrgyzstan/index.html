@@ -36,6 +36,8 @@
     --bg: #000; --surface: #161616; --tile: #1C1C1F; --border: rgba(255,255,255,.08); --chip: rgba(255,255,255,.10);
     --text: #fff; --muted: #A8A8B2; --dim: #555560; --accent: #FF8A3D; --on-accent: #000; --bad: #FF6B6B;
   }
+  /* plain-text copy for search engines and screen readers; the app replaces it as soon as it starts, so it is never shown */
+  .prerender { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   html, body { height: 100%; }
@@ -203,7 +205,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "World Radio", "item": "https://axarapps.github.io/radio/"}, {"@type": "ListItem", "position": 2, "name": "Radio Kyrgyzstan", "item": "https://axarapps.github.io/radio/kyrgyzstan/"}]}, {"@type": "ItemList", "name": "Radio stations in Kyrgyzstan", "numberOfItems": 8, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Кыргызстан Обондору (Kyrgyzstan Obondoru)"}, {"@type": "ListItem", "position": 2, "name": "ColdStar.Online Radio (High quality)"}, {"@type": "ListItem", "position": 3, "name": "The Holy Quran  by Sheikh Mahmoud Al-Husari"}, {"@type": "ListItem", "position": 4, "name": "Сүйүнчү FM (Suiunchu FM)"}, {"@type": "ListItem", "position": 5, "name": "ColdStar.Online Radio (Low quality)"}, {"@type": "ListItem", "position": 6, "name": "Биринчи Radio"}, {"@type": "ListItem", "position": 7, "name": "Abdulbasit Abdulsamad"}, {"@type": "ListItem", "position": 8, "name": "Радио Тумар FM (Radio Tumar FM)"}]}]}</script>
 </head>
 <body>
-<div class="wrap" id="view"><!--prerender--><h1>Radio Kyrgyzstan</h1><p>8 live radio stations from Kyrgyzstan, free and without ads. <a href="./">All countries</a></p><ul><li>Кыргызстан Обондору (Kyrgyzstan Obondoru) · music</li><li>ColdStar.Online Radio (High quality) · music</li><li>The Holy Quran  by Sheikh Mahmoud Al-Husari · music</li><li>Сүйүнчү FM (Suiunchu FM) · music</li><li>ColdStar.Online Radio (Low quality) · music</li><li>Биринчи Radio · music</li><li>Abdulbasit Abdulsamad · music</li><li>Радио Тумар FM (Radio Tumar FM) · music</li></ul><!--/prerender--></div>
+<div class="wrap" id="view"><!--prerender--><div class="prerender"><h1>Radio Kyrgyzstan</h1><p>8 live radio stations from Kyrgyzstan, free and without ads. <a href="./">All countries</a></p><ul><li>Кыргызстан Обондору (Kyrgyzstan Obondoru) · music</li><li>ColdStar.Online Radio (High quality) · music</li><li>The Holy Quran  by Sheikh Mahmoud Al-Husari · music</li><li>Сүйүнчү FM (Suiunchu FM) · music</li><li>ColdStar.Online Radio (Low quality) · music</li><li>Биринчи Radio · music</li><li>Abdulbasit Abdulsamad · music</li><li>Радио Тумар FM (Radio Tumar FM) · music</li></ul></div><!--/prerender--></div>
 
 <div class="player" id="player" aria-live="polite">
   <div class="in">

@@ -36,6 +36,8 @@
     --bg: #000; --surface: #161616; --tile: #1C1C1F; --border: rgba(255,255,255,.08); --chip: rgba(255,255,255,.10);
     --text: #fff; --muted: #A8A8B2; --dim: #555560; --accent: #FF8A3D; --on-accent: #000; --bad: #FF6B6B;
   }
+  /* plain-text copy for search engines and screen readers; the app replaces it as soon as it starts, so it is never shown */
+  .prerender { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   html, body { height: 100%; }
@@ -203,7 +205,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "World Radio", "item": "https://axarapps.github.io/radio/"}, {"@type": "ListItem", "position": 2, "name": "Radio Mali", "item": "https://axarapps.github.io/radio/mali/"}]}, {"@type": "ItemList", "name": "Radio stations in Mali", "numberOfItems": 11, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Radio Kledu 101.2"}, {"@type": "ListItem", "position": 2, "name": "Radio Kledu"}, {"@type": "ListItem", "position": 3, "name": "Radio Malijet"}, {"@type": "ListItem", "position": 4, "name": "Radio Tissa la Voix du Mamelon 99.7 FM"}, {"@type": "ListItem", "position": 5, "name": "Radio Kassara Barikama 107.4 Kayes"}, {"@type": "ListItem", "position": 6, "name": "Noura FM 94.5 Bamako"}, {"@type": "ListItem", "position": 7, "name": "Radio Madjoura Nourou Dine Touba"}, {"@type": "ListItem", "position": 8, "name": "Radio Woyowayanko 93.0 Bamako"}, {"@type": "ListItem", "position": 9, "name": "Radio Neneba FM 97.7 Markala"}, {"@type": "ListItem", "position": 10, "name": "Radio Yélé Sagabali La Voix Du Beledougou"}, {"@type": "ListItem", "position": 11, "name": "Radio Bougouni Kunkan 102.9"}]}]}</script>
 </head>
 <body>
-<div class="wrap" id="view"><!--prerender--><h1>Radio Mali</h1><p>11 live radio stations from Mali, free and without ads. <a href="./">All countries</a></p><ul><li>Radio Kledu 101.2 · music</li><li>Radio Kledu · music</li><li>Radio Malijet · music</li><li>Radio Tissa la Voix du Mamelon 99.7 FM · music</li><li>Radio Kassara Barikama 107.4 Kayes · talk</li><li>Noura FM 94.5 Bamako · music</li><li>Radio Madjoura Nourou Dine Touba · music</li><li>Radio Woyowayanko 93.0 Bamako · music</li><li>Radio Neneba FM 97.7 Markala · music</li><li>Radio Yélé Sagabali La Voix Du Beledougou · music</li><li>Radio Bougouni Kunkan 102.9 · music</li></ul><!--/prerender--></div>
+<div class="wrap" id="view"><!--prerender--><div class="prerender"><h1>Radio Mali</h1><p>11 live radio stations from Mali, free and without ads. <a href="./">All countries</a></p><ul><li>Radio Kledu 101.2 · music</li><li>Radio Kledu · music</li><li>Radio Malijet · music</li><li>Radio Tissa la Voix du Mamelon 99.7 FM · music</li><li>Radio Kassara Barikama 107.4 Kayes · talk</li><li>Noura FM 94.5 Bamako · music</li><li>Radio Madjoura Nourou Dine Touba · music</li><li>Radio Woyowayanko 93.0 Bamako · music</li><li>Radio Neneba FM 97.7 Markala · music</li><li>Radio Yélé Sagabali La Voix Du Beledougou · music</li><li>Radio Bougouni Kunkan 102.9 · music</li></ul></div><!--/prerender--></div>
 
 <div class="player" id="player" aria-live="polite">
   <div class="in">

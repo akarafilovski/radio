@@ -36,6 +36,8 @@
     --bg: #000; --surface: #161616; --tile: #1C1C1F; --border: rgba(255,255,255,.08); --chip: rgba(255,255,255,.10);
     --text: #fff; --muted: #A8A8B2; --dim: #555560; --accent: #FF8A3D; --on-accent: #000; --bad: #FF6B6B;
   }
+  /* plain-text copy for search engines and screen readers; the app replaces it as soon as it starts, so it is never shown */
+  .prerender { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   html, body { height: 100%; }
@@ -203,7 +205,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "World Radio", "item": "https://axarapps.github.io/radio/"}, {"@type": "ListItem", "position": 2, "name": "Radio New Caledonia", "item": "https://axarapps.github.io/radio/new-caledonia/"}]}, {"@type": "ItemList", "name": "Radio stations in New Caledonia", "numberOfItems": 7, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "NIA Radio Lo-Fi"}, {"@type": "ListItem", "position": 2, "name": "NIA Radio - Pacifique"}, {"@type": "ListItem", "position": 3, "name": "Nouvelle-Calédonie La Première"}, {"@type": "ListItem", "position": 4, "name": "NIA Pacifique"}, {"@type": "ListItem", "position": 5, "name": "Radio Rythme Bleu"}, {"@type": "ListItem", "position": 6, "name": "Abdulbasit Abdulsamad"}, {"@type": "ListItem", "position": 7, "name": "NIA Lo-Fi"}]}]}</script>
 </head>
 <body>
-<div class="wrap" id="view"><!--prerender--><h1>Radio New Caledonia</h1><p>7 live radio stations from New Caledonia, free and without ads. <a href="./">All countries</a></p><ul><li>NIA Radio Lo-Fi · music</li><li>NIA Radio - Pacifique · music</li><li>Nouvelle-Calédonie La Première · talk</li><li>NIA Pacifique · music</li><li>Radio Rythme Bleu · music</li><li>Abdulbasit Abdulsamad · music</li><li>NIA Lo-Fi · music</li></ul><!--/prerender--></div>
+<div class="wrap" id="view"><!--prerender--><div class="prerender"><h1>Radio New Caledonia</h1><p>7 live radio stations from New Caledonia, free and without ads. <a href="./">All countries</a></p><ul><li>NIA Radio Lo-Fi · music</li><li>NIA Radio - Pacifique · music</li><li>Nouvelle-Calédonie La Première · talk</li><li>NIA Pacifique · music</li><li>Radio Rythme Bleu · music</li><li>Abdulbasit Abdulsamad · music</li><li>NIA Lo-Fi · music</li></ul></div><!--/prerender--></div>
 
 <div class="player" id="player" aria-live="polite">
   <div class="in">

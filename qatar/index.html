@@ -36,6 +36,8 @@
     --bg: #000; --surface: #161616; --tile: #1C1C1F; --border: rgba(255,255,255,.08); --chip: rgba(255,255,255,.10);
     --text: #fff; --muted: #A8A8B2; --dim: #555560; --accent: #FF8A3D; --on-accent: #000; --bad: #FF6B6B;
   }
+  /* plain-text copy for search engines and screen readers; the app replaces it as soon as it starts, so it is never shown */
+  .prerender { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   html, body { height: 100%; }
@@ -203,7 +205,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "World Radio", "item": "https://axarapps.github.io/radio/"}, {"@type": "ListItem", "position": 2, "name": "Radio Qatar", "item": "https://axarapps.github.io/radio/qatar/"}]}, {"@type": "ItemList", "name": "Radio stations in Qatar", "numberOfItems": 12, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Al araby"}, {"@type": "ListItem", "position": 2, "name": "Al Jazeera - English"}, {"@type": "ListItem", "position": 3, "name": "Aljazeera Arabic"}, {"@type": "ListItem", "position": 4, "name": "Al Jazzera News Audio Hub Live English 20260312"}, {"@type": "ListItem", "position": 5, "name": "Qabayan Radio 94.3 FM (FLAC)"}, {"@type": "ListItem", "position": 6, "name": "Suno Malayalam FM"}, {"@type": "ListItem", "position": 7, "name": "Radio Olive 106.3 FM"}, {"@type": "ListItem", "position": 8, "name": "Al Jazeera English (Live)"}, {"@type": "ListItem", "position": 9, "name": "Abdulbasit Abdulsamad"}, {"@type": "ListItem", "position": 10, "name": "Al Jazeera Video"}, {"@type": "ListItem", "position": 11, "name": "Radio Olive 106.3"}, {"@type": "ListItem", "position": 12, "name": "Radio Olive 106.3 - Jiyo Bindass"}]}]}</script>
 </head>
 <body>
-<div class="wrap" id="view"><!--prerender--><h1>Radio Qatar</h1><p>12 live radio stations from Qatar, free and without ads. <a href="./">All countries</a></p><ul><li>Al araby · news</li><li>Al Jazeera - English · news</li><li>Aljazeera Arabic · music</li><li>Al Jazzera News Audio Hub Live English 20260312 · news</li><li>Qabayan Radio 94.3 FM (FLAC) · music</li><li>Suno Malayalam FM · music</li><li>Radio Olive 106.3 FM · music</li><li>Al Jazeera English (Live) · news</li><li>Abdulbasit Abdulsamad · music</li><li>Al Jazeera Video · news</li><li>Radio Olive 106.3 · music</li><li>Radio Olive 106.3 - Jiyo Bindass · music</li></ul><!--/prerender--></div>
+<div class="wrap" id="view"><!--prerender--><div class="prerender"><h1>Radio Qatar</h1><p>12 live radio stations from Qatar, free and without ads. <a href="./">All countries</a></p><ul><li>Al araby · news</li><li>Al Jazeera - English · news</li><li>Aljazeera Arabic · music</li><li>Al Jazzera News Audio Hub Live English 20260312 · news</li><li>Qabayan Radio 94.3 FM (FLAC) · music</li><li>Suno Malayalam FM · music</li><li>Radio Olive 106.3 FM · music</li><li>Al Jazeera English (Live) · news</li><li>Abdulbasit Abdulsamad · music</li><li>Al Jazeera Video · news</li><li>Radio Olive 106.3 · music</li><li>Radio Olive 106.3 - Jiyo Bindass · music</li></ul></div><!--/prerender--></div>
 
 <div class="player" id="player" aria-live="polite">
   <div class="in">

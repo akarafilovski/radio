@@ -33,7 +33,7 @@ with ThreadPoolExecutor(8) as ex:
 
 # ---- home: crawlable list of all countries
 links = ''.join(f'<li><a href="{c["slug"]}/">Radio {e(c["name"])}</a> ({len(stations[c["code"]])} stations)</li>' for c in sorted(countries, key=lambda c: c['name']))
-home_pre = ('<!--prerender--><h1>World Radio</h1><p>Listen to live radio from %d countries, free and without ads.</p><ul>%s</ul><!--/prerender-->'
+home_pre = ('<!--prerender--><div class="prerender"><h1>World Radio</h1><p>Listen to live radio from %d countries, free and without ads.</p><ul>%s</ul></div><!--/prerender-->'
             % (len(countries), links))
 home = MARK.sub(lambda m: home_pre, src, count=1)
 home = home.replace('Live radio from 239 countries', 'Live radio from %d countries' % len(countries)).replace('Live radio from 239 countries.', 'Live radio from %d countries.' % len(countries))
@@ -63,8 +63,8 @@ for c in countries:
              'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'name': s['name']} for i, s in enumerate(st[:100])]},
         ]}, ensure_ascii=False).replace('</', '<\/')
     items = ''.join(f'<li>{e(s["name"])}{" · " + e(s["category"]) if s.get("category") else ""}</li>' for s in st[:150])
-    pre = (f'<!--prerender--><h1>Radio {e(name)}</h1><p>{n} live radio stations from {e(name)}, free and without ads. '
-           f'<a href="./">All countries</a></p><ul>{items}</ul><!--/prerender-->')
+    pre = (f'<!--prerender--><div class="prerender"><h1>Radio {e(name)}</h1><p>{n} live radio stations from {e(name)}, free and without ads. '
+           f'<a href="./">All countries</a></p><ul>{items}</ul></div><!--/prerender-->')
     page = MARK.sub(lambda m: pre, home, count=1)
     page = sub(page, r'<title>.*?</title>', f'<title>{e(title)}</title>')
     page = sub(page, r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{e(desc, quote=True)}">')

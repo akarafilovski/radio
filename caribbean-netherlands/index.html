@@ -36,6 +36,8 @@
     --bg: #000; --surface: #161616; --tile: #1C1C1F; --border: rgba(255,255,255,.08); --chip: rgba(255,255,255,.10);
     --text: #fff; --muted: #A8A8B2; --dim: #555560; --accent: #FF8A3D; --on-accent: #000; --bad: #FF6B6B;
   }
+  /* plain-text copy for search engines and screen readers; the app replaces it as soon as it starts, so it is never shown */
+  .prerender { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   html, body { height: 100%; }
@@ -203,7 +205,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "World Radio", "item": "https://axarapps.github.io/radio/"}, {"@type": "ListItem", "position": 2, "name": "Radio Caribbean Netherlands", "item": "https://axarapps.github.io/radio/caribbean-netherlands/"}]}, {"@type": "ItemList", "name": "Radio stations in Caribbean Netherlands", "numberOfItems": 8, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Radio Transmundial Bonaire 800 Khz"}, {"@type": "ListItem", "position": 2, "name": "Mega Hit FM"}, {"@type": "ListItem", "position": 3, "name": "KISS FM Nederland"}, {"@type": "ListItem", "position": 4, "name": "Club De Daltons"}, {"@type": "ListItem", "position": 5, "name": "Non Stop Hits Alex FM"}, {"@type": "ListItem", "position": 6, "name": "Studio De Groene Knuppel"}, {"@type": "ListItem", "position": 7, "name": "TROPICAL SPICE RADIO"}, {"@type": "ListItem", "position": 8, "name": "Abdulbasit Abdulsamad"}]}]}</script>
 </head>
 <body>
-<div class="wrap" id="view"><!--prerender--><h1>Radio Caribbean Netherlands</h1><p>8 live radio stations from Caribbean Netherlands, free and without ads. <a href="./">All countries</a></p><ul><li>Radio Transmundial Bonaire 800 Khz · music</li><li>Mega Hit FM · music</li><li>KISS FM Nederland · music</li><li>Club De Daltons · music</li><li>Non Stop Hits Alex FM · music</li><li>Studio De Groene Knuppel · music</li><li>TROPICAL SPICE RADIO · music</li><li>Abdulbasit Abdulsamad · music</li></ul><!--/prerender--></div>
+<div class="wrap" id="view"><!--prerender--><div class="prerender"><h1>Radio Caribbean Netherlands</h1><p>8 live radio stations from Caribbean Netherlands, free and without ads. <a href="./">All countries</a></p><ul><li>Radio Transmundial Bonaire 800 Khz · music</li><li>Mega Hit FM · music</li><li>KISS FM Nederland · music</li><li>Club De Daltons · music</li><li>Non Stop Hits Alex FM · music</li><li>Studio De Groene Knuppel · music</li><li>TROPICAL SPICE RADIO · music</li><li>Abdulbasit Abdulsamad · music</li></ul></div><!--/prerender--></div>
 
 <div class="player" id="player" aria-live="polite">
   <div class="in">

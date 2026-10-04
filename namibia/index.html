@@ -36,6 +36,8 @@
     --bg: #000; --surface: #161616; --tile: #1C1C1F; --border: rgba(255,255,255,.08); --chip: rgba(255,255,255,.10);
     --text: #fff; --muted: #A8A8B2; --dim: #555560; --accent: #FF8A3D; --on-accent: #000; --bad: #FF6B6B;
   }
+  /* plain-text copy for search engines and screen readers; the app replaces it as soon as it starts, so it is never shown */
+  .prerender { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   html, body { height: 100%; }
@@ -203,7 +205,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "World Radio", "item": "https://axarapps.github.io/radio/"}, {"@type": "ListItem", "position": 2, "name": "Radio Namibia", "item": "https://axarapps.github.io/radio/namibia/"}]}, {"@type": "ItemList", "name": "Radio stations in Namibia", "numberOfItems": 10, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hitradio Namibia"}, {"@type": "ListItem", "position": 2, "name": "Omulunga Radio"}, {"@type": "ListItem", "position": 3, "name": "Kosmos 94.1"}, {"@type": "ListItem", "position": 4, "name": "Radiowave FM"}, {"@type": "ListItem", "position": 5, "name": "Fresh FM"}, {"@type": "ListItem", "position": 6, "name": "Nova 103.5"}, {"@type": "ListItem", "position": 7, "name": "Nam Radio Local"}, {"@type": "ListItem", "position": 8, "name": "Afrika-Boom"}, {"@type": "ListItem", "position": 9, "name": "Kanaal 7"}, {"@type": "ListItem", "position": 10, "name": "Abdulbasit Abdulsamad"}]}]}</script>
 </head>
 <body>
-<div class="wrap" id="view"><!--prerender--><h1>Radio Namibia</h1><p>10 live radio stations from Namibia, free and without ads. <a href="./">All countries</a></p><ul><li>Hitradio Namibia · music</li><li>Omulunga Radio · music</li><li>Kosmos 94.1 · news</li><li>Radiowave FM · music</li><li>Fresh FM · music</li><li>Nova 103.5 · music</li><li>Nam Radio Local · music</li><li>Afrika-Boom · music</li><li>Kanaal 7 · music</li><li>Abdulbasit Abdulsamad · music</li></ul><!--/prerender--></div>
+<div class="wrap" id="view"><!--prerender--><div class="prerender"><h1>Radio Namibia</h1><p>10 live radio stations from Namibia, free and without ads. <a href="./">All countries</a></p><ul><li>Hitradio Namibia · music</li><li>Omulunga Radio · music</li><li>Kosmos 94.1 · news</li><li>Radiowave FM · music</li><li>Fresh FM · music</li><li>Nova 103.5 · music</li><li>Nam Radio Local · music</li><li>Afrika-Boom · music</li><li>Kanaal 7 · music</li><li>Abdulbasit Abdulsamad · music</li></ul></div><!--/prerender--></div>
 
 <div class="player" id="player" aria-live="polite">
   <div class="in">
