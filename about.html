@@ -17,8 +17,7 @@
   .bar a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--panel); border: 1px solid var(--line); color: var(--text); }
   .bar svg { width: 22px; height: 22px; }
   .bar a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .head { display: flex; align-items: center; gap: 14px; margin: 14px 0 6px; }
-  .head img { width: 56px; height: 56px; border-radius: 14px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   h1 { font-size: 28px; margin: 0; }
   h2 { font-size: 18px; margin: 28px 0 6px; }
   p, li { color: var(--muted); }
@@ -36,7 +35,7 @@
 <body>
 <main>
   <div class="bar"><a href="./" data-back="/radio/" aria-label="All radios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg></a><span class="bt">About</span></div>
-  <div class="head"><img src="icons/app-192.png" alt="" width="56" height="56"><h1>World Radio</h1></div>
+  <h1 class="sr">World Radio</h1>
   <p>Live radio from 191 countries in your browser. Search a country, tap a station and listen. Free, no ads, no sign-up.</p>
   <div class="chips"><span class="chip">No ads</span><span class="chip">No sign-up</span><span class="chip">191 countries</span><span class="chip">Phone, tablet and computer</span></div>
   <h2>How it works</h2><p>Pick a country, then a station, and it plays right away. Star your favorites and they stay on your device. Add this page to your home screen to open it like an app.</p>
