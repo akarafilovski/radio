@@ -1,0 +1,28 @@
+from playwright.sync_api import sync_playwright
+S = 'C:/Users/ALEKSA~1/AppData/Local/Temp/claude/D--Development-Android-Mudras/9ea4b5eb-2ec9-478a-a90e-4a035ab60d6d/scratchpad/'
+with sync_playwright() as p:
+    b = p.chromium.launch(channel='chrome', args=['--autoplay-policy=no-user-gesture-required'])
+    ctx = b.new_context(viewport={'width': 390, 'height': 844}, device_scale_factor=2, is_mobile=True, has_touch=True)
+    pg = ctx.new_page()
+    errs = []
+    pg.on('pageerror', lambda e: errs.append(str(e)))
+    pg.goto('http://localhost:8766/#/RS')
+    pg.wait_for_timeout(2500)
+    for i in range(3):
+        pg.locator('.row').nth(i).click()
+        pg.wait_for_timeout(1500)
+    pg.locator('#back').click()
+    pg.wait_for_timeout(1500)
+    print('open: recent rows', pg.locator('.row').count(), pg.locator('.fold').inner_text().replace('\n', ' '))
+    pg.screenshot(path=S + 'rt1.png')
+    pg.locator('.fold').click()
+    pg.wait_for_timeout(300)
+    print('collapsed: rows', pg.locator('.row').count(), 'aria', pg.locator('.fold').get_attribute('aria-expanded'))
+    pg.screenshot(path=S + 'rt2.png')
+    pg.reload()
+    pg.wait_for_timeout(2000)
+    print('after reload: rows', pg.locator('.row').count(), 'aria', pg.locator('.fold').get_attribute('aria-expanded'))
+    pg.locator('.fold').click()
+    pg.wait_for_timeout(300)
+    print('reopened: rows', pg.locator('.row').count(), errs)
+    b.close()

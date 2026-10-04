@@ -44,6 +44,11 @@
     padding: 0 18px 0 46px; font: 500 16px 'Figtree', sans-serif; outline: none; }
   .search input:focus { border-color: var(--accent); }
   .search svg { position: absolute; left: 16px; top: 15px; width: 20px; height: 20px; color: var(--muted); }
+  button.label.fold { all: unset; box-sizing: border-box; cursor: pointer; width: 100%; display: flex; align-items: center; gap: 8px; font: 700 13px 'Figtree', sans-serif; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; margin: 22px 0 10px; }
+  button.label.fold span { background: var(--chip); border-radius: 999px; padding: 1px 8px; font-size: 12px; letter-spacing: 0; }
+  button.label.fold .chev { margin-left: auto; width: 20px; height: 20px; transition: transform .2s; transform: rotate(-90deg); color: var(--accent); }
+  button.label.fold.open .chev { transform: none; }
+  button.label.fold:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
   .label { font: 700 13px 'Figtree'; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; margin: 22px 0 10px; }
   .picks { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
   .pick { all: unset; cursor: pointer; display: grid; justify-items: center; gap: 6px; padding: 12px 6px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); text-align: center; }
@@ -346,6 +351,7 @@ function stationRow(s) {
 let route = { code: null };
 const findStation = (id) => shown.find((x) => x.id === id) || favs.find((x) => x.id === id) || recent.find((x) => x.id === id);
 let homeDraw = null;
+let recentOpen = load('radio.recentOpen', true);
 let countryDraw = null;
 let shown = [];       // stations currently in the list, for click lookup
 let listState = { q: '', cat: 'all', limit: PAGE };
@@ -375,7 +381,10 @@ async function renderHome() {
       ? `<div class="list">${favs.map(stationRow).join('')}</div>`
       : `<div class="favempty"><span>${ICON.star}</span><p>Your favorite stations will be here.<br>Tap the star next to a station to add it.</p></div>`);
     const rec = recent.filter((r) => !isFav(r.id)).slice(0, 6);
-    if (!term && rec.length) html += `<div class="label">Recently played</div><div class="list">${rec.map(stationRow).join('')}</div>`;
+    if (!term && rec.length) {
+      html += `<button type="button" class="label fold${recentOpen ? ' open' : ''}" data-toggle="recent" aria-expanded="${recentOpen}">Recently played<span>${rec.length}</span>${ICON.chev}</button>`;
+      if (recentOpen) html += `<div class="list">${rec.map(stationRow).join('')}</div>`;
+    }
     if (m.length) html += `${!term ? '<div class="label">Countries</div>' : '<div class="label">Countries</div>'}<div class="apps">${m.map(card).join('')}</div>`;
     let hits = [];
     if (term.length >= 2) {
@@ -385,7 +394,7 @@ async function renderHome() {
       if (loading && hits.length) html += `<p class="note" style="text-align:center">Still searching: ${prefetchState.done} of ${prefetchState.total} countries</p>`;
     }
     $('home-lists').innerHTML = html || '<div class="empty">Nothing found.</div>';
-    shown = hits.concat(favs, rec);
+    shown = hits.concat(favs, rec, recent);
   };
   homeDraw = draw;
   q.addEventListener('input', () => { if (q.value.trim().length >= 2) prefetchAll(() => { if (q.isConnected && q.value.trim().length >= 2) draw(); }); draw(); });
@@ -446,6 +455,12 @@ function redrawRows() {
 function setAccent(c) { document.documentElement.style.setProperty('--accent', c); }
 
 view.addEventListener('click', (e) => {
+  if (e.target.closest('[data-toggle="recent"]')) {
+    recentOpen = !recentOpen;
+    save('radio.recentOpen', recentOpen);
+    if (homeDraw) homeDraw();
+    return;
+  }
   const favBtn = e.target.closest('[data-fav]');
   if (favBtn) {
     e.stopPropagation();
