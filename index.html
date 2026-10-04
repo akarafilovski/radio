@@ -129,7 +129,8 @@
   .qrbox { display: grid; justify-items: center; margin-bottom: 20px; }
   .qrbox img { width: 180px; height: 180px; border-radius: 18px; background: #fff; padding: 10px; }
   .addrrow { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
-  .addr3 { flex: 1; min-width: 0; font: 600 18px/1.3 'Figtree', sans-serif; color: #EAECEF; word-break: break-all; letter-spacing: .1px; }
+  .addr3 { flex: 1; min-width: 0; container-type: inline-size; font: 600 15px/1.45 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; color: #EAECEF; }
+  .addr3 span { display: block; white-space: nowrap; overflow: hidden; font-size: min(18px, calc(100cqw / 13.9)); }
   .addr3 i { font-style: normal; color: var(--by); }
   .cbtn { all: unset; cursor: pointer; flex: none; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: #363D47; color: #EAECEF; transition: transform .1s, background .2s; }
   .cbtn svg { width: 22px; height: 22px; } .cbtn:active { transform: scale(.92); } .cbtn:focus-visible { outline: 2px solid var(--by); outline-offset: 2px; }
@@ -507,7 +508,7 @@ function supportHtml() {
         <div class="qrbox"><img id="dep-qr" src="icons/qr-sol.png" alt="QR code of the wallet address" width="180" height="180"></div>
         <div class="k">Wallet address</div>
         <div class="addrrow">
-          <div class="addr3" title="${WALLET}"><i>${WALLET.slice(0, 6)}</i>${WALLET.slice(6, -6)}<i>${WALLET.slice(-6)}</i></div>
+          <div class="addr3" title="${WALLET}"><span><i>${WALLET.slice(0, 6)}</i>${WALLET.slice(6, 22)}</span><span>${WALLET.slice(22, -6)}<i>${WALLET.slice(-6)}</i></span></div>
           <button type="button" class="cbtn" aria-label="Copy address"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></button>
         </div>
         <p class="redn" id="dep-note"></p>
