@@ -304,7 +304,7 @@ async function renderHome() {
     <div class="fixed">${supportHtml()}
       <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search a country" autocomplete="off" aria-label="Search a country"></div></div>
     <div id="home-lists"><div class="empty">Loading…</div></div>
-    <footer><span>© aXar</span><a href="privacy.html">Privacy</a><a href="https://akarafilovski.github.io/games/">Games</a><a href="mailto:akarafilovski@gmail.com">Contact</a></footer>`;
+    <footer><span>© aXar</span><a href="privacy.html">Privacy</a><a href="https://axarapps.github.io/games/">Games</a><a href="mailto:akarafilovski@gmail.com">Contact</a></footer>`;
   wireSupport();
   await Promise.all([getIndex(), getCountries()]);
   const q = $('q');
