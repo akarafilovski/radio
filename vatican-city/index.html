@@ -396,6 +396,7 @@ async function renderHome() {
     <footer><span>© aXar</span><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="https://axarapps.github.io/games/">Games</a><a href="mailto:akarafilovski@gmail.com">Contact</a></footer>`;
   wireSupport();
   await Promise.all([getIndex(), getCountries()]);
+  if (route.code !== null) return;   // the user already moved on while this loaded
   const q = $('q');
   const list = COUNTRIES.map((c) => app(c.code)).sort((a, b) => a.name.localeCompare(b.name));
   const card = (a) => `<a class="app" data-code="${a.code}" href="${slugOf(a.code)}/" style="--a:${a.accent}">
@@ -442,6 +443,7 @@ async function renderCountry(code) {
   route = { code };
   listState = { q: '', cat: 'all', limit: PAGE };
   await Promise.all([getIndex(), getCountries()]);
+  if (route.code !== code) return;
   const pick = app(code);
   const name = pick.name;
   document.title = `${name}: listen to ${pick.stations} live stations online | World Radio`;
@@ -453,10 +455,10 @@ async function renderCountry(code) {
     <div class="chips" id="chips"></div>
     <div id="stations"><div class="empty">Loading stations…</div></div>
 `;
-  $('back').addEventListener('click', () => go(''));
+  $('back').addEventListener('click', () => goBack());
   window.scrollTo(0, 0);
   let stations;
-  try { stations = await getCountry(code); } catch (e) { $('stations').innerHTML = '<div class="empty">Could not load the stations. Check your connection.</div>'; return; }
+  try { stations = await getCountry(code); if (route.code !== code) return; } catch (e) { if (route.code !== code) return; $('stations').innerHTML = '<div class="empty">Could not load the stations. Check your connection.</div>'; return; }
   // Browsers block old http streams on a secure page, so only https stations are listed here (all of them play in the apps).
   const appOnly = stations.filter((s) => !s.stream.url.startsWith('https:')).length;
   stations = stations.filter((s) => s.stream.url.startsWith('https:'));
@@ -724,7 +726,14 @@ function wireSupport() {
 const BASE = new URL('.', document.baseURI).pathname;
 function slugOf(code) { const c = COUNTRIES.find((x) => x.code === code); return c ? c.slug : code.toLowerCase(); }
 function go(code) {
-  history.pushState(null, '', BASE + (code ? slugOf(code) + '/' : ''));
+  history.pushState({ app: 1 }, '', BASE + (code ? slugOf(code) + '/' : ''));
+  routeNow();
+}
+// Back arrow: step back in history when we got here from inside the app (no loop between list and country);
+// when the country page was opened directly, replace it by the list so browser Back leaves the site.
+function goBack() {
+  if (history.state && history.state.app) { history.back(); return; }
+  history.replaceState({ app: 1 }, '', BASE);
   routeNow();
 }
 async function routeNow() {
