@@ -11,9 +11,9 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Radio Ireland: listen to 116 live stations online | World Radio</title>
+<title>Radio Ireland: listen to 116 live stations online | TUNO</title>
 <meta name="description" content="Listen to 116 live radio stations from Ireland online, free and without ads. Music, news, talk and sports: search, tap and play.">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#0A1020">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="canonical" href="https://axarapps.github.io/radio/ireland/">
 <link rel="icon" href="icons/app-192.png">
@@ -21,8 +21,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="World Radio">
-<meta property="og:title" content="Radio Ireland: listen to 116 live stations online | World Radio">
+<meta name="apple-mobile-web-app-title" content="TUNO">
+<meta property="og:title" content="Radio Ireland: listen to 116 live stations online | TUNO">
 <meta property="og:description" content="Listen to 116 live radio stations from Ireland online, free and without ads. Music, news, talk and sports: search, tap and play.">
 <meta property="og:image" content="https://axarapps.github.io/radio/icons/og.png">
 <meta property="og:type" content="website">
@@ -33,8 +33,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #000; --surface: #161616; --tile: #1C1C1F; --border: rgba(255,255,255,.08); --chip: rgba(255,255,255,.10);
-    --text: #fff; --muted: #A8A8B2; --dim: #555560; --accent: #FF8A3D; --on-accent: #000; --bad: #FF6B6B;
+    --bg: #0A1020; --surface: #131C32; --tile: #131C32; --border: rgba(130,160,255,.14); --chip: rgba(255,255,255,.10);
+    --text: #EEF1F8; --muted: #B5BDD3; --dim: #6B7592; --accent: #FF8A3D; --on-accent: #000; --bad: #FF6B6B;
   }
   /* plain-text copy for search engines and screen readers; the app replaces it as soon as it starts, so it is never shown */
   .prerender { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -80,7 +80,7 @@
   .app img { width: 44px; height: 44px; border-radius: 12px; box-shadow: 0 5px 14px rgba(0,0,0,.45); }
   .app b { font: 700 10.5px/1.25 'Sora', sans-serif; letter-spacing: -0.2px; width: 100%; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; min-height: 2.4em; }
   .app small { color: var(--muted); font-size: 11px; line-height: 1; }
-  .fixed { position: sticky; top: 0; z-index: 15; margin: 0 -16px; padding: max(8px, env(safe-area-inset-top)) 16px 10px; background: rgba(0,0,0,.94);  }
+  .fixed { position: sticky; top: 0; z-index: 15; margin: 0 -16px; padding: max(8px, env(safe-area-inset-top)) 16px 10px; background: rgba(10,16,32,.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
   .fixed .search { margin: 8px 0 0; }
   .fixed .support { margin: 0; }
   .lead { color: var(--muted); margin: -6px 0 16px; }
@@ -204,14 +204,29 @@
   .sleepmenu b { padding: 8px 12px 6px; font-size: 12px; letter-spacing: .6px; text-transform: uppercase; color: var(--muted); }
   .sleepmenu button { all: unset; cursor: pointer; padding: 11px 12px; border-radius: 10px; font-weight: 600; font-size: 15px; }
   .sleepmenu button:hover { background: var(--chip); } .sleepmenu .off { color: var(--muted); }
+  /* light behind the page: calm when idle, drifting while a station plays */
+  #glow { position: fixed; inset: 0; z-index: 0; pointer-events: none; transition: opacity .9s;
+    background: radial-gradient(70% 38% at 18% -4%, rgba(76,100,255,.24), transparent 70%), radial-gradient(60% 34% at 92% 2%, rgba(125,105,255,.18), transparent 68%); }
+  body.playing #glow { background: radial-gradient(70% 38% at 18% -4%, rgba(76,100,255,.40), transparent 70%), radial-gradient(60% 34% at 92% 2%, rgba(125,105,255,.34), transparent 68%);
+    animation: drift 14s linear infinite; }
+  @keyframes drift { 0%, 100% { transform: translate(0, 0) scale(1); } 25% { transform: translate(3%, 1.5%) scale(1.05); } 50% { transform: translate(0, 3%) scale(1); } 75% { transform: translate(-3%, 1.5%) scale(1.05); } }
+  .wrap { position: relative; z-index: 1; }
+  .logo { display: flex; align-items: center; gap: 2.5px; height: 28px; margin-right: 2px; }
+  .logo i { display: block; width: 3.4px; height: calc(var(--h) * 1px); border-radius: 2px; background: linear-gradient(#FFD6B4, #EB6428); }
+  body.playing .logo i { animation: bar var(--d) ease-in-out infinite alternate; }
+  @keyframes bar { from { transform: scaleY(.45); } to { transform: scaleY(1); } }
+  .top h1 { color: #FFB68C; font-weight: 900; }
+  .app img.flag, .top img.flag { border-radius: 50%; box-shadow: none; }
+  .support.open { background: #0A1020; }
   .toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--text); color: #000; padding: 10px 18px;
     border-radius: 999px; font-weight: 700; font-size: 14px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 40; max-width: 90vw; text-align: center; }
   .toast.show { opacity: 1; }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "World Radio", "item": "https://axarapps.github.io/radio/"}, {"@type": "ListItem", "position": 2, "name": "Radio Ireland", "item": "https://axarapps.github.io/radio/ireland/"}]}, {"@type": "ItemList", "name": "Radio stations in Ireland", "numberOfItems": 100, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Newstalk"}, {"@type": "ListItem", "position": 2, "name": "Dublin's FM104"}, {"@type": "ListItem", "position": 3, "name": "Today FM"}, {"@type": "ListItem", "position": 4, "name": "RTÉ Radio 1"}, {"@type": "ListItem", "position": 5, "name": "RTÉ Gold"}, {"@type": "ListItem", "position": 6, "name": "Dublin's 98FM"}, {"@type": "ListItem", "position": 7, "name": "Classic Hits 80s"}, {"@type": "ListItem", "position": 8, "name": "Deep House Radio"}, {"@type": "ListItem", "position": 9, "name": "Dublin's Q102"}, {"@type": "ListItem", "position": 10, "name": "Radio Nova 100"}, {"@type": "ListItem", "position": 11, "name": "Highland Radio"}, {"@type": "ListItem", "position": 12, "name": "Gem Radio New Wave"}, {"@type": "ListItem", "position": 13, "name": "Newstalk Ireland AAC"}, {"@type": "ListItem", "position": 14, "name": "Sunshine 106.8"}, {"@type": "ListItem", "position": 15, "name": "Freedom FM"}, {"@type": "ListItem", "position": 16, "name": "UCBI WORSHIP"}, {"@type": "ListItem", "position": 17, "name": "RTE 2 FM"}, {"@type": "ListItem", "position": 18, "name": "Christmas FM Classical & Carols"}, {"@type": "ListItem", "position": 19, "name": "PowerFM Dublin 320Kbps MP3"}, {"@type": "ListItem", "position": 20, "name": "Funky Ass Tunes"}, {"@type": "ListItem", "position": 21, "name": "Energy 106 Belfast Northern Ireland"}, {"@type": "ListItem", "position": 22, "name": "RTÉ Raidió na Gaeltachta"}, {"@type": "ListItem", "position": 23, "name": "Spin 103.8"}, {"@type": "ListItem", "position": 24, "name": "Onic 80s"}, {"@type": "ListItem", "position": 25, "name": "Radio Siamsa"}, {"@type": "ListItem", "position": 26, "name": "Christmas FM Ireland"}, {"@type": "ListItem", "position": 27, "name": "RTÉ 2FM"}, {"@type": "ListItem", "position": 28, "name": "Cork's RedFM"}, {"@type": "ListItem", "position": 29, "name": "iRadio"}, {"@type": "ListItem", "position": 30, "name": "SPIN South West"}, {"@type": "ListItem", "position": 31, "name": "LMFM"}, {"@type": "ListItem", "position": 32, "name": "Club FM Dublin"}, {"@type": "ListItem", "position": 33, "name": "Christmas FM"}, {"@type": "ListItem", "position": 34, "name": "Free FM Ireland"}, {"@type": "ListItem", "position": 35, "name": "MixLive.net - Psybient Sunset"}, {"@type": "ListItem", "position": 36, "name": "Clonmellon Community Radio"}, {"@type": "ListItem", "position": 37, "name": "Midlands 103"}, {"@type": "ListItem", "position": 38, "name": "98fm Dance"}, {"@type": "ListItem", "position": 39, "name": "Deep House Radio (DHR)"}, {"@type": "ListItem", "position": 40, "name": "Onic Movies"}, {"@type": "ListItem", "position": 41, "name": "Rana Sundi"}, {"@type": "ListItem", "position": 42, "name": "Deise Christmas Radio"}, {"@type": "ListItem", "position": 43, "name": "TrancePulse Dublin"}, {"@type": "ListItem", "position": 44, "name": "Onic Alternative"}, {"@type": "ListItem", "position": 45, "name": "PHEVER Radio"}, {"@type": "ListItem", "position": 46, "name": "Ignoreradio Shoegaze"}, {"@type": "ListItem", "position": 47, "name": "MPB Radio 1"}, {"@type": "ListItem", "position": 48, "name": "GOCOM Radio"}, {"@type": "ListItem", "position": 49, "name": "Biggest Disco Radio"}, {"@type": "ListItem", "position": 50, "name": "Gem Radio Gold"}, {"@type": "ListItem", "position": 51, "name": "MixLive - Progressive & Tech-house"}, {"@type": "ListItem", "position": 52, "name": "CFC FM"}, {"@type": "ListItem", "position": 53, "name": "Live95 Limerick"}, {"@type": "ListItem", "position": 54, "name": "Onic Country"}, {"@type": "ListItem", "position": 55, "name": "Easy Radio Ireland, Easy Mix"}, {"@type": "ListItem", "position": 56, "name": "BOB FM"}, {"@type": "ListItem", "position": 57, "name": "HeadWax Radio"}, {"@type": "ListItem", "position": 58, "name": "HITMIX RADIO IRELAND"}, {"@type": "ListItem", "position": 59, "name": "80s Rewind"}, {"@type": "ListItem", "position": 60, "name": "Retro Rewind"}, {"@type": "ListItem", "position": 61, "name": "Gravity Hits"}, {"@type": "ListItem", "position": 62, "name": "University College Cork"}, {"@type": "ListItem", "position": 63, "name": "Today FM 80's"}, {"@type": "ListItem", "position": 64, "name": "Today FM 90s"}, {"@type": "ListItem", "position": 65, "name": "MPB Radio 1 Dance"}, {"@type": "ListItem", "position": 66, "name": "FM104"}, {"@type": "ListItem", "position": 67, "name": "East Coast FM"}, {"@type": "ListItem", "position": 68, "name": "[ vinyl stacks ]"}, {"@type": "ListItem", "position": 69, "name": "Dublin Digital Radio"}, {"@type": "ListItem", "position": 70, "name": "SOLID GOLD RADIO IRELAND"}, {"@type": "ListItem", "position": 71, "name": "Timewarp Ireland"}, {"@type": "ListItem", "position": 72, "name": "Onic Classical"}, {"@type": "ListItem", "position": 73, "name": "Total Country Inchicore"}, {"@type": "ListItem", "position": 74, "name": "XT Alternative"}, {"@type": "ListItem", "position": 75, "name": "Q102"}, {"@type": "ListItem", "position": 76, "name": "Beat 102-103"}, {"@type": "ListItem", "position": 77, "name": "Live95FM"}, {"@type": "ListItem", "position": 78, "name": "Rewind"}, {"@type": "ListItem", "position": 79, "name": "Tipperary Mid West Community Radio"}, {"@type": "ListItem", "position": 80, "name": "Wired FM - FM 99.9 - Limerick, Ireland"}, {"@type": "ListItem", "position": 81, "name": "Off The Ball"}, {"@type": "ListItem", "position": 82, "name": "Onic Pride Vibes"}, {"@type": "ListItem", "position": 83, "name": "Limerick's Live 95FM"}, {"@type": "ListItem", "position": 84, "name": "Classic Gold Radio"}, {"@type": "ListItem", "position": 85, "name": "Christmas FM Classics"}, {"@type": "ListItem", "position": 86, "name": "Club FM  Dublin Dublins hottest dance mix"}, {"@type": "ListItem", "position": 87, "name": "Scariff Bay Community Radio"}, {"@type": "ListItem", "position": 88, "name": "Clare FM"}, {"@type": "ListItem", "position": 89, "name": "Onic Hits"}, {"@type": "ListItem", "position": 90, "name": "Raídío Rí-Rá"}, {"@type": "ListItem", "position": 91, "name": "Circle Of White Light Radio"}, {"@type": "ListItem", "position": 92, "name": "PlanetRadioie"}, {"@type": "ListItem", "position": 93, "name": "Onic RnB"}, {"@type": "ListItem", "position": 94, "name": "eist"}, {"@type": "ListItem", "position": 95, "name": "98FM Throwback"}, {"@type": "ListItem", "position": 96, "name": "Kfm 97.6"}, {"@type": "ListItem", "position": 97, "name": "PowerFM Dublin 320Kbps Ogg/Vorbis"}, {"@type": "ListItem", "position": 98, "name": "Phantom Radio Ireland"}, {"@type": "ListItem", "position": 99, "name": "Tipperary Hospital Radio Clonmel"}, {"@type": "ListItem", "position": 100, "name": "Birdhill Radio"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "TUNO", "item": "https://axarapps.github.io/radio/"}, {"@type": "ListItem", "position": 2, "name": "Radio Ireland", "item": "https://axarapps.github.io/radio/ireland/"}]}, {"@type": "ItemList", "name": "Radio stations in Ireland", "numberOfItems": 100, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Newstalk"}, {"@type": "ListItem", "position": 2, "name": "Dublin's FM104"}, {"@type": "ListItem", "position": 3, "name": "Today FM"}, {"@type": "ListItem", "position": 4, "name": "RTÉ Radio 1"}, {"@type": "ListItem", "position": 5, "name": "RTÉ Gold"}, {"@type": "ListItem", "position": 6, "name": "Dublin's 98FM"}, {"@type": "ListItem", "position": 7, "name": "Classic Hits 80s"}, {"@type": "ListItem", "position": 8, "name": "Deep House Radio"}, {"@type": "ListItem", "position": 9, "name": "Dublin's Q102"}, {"@type": "ListItem", "position": 10, "name": "Radio Nova 100"}, {"@type": "ListItem", "position": 11, "name": "Highland Radio"}, {"@type": "ListItem", "position": 12, "name": "Gem Radio New Wave"}, {"@type": "ListItem", "position": 13, "name": "Newstalk Ireland AAC"}, {"@type": "ListItem", "position": 14, "name": "Sunshine 106.8"}, {"@type": "ListItem", "position": 15, "name": "Freedom FM"}, {"@type": "ListItem", "position": 16, "name": "UCBI WORSHIP"}, {"@type": "ListItem", "position": 17, "name": "RTE 2 FM"}, {"@type": "ListItem", "position": 18, "name": "Christmas FM Classical & Carols"}, {"@type": "ListItem", "position": 19, "name": "PowerFM Dublin 320Kbps MP3"}, {"@type": "ListItem", "position": 20, "name": "Funky Ass Tunes"}, {"@type": "ListItem", "position": 21, "name": "Energy 106 Belfast Northern Ireland"}, {"@type": "ListItem", "position": 22, "name": "RTÉ Raidió na Gaeltachta"}, {"@type": "ListItem", "position": 23, "name": "Spin 103.8"}, {"@type": "ListItem", "position": 24, "name": "Onic 80s"}, {"@type": "ListItem", "position": 25, "name": "Radio Siamsa"}, {"@type": "ListItem", "position": 26, "name": "Christmas FM Ireland"}, {"@type": "ListItem", "position": 27, "name": "RTÉ 2FM"}, {"@type": "ListItem", "position": 28, "name": "Cork's RedFM"}, {"@type": "ListItem", "position": 29, "name": "iRadio"}, {"@type": "ListItem", "position": 30, "name": "SPIN South West"}, {"@type": "ListItem", "position": 31, "name": "LMFM"}, {"@type": "ListItem", "position": 32, "name": "Club FM Dublin"}, {"@type": "ListItem", "position": 33, "name": "Christmas FM"}, {"@type": "ListItem", "position": 34, "name": "Free FM Ireland"}, {"@type": "ListItem", "position": 35, "name": "MixLive.net - Psybient Sunset"}, {"@type": "ListItem", "position": 36, "name": "Clonmellon Community Radio"}, {"@type": "ListItem", "position": 37, "name": "Midlands 103"}, {"@type": "ListItem", "position": 38, "name": "98fm Dance"}, {"@type": "ListItem", "position": 39, "name": "Deep House Radio (DHR)"}, {"@type": "ListItem", "position": 40, "name": "Onic Movies"}, {"@type": "ListItem", "position": 41, "name": "Rana Sundi"}, {"@type": "ListItem", "position": 42, "name": "Deise Christmas Radio"}, {"@type": "ListItem", "position": 43, "name": "TrancePulse Dublin"}, {"@type": "ListItem", "position": 44, "name": "Onic Alternative"}, {"@type": "ListItem", "position": 45, "name": "PHEVER Radio"}, {"@type": "ListItem", "position": 46, "name": "Ignoreradio Shoegaze"}, {"@type": "ListItem", "position": 47, "name": "MPB Radio 1"}, {"@type": "ListItem", "position": 48, "name": "GOCOM Radio"}, {"@type": "ListItem", "position": 49, "name": "Biggest Disco Radio"}, {"@type": "ListItem", "position": 50, "name": "Gem Radio Gold"}, {"@type": "ListItem", "position": 51, "name": "MixLive - Progressive & Tech-house"}, {"@type": "ListItem", "position": 52, "name": "CFC FM"}, {"@type": "ListItem", "position": 53, "name": "Live95 Limerick"}, {"@type": "ListItem", "position": 54, "name": "Onic Country"}, {"@type": "ListItem", "position": 55, "name": "Easy Radio Ireland, Easy Mix"}, {"@type": "ListItem", "position": 56, "name": "BOB FM"}, {"@type": "ListItem", "position": 57, "name": "HeadWax Radio"}, {"@type": "ListItem", "position": 58, "name": "HITMIX RADIO IRELAND"}, {"@type": "ListItem", "position": 59, "name": "80s Rewind"}, {"@type": "ListItem", "position": 60, "name": "Retro Rewind"}, {"@type": "ListItem", "position": 61, "name": "Gravity Hits"}, {"@type": "ListItem", "position": 62, "name": "University College Cork"}, {"@type": "ListItem", "position": 63, "name": "Today FM 80's"}, {"@type": "ListItem", "position": 64, "name": "Today FM 90s"}, {"@type": "ListItem", "position": 65, "name": "MPB Radio 1 Dance"}, {"@type": "ListItem", "position": 66, "name": "FM104"}, {"@type": "ListItem", "position": 67, "name": "East Coast FM"}, {"@type": "ListItem", "position": 68, "name": "[ vinyl stacks ]"}, {"@type": "ListItem", "position": 69, "name": "Dublin Digital Radio"}, {"@type": "ListItem", "position": 70, "name": "SOLID GOLD RADIO IRELAND"}, {"@type": "ListItem", "position": 71, "name": "Timewarp Ireland"}, {"@type": "ListItem", "position": 72, "name": "Onic Classical"}, {"@type": "ListItem", "position": 73, "name": "Total Country Inchicore"}, {"@type": "ListItem", "position": 74, "name": "XT Alternative"}, {"@type": "ListItem", "position": 75, "name": "Q102"}, {"@type": "ListItem", "position": 76, "name": "Beat 102-103"}, {"@type": "ListItem", "position": 77, "name": "Live95FM"}, {"@type": "ListItem", "position": 78, "name": "Rewind"}, {"@type": "ListItem", "position": 79, "name": "Tipperary Mid West Community Radio"}, {"@type": "ListItem", "position": 80, "name": "Wired FM - FM 99.9 - Limerick, Ireland"}, {"@type": "ListItem", "position": 81, "name": "Off The Ball"}, {"@type": "ListItem", "position": 82, "name": "Onic Pride Vibes"}, {"@type": "ListItem", "position": 83, "name": "Limerick's Live 95FM"}, {"@type": "ListItem", "position": 84, "name": "Classic Gold Radio"}, {"@type": "ListItem", "position": 85, "name": "Christmas FM Classics"}, {"@type": "ListItem", "position": 86, "name": "Club FM  Dublin Dublins hottest dance mix"}, {"@type": "ListItem", "position": 87, "name": "Scariff Bay Community Radio"}, {"@type": "ListItem", "position": 88, "name": "Clare FM"}, {"@type": "ListItem", "position": 89, "name": "Onic Hits"}, {"@type": "ListItem", "position": 90, "name": "Raídío Rí-Rá"}, {"@type": "ListItem", "position": 91, "name": "Circle Of White Light Radio"}, {"@type": "ListItem", "position": 92, "name": "PlanetRadioie"}, {"@type": "ListItem", "position": 93, "name": "Onic RnB"}, {"@type": "ListItem", "position": 94, "name": "eist"}, {"@type": "ListItem", "position": 95, "name": "98FM Throwback"}, {"@type": "ListItem", "position": 96, "name": "Kfm 97.6"}, {"@type": "ListItem", "position": 97, "name": "PowerFM Dublin 320Kbps Ogg/Vorbis"}, {"@type": "ListItem", "position": 98, "name": "Phantom Radio Ireland"}, {"@type": "ListItem", "position": 99, "name": "Tipperary Hospital Radio Clonmel"}, {"@type": "ListItem", "position": 100, "name": "Birdhill Radio"}]}]}</script>
 </head>
 <body>
+<div id="glow" aria-hidden="true"></div>
 <div class="wrap" id="view"><!--prerender--><div class="prerender"><h1>Radio Ireland</h1><p>116 live radio stations from Ireland, free and without ads. <a href="./">All countries</a></p><ul><li>Newstalk · music</li><li>Dublin&#x27;s FM104 · music</li><li>Today FM · music</li><li>RTÉ Radio 1 · news</li><li>RTÉ Gold · music</li><li>Dublin&#x27;s 98FM · news</li><li>Classic Hits 80s · music</li><li>Deep House Radio · music</li><li>Dublin&#x27;s Q102 · music</li><li>Radio Nova 100 · music</li><li>Highland Radio · music</li><li>Gem Radio New Wave · music</li><li>Newstalk Ireland AAC · music</li><li>Sunshine 106.8 · music</li><li>Freedom FM · music</li><li>UCBI WORSHIP · music</li><li>RTE 2 FM · music</li><li>Christmas FM Classical &amp; Carols · music</li><li>PowerFM Dublin 320Kbps MP3 · music</li><li>Funky Ass Tunes · music</li><li>Energy 106 Belfast Northern Ireland · music</li><li>RTÉ Raidió na Gaeltachta · music</li><li>Spin 103.8 · music</li><li>Onic 80s · music</li><li>Radio Siamsa · music</li><li>Christmas FM Ireland · music</li><li>RTÉ 2FM · music</li><li>Cork&#x27;s RedFM · music</li><li>iRadio · music</li><li>SPIN South West · music</li><li>LMFM · music</li><li>Club FM Dublin · music</li><li>Christmas FM · music</li><li>Free FM Ireland · music</li><li>MixLive.net - Psybient Sunset · music</li><li>Clonmellon Community Radio · news</li><li>Midlands 103 · music</li><li>98fm Dance · music</li><li>Deep House Radio (DHR) · music</li><li>Onic Movies · music</li><li>Rana Sundi · music</li><li>Deise Christmas Radio · music</li><li>TrancePulse Dublin · music</li><li>Onic Alternative · music</li><li>PHEVER Radio · music</li><li>Ignoreradio Shoegaze · music</li><li>MPB Radio 1 · music</li><li>GOCOM Radio · music</li><li>Biggest Disco Radio · music</li><li>Gem Radio Gold · music</li><li>MixLive - Progressive &amp; Tech-house · music</li><li>CFC FM · music</li><li>Live95 Limerick · music</li><li>Onic Country · music</li><li>Easy Radio Ireland, Easy Mix · music</li><li>BOB FM · music</li><li>HeadWax Radio · music</li><li>HITMIX RADIO IRELAND · music</li><li>80s Rewind · music</li><li>Retro Rewind · music</li><li>Gravity Hits · music</li><li>University College Cork · music</li><li>Today FM 80&#x27;s · music</li><li>Today FM 90s · music</li><li>MPB Radio 1 Dance · music</li><li>FM104 · music</li><li>East Coast FM · music</li><li>[ vinyl stacks ] · music</li><li>Dublin Digital Radio · music</li><li>SOLID GOLD RADIO IRELAND · music</li><li>Timewarp Ireland · music</li><li>Onic Classical · music</li><li>Total Country Inchicore · music</li><li>XT Alternative · music</li><li>Q102 · music</li><li>Beat 102-103 · music</li><li>Live95FM · music</li><li>Rewind · music</li><li>Tipperary Mid West Community Radio · music</li><li>Wired FM - FM 99.9 - Limerick, Ireland · music</li><li>Off The Ball · news</li><li>Onic Pride Vibes · music</li><li>Limerick&#x27;s Live 95FM · news</li><li>Classic Gold Radio · music</li><li>Christmas FM Classics · music</li><li>Club FM  Dublin Dublins hottest dance mix · music</li><li>Scariff Bay Community Radio · music</li><li>Clare FM · music</li><li>Onic Hits · music</li><li>Raídío Rí-Rá · music</li><li>Circle Of White Light Radio · news</li><li>PlanetRadioie · music</li><li>Onic RnB · music</li><li>eist · music</li><li>98FM Throwback · music</li><li>Kfm 97.6 · music</li><li>PowerFM Dublin 320Kbps Ogg/Vorbis · music</li><li>Phantom Radio Ireland · music</li><li>Tipperary Hospital Radio Clonmel · music</li><li>Birdhill Radio · music</li><li>Onic Kids · music</li><li>BFBS Northern Ireland · music</li><li>PlayFm Dublin · music</li><li>Christmas FM Classical · music</li><li>Planet Radio ACC · music</li><li>MPB Radio 2 90s &amp; 00s · music</li><li>Onic Gold · music</li><li>Dance Nation Radio · music</li><li>MPB Radio 2 · music</li><li>Onic Rock · music</li><li>South East Radio · news</li><li>SOLID GOLD RADIO IRELAND 1 · music</li><li>Radio Ajay · music</li><li>Near FM (webcam) · music</li><li>C103 West · music</li><li>sunshine soul · music</li></ul></div><!--/prerender--></div>
 
 <div class="player" id="player" aria-live="polite">
@@ -229,7 +244,7 @@
   </div>
 </div>
 
-<div class="install" id="install" role="dialog" aria-label="Install World Radio">
+<div class="install" id="install" role="dialog" aria-label="Install TUNO">
   <img src="icons/app-192.png" alt="">
   <div class="t" id="install-text"></div>
   <div class="acts">
@@ -399,12 +414,16 @@ function tunoCard() {
     <img src="icons/tuno-192.png" alt="" width="56" height="56"><span class="tx"><b>Get the TUNO app</b><small>Radio, TV and news from every country. Free, no ads.</small></span><em>Google Play</em></a>`;
 }
 
+const LOGO = '<span class="logo" aria-hidden="true">' + [[7.7, 560], [11.6, 700], [16.4, 480], [22.2, 760], [28, 600], [22.2, 720], [16.4, 520], [11.6, 660], [7.7, 580]]
+  .map(([h, d]) => `<i style="--h:${h};--d:${d}ms"></i>`).join('') + '</span>';
+const flagUrl = (c) => 'https://akarafilovski.github.io/tuno-data/flags/' + c.toLowerCase() + '.png';
+
 async function renderHome() {
   route = { code: null };
-  document.title = 'World Radio';
+  document.title = 'TUNO';
   setAccent('#FF8A3D');
   view.innerHTML = `
-    <div class="top"><img src="icons/app-192.png" alt=""><h1>World Radio</h1><a class="iconbtn about-btn" href="about.html" aria-label="About World Radio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg></a></div>
+    <div class="top">${LOGO}<h1>TUNO</h1><a class="iconbtn about-btn" href="about.html" aria-label="About TUNO"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg></a></div>
     <div class="fixed">${supportHtml()}
       <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search a country or station" autocomplete="off" aria-label="Search a country or station"></div></div>
     <div id="home-lists"><div class="empty">Loading…</div></div>
@@ -415,7 +434,7 @@ async function renderHome() {
   const q = $('q');
   const list = COUNTRIES.map((c) => app(c.code)).sort((a, b) => a.name.localeCompare(b.name));
   const card = (a) => `<a class="app" data-code="${a.code}" href="${slugOf(a.code)}/" style="--a:${a.accent}">
-        <img src="${a.icon}" alt="" loading="lazy" width="44" height="44"><b>${esc(a.name.replace(/^Radio /, ''))}</b><small>${a.stations}</small></a>`;
+        <img class="flag" src="${flagUrl(a.code)}" alt="" loading="lazy" width="44" height="44"><b>${esc(a.name.replace(/^Radio /, ''))}</b><small>${a.stations}</small></a>`;
   const draw = () => {
     const term = q.value.trim().toLowerCase();
     const match = (a) => !term || a.name.replace(/^Radio /, '').toLowerCase().includes(term) || a.name.toLowerCase().includes(term) || countryName(a.code).toLowerCase().includes(term) || a.code.toLowerCase() === term;
@@ -462,11 +481,11 @@ async function renderCountry(code) {
   if (route.code !== code) return;
   const pick = app(code);
   const name = pick.name;
-  document.title = `${name}: listen to ${pick.stations} live stations online | World Radio`;
+  document.title = `${name}: listen to ${pick.stations} live stations online | TUNO`;
   setAccent(pick.accent);
   view.innerHTML = `
     <div class="hero"><div class="top"><button class="iconbtn" id="back" type="button" aria-label="All radios">${ICON.back}</button>
-      <img src="${pick.icon}" alt=""><h1>${esc(name)}</h1></div>
+      <img class="flag" src="${flagUrl(code)}" alt=""><h1>${esc(name)}</h1></div>
     <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search stations" autocomplete="off" aria-label="Search stations"></div></div>
     <div class="chips" id="chips"></div>
     <div id="stations"><div class="empty">Loading stations…</div></div>
@@ -659,14 +678,15 @@ $('sleepmenu').addEventListener('click', (e) => {
   if (b) setSleep(Number(b.dataset.min));
 });
 document.addEventListener('click', closeSleepMenu);
-audio.addEventListener('playing', () => { setBtn('pause'); showPlayer(); redrawRows(); });
+audio.addEventListener('playing', () => { setBtn('pause'); showPlayer(); redrawRows(); document.body.classList.add('playing'); });
 audio.addEventListener('waiting', () => setBtn('loading'));
 audio.addEventListener('pause', () => { setBtn('play'); redrawRows(); });
+['pause', 'ended', 'error', 'emptied'].forEach((ev) => audio.addEventListener(ev, () => document.body.classList.remove('playing')));
 audio.addEventListener('error', () => { if (current && !hls) failed(); });
 function mediaSession(s) {
   if (!('mediaSession' in navigator)) return;
   const art = s.logoUrl ? [{ src: s.logoUrl.replace(/^http:/, 'https:'), sizes: '256x256' }] : [{ src: 'icons/app-512.png', sizes: '512x512', type: 'image/png' }];
-  navigator.mediaSession.metadata = new MediaMetadata({ title: s.name, artist: countryName(s.country), album: 'World Radio', artwork: art });
+  navigator.mediaSession.metadata = new MediaMetadata({ title: s.name, artist: countryName(s.country), album: 'TUNO', artwork: art });
   navigator.mediaSession.setActionHandler('play', () => play(current));
   navigator.mediaSession.setActionHandler('pause', () => audio.pause());
 }
@@ -778,10 +798,10 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catc
   function show(mode) {
     if (standalone || snoozed) return;
     if (mode === 'ios') {
-      text.innerHTML = '<b>Install World Radio</b><span>Tap Share, then <b style="display:inline;font-size:inherit;color:var(--text)">Add to Home Screen</b>.</span>';
+      text.innerHTML = '<b>Install TUNO</b><span>Tap Share, then <b style="display:inline;font-size:inherit;color:var(--text)">Add to Home Screen</b>.</span>';
       go.style.display = 'none';
     } else {
-      text.innerHTML = '<b>Install World Radio</b><span>Listen from your home screen.</span>';
+      text.innerHTML = '<b>Install TUNO</b><span>Listen from your home screen.</span>';
     }
     box.classList.add('show');
   }

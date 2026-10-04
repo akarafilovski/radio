@@ -33,7 +33,7 @@ with ThreadPoolExecutor(8) as ex:
 
 # ---- home: crawlable list of all countries
 links = ''.join(f'<li><a href="{c["slug"]}/">Radio {e(c["name"])}</a> ({len(stations[c["code"]])} stations)</li>' for c in sorted(countries, key=lambda c: c['name']))
-home_pre = ('<!--prerender--><div class="prerender"><h1>World Radio</h1><p>Listen to live radio from %d countries, free and without ads.</p><ul>%s</ul></div><!--/prerender-->'
+home_pre = ('<!--prerender--><div class="prerender"><h1>TUNO</h1><p>Listen to live radio from %d countries, free and without ads.</p><ul>%s</ul></div><!--/prerender-->'
             % (len(countries), links))
 home = MARK.sub(lambda m: home_pre, src, count=1)
 home = home.replace('Live radio from 239 countries', 'Live radio from %d countries' % len(countries)).replace('Live radio from 239 countries.', 'Live radio from %d countries.' % len(countries))
@@ -51,13 +51,13 @@ for c in countries:
     n = len(st)
     name = c['name']
     url = f'{SITE}{c["slug"]}/'
-    title = f'Radio {name}: listen to {n} live stations online | World Radio'
+    title = f'Radio {name}: listen to {n} live stations online | TUNO'
     desc = f'Listen to {n} live radio stations from {name} online, free and without ads. Music, news, talk and sports: search, tap and play.'
     ld = json.dumps({
         '@context': 'https://schema.org',
         '@graph': [
             {'@type': 'BreadcrumbList', 'itemListElement': [
-                {'@type': 'ListItem', 'position': 1, 'name': 'World Radio', 'item': SITE},
+                {'@type': 'ListItem', 'position': 1, 'name': 'TUNO', 'item': SITE},
                 {'@type': 'ListItem', 'position': 2, 'name': f'Radio {name}', 'item': url}]},
             {'@type': 'ItemList', 'name': f'Radio stations in {name}', 'numberOfItems': min(n, 100),
              'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'name': s['name']} for i, s in enumerate(st[:100])]},

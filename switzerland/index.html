@@ -11,9 +11,9 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Radio Switzerland: listen to 118 live stations online | World Radio</title>
+<title>Radio Switzerland: listen to 118 live stations online | TUNO</title>
 <meta name="description" content="Listen to 118 live radio stations from Switzerland online, free and without ads. Music, news, talk and sports: search, tap and play.">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#0A1020">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="canonical" href="https://axarapps.github.io/radio/switzerland/">
 <link rel="icon" href="icons/app-192.png">
@@ -21,8 +21,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="World Radio">
-<meta property="og:title" content="Radio Switzerland: listen to 118 live stations online | World Radio">
+<meta name="apple-mobile-web-app-title" content="TUNO">
+<meta property="og:title" content="Radio Switzerland: listen to 118 live stations online | TUNO">
 <meta property="og:description" content="Listen to 118 live radio stations from Switzerland online, free and without ads. Music, news, talk and sports: search, tap and play.">
 <meta property="og:image" content="https://axarapps.github.io/radio/icons/og.png">
 <meta property="og:type" content="website">
@@ -33,8 +33,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #000; --surface: #161616; --tile: #1C1C1F; --border: rgba(255,255,255,.08); --chip: rgba(255,255,255,.10);
-    --text: #fff; --muted: #A8A8B2; --dim: #555560; --accent: #FF8A3D; --on-accent: #000; --bad: #FF6B6B;
+    --bg: #0A1020; --surface: #131C32; --tile: #131C32; --border: rgba(130,160,255,.14); --chip: rgba(255,255,255,.10);
+    --text: #EEF1F8; --muted: #B5BDD3; --dim: #6B7592; --accent: #FF8A3D; --on-accent: #000; --bad: #FF6B6B;
   }
   /* plain-text copy for search engines and screen readers; the app replaces it as soon as it starts, so it is never shown */
   .prerender { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -80,7 +80,7 @@
   .app img { width: 44px; height: 44px; border-radius: 12px; box-shadow: 0 5px 14px rgba(0,0,0,.45); }
   .app b { font: 700 10.5px/1.25 'Sora', sans-serif; letter-spacing: -0.2px; width: 100%; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; min-height: 2.4em; }
   .app small { color: var(--muted); font-size: 11px; line-height: 1; }
-  .fixed { position: sticky; top: 0; z-index: 15; margin: 0 -16px; padding: max(8px, env(safe-area-inset-top)) 16px 10px; background: rgba(0,0,0,.94);  }
+  .fixed { position: sticky; top: 0; z-index: 15; margin: 0 -16px; padding: max(8px, env(safe-area-inset-top)) 16px 10px; background: rgba(10,16,32,.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
   .fixed .search { margin: 8px 0 0; }
   .fixed .support { margin: 0; }
   .lead { color: var(--muted); margin: -6px 0 16px; }
@@ -204,14 +204,29 @@
   .sleepmenu b { padding: 8px 12px 6px; font-size: 12px; letter-spacing: .6px; text-transform: uppercase; color: var(--muted); }
   .sleepmenu button { all: unset; cursor: pointer; padding: 11px 12px; border-radius: 10px; font-weight: 600; font-size: 15px; }
   .sleepmenu button:hover { background: var(--chip); } .sleepmenu .off { color: var(--muted); }
+  /* light behind the page: calm when idle, drifting while a station plays */
+  #glow { position: fixed; inset: 0; z-index: 0; pointer-events: none; transition: opacity .9s;
+    background: radial-gradient(70% 38% at 18% -4%, rgba(76,100,255,.24), transparent 70%), radial-gradient(60% 34% at 92% 2%, rgba(125,105,255,.18), transparent 68%); }
+  body.playing #glow { background: radial-gradient(70% 38% at 18% -4%, rgba(76,100,255,.40), transparent 70%), radial-gradient(60% 34% at 92% 2%, rgba(125,105,255,.34), transparent 68%);
+    animation: drift 14s linear infinite; }
+  @keyframes drift { 0%, 100% { transform: translate(0, 0) scale(1); } 25% { transform: translate(3%, 1.5%) scale(1.05); } 50% { transform: translate(0, 3%) scale(1); } 75% { transform: translate(-3%, 1.5%) scale(1.05); } }
+  .wrap { position: relative; z-index: 1; }
+  .logo { display: flex; align-items: center; gap: 2.5px; height: 28px; margin-right: 2px; }
+  .logo i { display: block; width: 3.4px; height: calc(var(--h) * 1px); border-radius: 2px; background: linear-gradient(#FFD6B4, #EB6428); }
+  body.playing .logo i { animation: bar var(--d) ease-in-out infinite alternate; }
+  @keyframes bar { from { transform: scaleY(.45); } to { transform: scaleY(1); } }
+  .top h1 { color: #FFB68C; font-weight: 900; }
+  .app img.flag, .top img.flag { border-radius: 50%; box-shadow: none; }
+  .support.open { background: #0A1020; }
   .toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--text); color: #000; padding: 10px 18px;
     border-radius: 999px; font-weight: 700; font-size: 14px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 40; max-width: 90vw; text-align: center; }
   .toast.show { opacity: 1; }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "World Radio", "item": "https://axarapps.github.io/radio/"}, {"@type": "ListItem", "position": 2, "name": "Radio Switzerland", "item": "https://axarapps.github.io/radio/switzerland/"}]}, {"@type": "ItemList", "name": "Radio stations in Switzerland", "numberOfItems": 100, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Radio SRF 3"}, {"@type": "ListItem", "position": 2, "name": "Vintage Radio"}, {"@type": "ListItem", "position": 3, "name": "RADIO ARGOVIA"}, {"@type": "ListItem", "position": 4, "name": "Radio Pilatus"}, {"@type": "ListItem", "position": 5, "name": "UZIC.CH :: TECHNO - MINIMAL :: best of electronic with techno minimal electro house and progressive"}, {"@type": "ListItem", "position": 6, "name": "Radio24"}, {"@type": "ListItem", "position": 7, "name": "80s Forever - We Keep The 80s Alive"}, {"@type": "ListItem", "position": 8, "name": "Kontrafunk (AAC 64)"}, {"@type": "ListItem", "position": 9, "name": "Radio Zürisee"}, {"@type": "ListItem", "position": 10, "name": "Energy Bern"}, {"@type": "ListItem", "position": 11, "name": "Radio 32"}, {"@type": "ListItem", "position": 12, "name": "Kontrafunk"}, {"@type": "ListItem", "position": 13, "name": "SWISS GROOVE"}, {"@type": "ListItem", "position": 14, "name": "Radio SRF 4 News (AAC 192)"}, {"@type": "ListItem", "position": 15, "name": "Ambi Nature Radio"}, {"@type": "ListItem", "position": 16, "name": "Radio SRF 3 (AAC 192)"}, {"@type": "ListItem", "position": 17, "name": "1.fm Otto's Classical music"}, {"@type": "ListItem", "position": 18, "name": "Virgin Radio Switzerland"}, {"@type": "ListItem", "position": 19, "name": "RADIO BERN1"}, {"@type": "ListItem", "position": 20, "name": "Kontrafunk (Mobil)"}, {"@type": "ListItem", "position": 21, "name": "Spoon Radio - Alternative Rock"}, {"@type": "ListItem", "position": 22, "name": "Kontrafunk (MP3 192)"}, {"@type": "ListItem", "position": 23, "name": "Brazilian Birds Radio"}, {"@type": "ListItem", "position": 24, "name": "Radio Swiss Jazz (AAC 192)"}, {"@type": "ListItem", "position": 25, "name": "Back2Noize Radio"}, {"@type": "ListItem", "position": 26, "name": "Radio Suisse Jazz"}, {"@type": "ListItem", "position": 27, "name": "RADIO FM1"}, {"@type": "ListItem", "position": 28, "name": "Energy Basel (NRJ)"}, {"@type": "ListItem", "position": 29, "name": "Spoon Radio - Hard Rock"}, {"@type": "ListItem", "position": 30, "name": "True House Radio"}, {"@type": "ListItem", "position": 31, "name": "GRRIF"}, {"@type": "ListItem", "position": 32, "name": "Radio Grischa"}, {"@type": "ListItem", "position": 33, "name": "A Fine Jazz Gumbo Radio"}, {"@type": "ListItem", "position": 34, "name": "1.FM - Sunshine"}, {"@type": "ListItem", "position": 35, "name": "GOAT Radio"}, {"@type": "ListItem", "position": 36, "name": "Spoon Radio - Rock Ballads"}, {"@type": "ListItem", "position": 37, "name": "Radio1.ch"}, {"@type": "ListItem", "position": 38, "name": "Rete Tre | 32k AAC+"}, {"@type": "ListItem", "position": 39, "name": "Basspistol Radio"}, {"@type": "ListItem", "position": 40, "name": "Radio Melody Schweiz"}, {"@type": "ListItem", "position": 41, "name": "Radio X FLAC"}, {"@type": "ListItem", "position": 42, "name": "Spoon Radio - Classic Rock"}, {"@type": "ListItem", "position": 43, "name": "1.fm Movie Soundtrack Hits"}, {"@type": "ListItem", "position": 44, "name": "Klassik Radio (Switzerland)"}, {"@type": "ListItem", "position": 45, "name": "Bear Metal Radio"}, {"@type": "ListItem", "position": 46, "name": "Radio SRF 2 Kultur"}, {"@type": "ListItem", "position": 47, "name": "Sunshine Radio (Switzerland)"}, {"@type": "ListItem", "position": 48, "name": "Radio SRF 2 Kultur (AAC 192)"}, {"@type": "ListItem", "position": 49, "name": "Radio Lac"}, {"@type": "ListItem", "position": 50, "name": "Radio Top (Ostschweiz)"}, {"@type": "ListItem", "position": 51, "name": "One Dance Ticino"}, {"@type": "ListItem", "position": 52, "name": "Radio Central"}, {"@type": "ListItem", "position": 53, "name": "1.fm Back To The 50's"}, {"@type": "ListItem", "position": 54, "name": "One FM Rock Oldies"}, {"@type": "ListItem", "position": 55, "name": "Radio 32 Goldies"}, {"@type": "ListItem", "position": 56, "name": "Radio 1 Zürich"}, {"@type": "ListItem", "position": 57, "name": "Radio Melody"}, {"@type": "ListItem", "position": 58, "name": "Skuizz Hits 90s-00s"}, {"@type": "ListItem", "position": 59, "name": "Radio Maxxima"}, {"@type": "ListItem", "position": 60, "name": "Radio Swiss Pop (AAC 192)"}, {"@type": "ListItem", "position": 61, "name": "KTfm Geneva - THE BEST OF 70'S AND 80'S"}, {"@type": "ListItem", "position": 62, "name": "Radio Rasa Schaffhausen"}, {"@type": "ListItem", "position": 63, "name": "Alti Radio"}, {"@type": "ListItem", "position": 64, "name": "Vinyl-Valley Rock Radio"}, {"@type": "ListItem", "position": 65, "name": "Radio neue Hoffnung (RNH)"}, {"@type": "ListItem", "position": 66, "name": "Rete Due | 32k AAC+"}, {"@type": "ListItem", "position": 67, "name": "RADIO VINTAGE"}, {"@type": "ListItem", "position": 68, "name": "Rockstar Radio"}, {"@type": "ListItem", "position": 69, "name": "GIN Radio 24"}, {"@type": "ListItem", "position": 70, "name": "Open Broadcast"}, {"@type": "ListItem", "position": 71, "name": "Gnu Radio - Metal FM"}, {"@type": "ListItem", "position": 72, "name": "lounge-radio.com"}, {"@type": "ListItem", "position": 73, "name": "LOUNGE-RADIO.COM - swiss made"}, {"@type": "ListItem", "position": 74, "name": "MaXXima"}, {"@type": "ListItem", "position": 75, "name": "1.FM Absolute 90's Radio"}, {"@type": "ListItem", "position": 76, "name": "WRS \"Swiss Radio in English\""}, {"@type": "ListItem", "position": 77, "name": "Dream Sequence"}, {"@type": "ListItem", "position": 78, "name": "Radio Argovia Hit Mix"}, {"@type": "ListItem", "position": 79, "name": "1.fm top rap"}, {"@type": "ListItem", "position": 80, "name": "Love Hardstyle"}, {"@type": "ListItem", "position": 81, "name": "Radio HOF—BAR"}, {"@type": "ListItem", "position": 82, "name": "RTN"}, {"@type": "ListItem", "position": 83, "name": "Spoon Radio - Acoustic Rock"}, {"@type": "ListItem", "position": 84, "name": "1.FM Beloved Ballads"}, {"@type": "ListItem", "position": 85, "name": ". Al quran radio"}, {"@type": "ListItem", "position": 86, "name": "Truehouse Chill"}, {"@type": "ListItem", "position": 87, "name": "Radio SRF 1 Bern Freiburg Wallis | 96k AAC+"}, {"@type": "ListItem", "position": 88, "name": "Radio SRF 1 Graubünden | 96k AAC+"}, {"@type": "ListItem", "position": 89, "name": "Radio SRF 1 Ostschweiz | 32k AAC+"}, {"@type": "ListItem", "position": 90, "name": "Radio-Drachenblut"}, {"@type": "ListItem", "position": 91, "name": "Rete Uno | 32k AAC+"}, {"@type": "ListItem", "position": 92, "name": "RTR | 32k AAC+"}, {"@type": "ListItem", "position": 93, "name": "Radio Munot"}, {"@type": "ListItem", "position": 94, "name": "PureGlow Radio"}, {"@type": "ListItem", "position": 95, "name": "Spoon Rock"}, {"@type": "ListItem", "position": 96, "name": "Neo1"}, {"@type": "ListItem", "position": 97, "name": "Radio R Louange"}, {"@type": "ListItem", "position": 98, "name": "Radio 2Go"}, {"@type": "ListItem", "position": 99, "name": "Kanal K"}, {"@type": "ListItem", "position": 100, "name": "World Radio Switzerland"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "TUNO", "item": "https://axarapps.github.io/radio/"}, {"@type": "ListItem", "position": 2, "name": "Radio Switzerland", "item": "https://axarapps.github.io/radio/switzerland/"}]}, {"@type": "ItemList", "name": "Radio stations in Switzerland", "numberOfItems": 100, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Radio SRF 3"}, {"@type": "ListItem", "position": 2, "name": "Vintage Radio"}, {"@type": "ListItem", "position": 3, "name": "RADIO ARGOVIA"}, {"@type": "ListItem", "position": 4, "name": "Radio Pilatus"}, {"@type": "ListItem", "position": 5, "name": "UZIC.CH :: TECHNO - MINIMAL :: best of electronic with techno minimal electro house and progressive"}, {"@type": "ListItem", "position": 6, "name": "Radio24"}, {"@type": "ListItem", "position": 7, "name": "80s Forever - We Keep The 80s Alive"}, {"@type": "ListItem", "position": 8, "name": "Kontrafunk (AAC 64)"}, {"@type": "ListItem", "position": 9, "name": "Radio Zürisee"}, {"@type": "ListItem", "position": 10, "name": "Energy Bern"}, {"@type": "ListItem", "position": 11, "name": "Radio 32"}, {"@type": "ListItem", "position": 12, "name": "Kontrafunk"}, {"@type": "ListItem", "position": 13, "name": "SWISS GROOVE"}, {"@type": "ListItem", "position": 14, "name": "Radio SRF 4 News (AAC 192)"}, {"@type": "ListItem", "position": 15, "name": "Ambi Nature Radio"}, {"@type": "ListItem", "position": 16, "name": "Radio SRF 3 (AAC 192)"}, {"@type": "ListItem", "position": 17, "name": "1.fm Otto's Classical music"}, {"@type": "ListItem", "position": 18, "name": "Virgin Radio Switzerland"}, {"@type": "ListItem", "position": 19, "name": "RADIO BERN1"}, {"@type": "ListItem", "position": 20, "name": "Kontrafunk (Mobil)"}, {"@type": "ListItem", "position": 21, "name": "Spoon Radio - Alternative Rock"}, {"@type": "ListItem", "position": 22, "name": "Kontrafunk (MP3 192)"}, {"@type": "ListItem", "position": 23, "name": "Brazilian Birds Radio"}, {"@type": "ListItem", "position": 24, "name": "Radio Swiss Jazz (AAC 192)"}, {"@type": "ListItem", "position": 25, "name": "Back2Noize Radio"}, {"@type": "ListItem", "position": 26, "name": "Radio Suisse Jazz"}, {"@type": "ListItem", "position": 27, "name": "RADIO FM1"}, {"@type": "ListItem", "position": 28, "name": "Energy Basel (NRJ)"}, {"@type": "ListItem", "position": 29, "name": "Spoon Radio - Hard Rock"}, {"@type": "ListItem", "position": 30, "name": "True House Radio"}, {"@type": "ListItem", "position": 31, "name": "GRRIF"}, {"@type": "ListItem", "position": 32, "name": "Radio Grischa"}, {"@type": "ListItem", "position": 33, "name": "A Fine Jazz Gumbo Radio"}, {"@type": "ListItem", "position": 34, "name": "1.FM - Sunshine"}, {"@type": "ListItem", "position": 35, "name": "GOAT Radio"}, {"@type": "ListItem", "position": 36, "name": "Spoon Radio - Rock Ballads"}, {"@type": "ListItem", "position": 37, "name": "Radio1.ch"}, {"@type": "ListItem", "position": 38, "name": "Rete Tre | 32k AAC+"}, {"@type": "ListItem", "position": 39, "name": "Basspistol Radio"}, {"@type": "ListItem", "position": 40, "name": "Radio Melody Schweiz"}, {"@type": "ListItem", "position": 41, "name": "Radio X FLAC"}, {"@type": "ListItem", "position": 42, "name": "Spoon Radio - Classic Rock"}, {"@type": "ListItem", "position": 43, "name": "1.fm Movie Soundtrack Hits"}, {"@type": "ListItem", "position": 44, "name": "Klassik Radio (Switzerland)"}, {"@type": "ListItem", "position": 45, "name": "Bear Metal Radio"}, {"@type": "ListItem", "position": 46, "name": "Radio SRF 2 Kultur"}, {"@type": "ListItem", "position": 47, "name": "Sunshine Radio (Switzerland)"}, {"@type": "ListItem", "position": 48, "name": "Radio SRF 2 Kultur (AAC 192)"}, {"@type": "ListItem", "position": 49, "name": "Radio Lac"}, {"@type": "ListItem", "position": 50, "name": "Radio Top (Ostschweiz)"}, {"@type": "ListItem", "position": 51, "name": "One Dance Ticino"}, {"@type": "ListItem", "position": 52, "name": "Radio Central"}, {"@type": "ListItem", "position": 53, "name": "1.fm Back To The 50's"}, {"@type": "ListItem", "position": 54, "name": "One FM Rock Oldies"}, {"@type": "ListItem", "position": 55, "name": "Radio 32 Goldies"}, {"@type": "ListItem", "position": 56, "name": "Radio 1 Zürich"}, {"@type": "ListItem", "position": 57, "name": "Radio Melody"}, {"@type": "ListItem", "position": 58, "name": "Skuizz Hits 90s-00s"}, {"@type": "ListItem", "position": 59, "name": "Radio Maxxima"}, {"@type": "ListItem", "position": 60, "name": "Radio Swiss Pop (AAC 192)"}, {"@type": "ListItem", "position": 61, "name": "KTfm Geneva - THE BEST OF 70'S AND 80'S"}, {"@type": "ListItem", "position": 62, "name": "Radio Rasa Schaffhausen"}, {"@type": "ListItem", "position": 63, "name": "Alti Radio"}, {"@type": "ListItem", "position": 64, "name": "Vinyl-Valley Rock Radio"}, {"@type": "ListItem", "position": 65, "name": "Radio neue Hoffnung (RNH)"}, {"@type": "ListItem", "position": 66, "name": "Rete Due | 32k AAC+"}, {"@type": "ListItem", "position": 67, "name": "RADIO VINTAGE"}, {"@type": "ListItem", "position": 68, "name": "Rockstar Radio"}, {"@type": "ListItem", "position": 69, "name": "GIN Radio 24"}, {"@type": "ListItem", "position": 70, "name": "Open Broadcast"}, {"@type": "ListItem", "position": 71, "name": "Gnu Radio - Metal FM"}, {"@type": "ListItem", "position": 72, "name": "lounge-radio.com"}, {"@type": "ListItem", "position": 73, "name": "LOUNGE-RADIO.COM - swiss made"}, {"@type": "ListItem", "position": 74, "name": "MaXXima"}, {"@type": "ListItem", "position": 75, "name": "1.FM Absolute 90's Radio"}, {"@type": "ListItem", "position": 76, "name": "WRS \"Swiss Radio in English\""}, {"@type": "ListItem", "position": 77, "name": "Dream Sequence"}, {"@type": "ListItem", "position": 78, "name": "Radio Argovia Hit Mix"}, {"@type": "ListItem", "position": 79, "name": "1.fm top rap"}, {"@type": "ListItem", "position": 80, "name": "Love Hardstyle"}, {"@type": "ListItem", "position": 81, "name": "Radio HOF—BAR"}, {"@type": "ListItem", "position": 82, "name": "RTN"}, {"@type": "ListItem", "position": 83, "name": "Spoon Radio - Acoustic Rock"}, {"@type": "ListItem", "position": 84, "name": "1.FM Beloved Ballads"}, {"@type": "ListItem", "position": 85, "name": ". Al quran radio"}, {"@type": "ListItem", "position": 86, "name": "Truehouse Chill"}, {"@type": "ListItem", "position": 87, "name": "Radio SRF 1 Bern Freiburg Wallis | 96k AAC+"}, {"@type": "ListItem", "position": 88, "name": "Radio SRF 1 Graubünden | 96k AAC+"}, {"@type": "ListItem", "position": 89, "name": "Radio SRF 1 Ostschweiz | 32k AAC+"}, {"@type": "ListItem", "position": 90, "name": "Radio-Drachenblut"}, {"@type": "ListItem", "position": 91, "name": "Rete Uno | 32k AAC+"}, {"@type": "ListItem", "position": 92, "name": "RTR | 32k AAC+"}, {"@type": "ListItem", "position": 93, "name": "Radio Munot"}, {"@type": "ListItem", "position": 94, "name": "PureGlow Radio"}, {"@type": "ListItem", "position": 95, "name": "Spoon Rock"}, {"@type": "ListItem", "position": 96, "name": "Neo1"}, {"@type": "ListItem", "position": 97, "name": "Radio R Louange"}, {"@type": "ListItem", "position": 98, "name": "Radio 2Go"}, {"@type": "ListItem", "position": 99, "name": "Kanal K"}, {"@type": "ListItem", "position": 100, "name": "World Radio Switzerland"}]}]}</script>
 </head>
 <body>
+<div id="glow" aria-hidden="true"></div>
 <div class="wrap" id="view"><!--prerender--><div class="prerender"><h1>Radio Switzerland</h1><p>118 live radio stations from Switzerland, free and without ads. <a href="./">All countries</a></p><ul><li>Radio SRF 3 · music</li><li>Vintage Radio · music</li><li>RADIO ARGOVIA · music</li><li>Radio Pilatus · music</li><li>UZIC.CH :: TECHNO - MINIMAL :: best of electronic with techno minimal electro house and progressive · music</li><li>Radio24 · music</li><li>80s Forever - We Keep The 80s Alive · music</li><li>Kontrafunk (AAC 64) · news</li><li>Radio Zürisee · music</li><li>Energy Bern · music</li><li>Radio 32 · news</li><li>Kontrafunk · news</li><li>SWISS GROOVE · music</li><li>Radio SRF 4 News (AAC 192) · news</li><li>Ambi Nature Radio · music</li><li>Radio SRF 3 (AAC 192) · music</li><li>1.fm Otto&#x27;s Classical music · music</li><li>Virgin Radio Switzerland · music</li><li>RADIO BERN1 · music</li><li>Kontrafunk (Mobil) · news</li><li>Spoon Radio - Alternative Rock · music</li><li>Kontrafunk (MP3 192) · news</li><li>Brazilian Birds Radio · music</li><li>Radio Swiss Jazz (AAC 192) · music</li><li>Back2Noize Radio · music</li><li>Radio Suisse Jazz · music</li><li>RADIO FM1 · music</li><li>Energy Basel (NRJ) · news</li><li>Spoon Radio - Hard Rock · music</li><li>True House Radio · music</li><li>GRRIF · music</li><li>Radio Grischa · news</li><li>A Fine Jazz Gumbo Radio · music</li><li>1.FM - Sunshine · music</li><li>GOAT Radio · music</li><li>Spoon Radio - Rock Ballads · music</li><li>Radio1.ch · music</li><li>Rete Tre | 32k AAC+ · music</li><li>Basspistol Radio · music</li><li>Radio Melody Schweiz · music</li><li>Radio X FLAC · music</li><li>Spoon Radio - Classic Rock · music</li><li>1.fm Movie Soundtrack Hits · music</li><li>Klassik Radio (Switzerland) · music</li><li>Bear Metal Radio · music</li><li>Radio SRF 2 Kultur · music</li><li>Sunshine Radio (Switzerland) · music</li><li>Radio SRF 2 Kultur (AAC 192) · music</li><li>Radio Lac · music</li><li>Radio Top (Ostschweiz) · news</li><li>One Dance Ticino · music</li><li>Radio Central · music</li><li>1.fm Back To The 50&#x27;s · music</li><li>One FM Rock Oldies · music</li><li>Radio 32 Goldies · music</li><li>Radio 1 Zürich · music</li><li>Radio Melody · music</li><li>Skuizz Hits 90s-00s · music</li><li>Radio Maxxima · music</li><li>Radio Swiss Pop (AAC 192) · music</li><li>KTfm Geneva - THE BEST OF 70&#x27;S AND 80&#x27;S · music</li><li>Radio Rasa Schaffhausen · music</li><li>Alti Radio · music</li><li>Vinyl-Valley Rock Radio · music</li><li>Radio neue Hoffnung (RNH) · talk</li><li>Rete Due | 32k AAC+ · music</li><li>RADIO VINTAGE · music</li><li>Rockstar Radio · music</li><li>GIN Radio 24 · news</li><li>Open Broadcast · music</li><li>Gnu Radio - Metal FM · music</li><li>lounge-radio.com · music</li><li>LOUNGE-RADIO.COM - swiss made · music</li><li>MaXXima · music</li><li>1.FM Absolute 90&#x27;s Radio · music</li><li>WRS &quot;Swiss Radio in English&quot; · music</li><li>Dream Sequence · music</li><li>Radio Argovia Hit Mix · music</li><li>1.fm top rap · music</li><li>Love Hardstyle · music</li><li>Radio HOF—BAR · music</li><li>RTN · music</li><li>Spoon Radio - Acoustic Rock · music</li><li>1.FM Beloved Ballads · music</li><li>. Al quran radio · music</li><li>Truehouse Chill · music</li><li>Radio SRF 1 Bern Freiburg Wallis | 96k AAC+ · music</li><li>Radio SRF 1 Graubünden | 96k AAC+ · music</li><li>Radio SRF 1 Ostschweiz | 32k AAC+ · music</li><li>Radio-Drachenblut · music</li><li>Rete Uno | 32k AAC+ · music</li><li>RTR | 32k AAC+ · music</li><li>Radio Munot · music</li><li>PureGlow Radio · music</li><li>Spoon Rock · music</li><li>Neo1 · news</li><li>Radio R Louange · music</li><li>Radio 2Go · music</li><li>Kanal K · music</li><li>World Radio Switzerland · music</li><li>Radio Electrons Libres · music</li><li>Traxx FM - Hits · music</li><li>Spoon Radio - Modern Rock · music</li><li>Kiss Collector Radio · music</li><li>Radio Zuerich Nord: Musikbox · music</li><li>Symphoniya Wave · music</li><li>WALTS WELT · music</li><li>Bachata Nation Radio · music</li><li>Swiss Country Radio · music</li><li>Music Radio Rock · music</li><li>WRS · music</li><li>Music Radio Chillout · music</li><li>Music Radio Deep House · music</li><li>Radio SRF 1 (AAC 192) · news</li><li>Radio Eviva · music</li><li>One FM 2000s · music</li><li>JAMES FM · music</li><li>hifreaksradio · music</li></ul></div><!--/prerender--></div>
 
 <div class="player" id="player" aria-live="polite">
@@ -229,7 +244,7 @@
   </div>
 </div>
 
-<div class="install" id="install" role="dialog" aria-label="Install World Radio">
+<div class="install" id="install" role="dialog" aria-label="Install TUNO">
   <img src="icons/app-192.png" alt="">
   <div class="t" id="install-text"></div>
   <div class="acts">
@@ -399,12 +414,16 @@ function tunoCard() {
     <img src="icons/tuno-192.png" alt="" width="56" height="56"><span class="tx"><b>Get the TUNO app</b><small>Radio, TV and news from every country. Free, no ads.</small></span><em>Google Play</em></a>`;
 }
 
+const LOGO = '<span class="logo" aria-hidden="true">' + [[7.7, 560], [11.6, 700], [16.4, 480], [22.2, 760], [28, 600], [22.2, 720], [16.4, 520], [11.6, 660], [7.7, 580]]
+  .map(([h, d]) => `<i style="--h:${h};--d:${d}ms"></i>`).join('') + '</span>';
+const flagUrl = (c) => 'https://akarafilovski.github.io/tuno-data/flags/' + c.toLowerCase() + '.png';
+
 async function renderHome() {
   route = { code: null };
-  document.title = 'World Radio';
+  document.title = 'TUNO';
   setAccent('#FF8A3D');
   view.innerHTML = `
-    <div class="top"><img src="icons/app-192.png" alt=""><h1>World Radio</h1><a class="iconbtn about-btn" href="about.html" aria-label="About World Radio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg></a></div>
+    <div class="top">${LOGO}<h1>TUNO</h1><a class="iconbtn about-btn" href="about.html" aria-label="About TUNO"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg></a></div>
     <div class="fixed">${supportHtml()}
       <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search a country or station" autocomplete="off" aria-label="Search a country or station"></div></div>
     <div id="home-lists"><div class="empty">Loading…</div></div>
@@ -415,7 +434,7 @@ async function renderHome() {
   const q = $('q');
   const list = COUNTRIES.map((c) => app(c.code)).sort((a, b) => a.name.localeCompare(b.name));
   const card = (a) => `<a class="app" data-code="${a.code}" href="${slugOf(a.code)}/" style="--a:${a.accent}">
-        <img src="${a.icon}" alt="" loading="lazy" width="44" height="44"><b>${esc(a.name.replace(/^Radio /, ''))}</b><small>${a.stations}</small></a>`;
+        <img class="flag" src="${flagUrl(a.code)}" alt="" loading="lazy" width="44" height="44"><b>${esc(a.name.replace(/^Radio /, ''))}</b><small>${a.stations}</small></a>`;
   const draw = () => {
     const term = q.value.trim().toLowerCase();
     const match = (a) => !term || a.name.replace(/^Radio /, '').toLowerCase().includes(term) || a.name.toLowerCase().includes(term) || countryName(a.code).toLowerCase().includes(term) || a.code.toLowerCase() === term;
@@ -462,11 +481,11 @@ async function renderCountry(code) {
   if (route.code !== code) return;
   const pick = app(code);
   const name = pick.name;
-  document.title = `${name}: listen to ${pick.stations} live stations online | World Radio`;
+  document.title = `${name}: listen to ${pick.stations} live stations online | TUNO`;
   setAccent(pick.accent);
   view.innerHTML = `
     <div class="hero"><div class="top"><button class="iconbtn" id="back" type="button" aria-label="All radios">${ICON.back}</button>
-      <img src="${pick.icon}" alt=""><h1>${esc(name)}</h1></div>
+      <img class="flag" src="${flagUrl(code)}" alt=""><h1>${esc(name)}</h1></div>
     <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search stations" autocomplete="off" aria-label="Search stations"></div></div>
     <div class="chips" id="chips"></div>
     <div id="stations"><div class="empty">Loading stations…</div></div>
@@ -659,14 +678,15 @@ $('sleepmenu').addEventListener('click', (e) => {
   if (b) setSleep(Number(b.dataset.min));
 });
 document.addEventListener('click', closeSleepMenu);
-audio.addEventListener('playing', () => { setBtn('pause'); showPlayer(); redrawRows(); });
+audio.addEventListener('playing', () => { setBtn('pause'); showPlayer(); redrawRows(); document.body.classList.add('playing'); });
 audio.addEventListener('waiting', () => setBtn('loading'));
 audio.addEventListener('pause', () => { setBtn('play'); redrawRows(); });
+['pause', 'ended', 'error', 'emptied'].forEach((ev) => audio.addEventListener(ev, () => document.body.classList.remove('playing')));
 audio.addEventListener('error', () => { if (current && !hls) failed(); });
 function mediaSession(s) {
   if (!('mediaSession' in navigator)) return;
   const art = s.logoUrl ? [{ src: s.logoUrl.replace(/^http:/, 'https:'), sizes: '256x256' }] : [{ src: 'icons/app-512.png', sizes: '512x512', type: 'image/png' }];
-  navigator.mediaSession.metadata = new MediaMetadata({ title: s.name, artist: countryName(s.country), album: 'World Radio', artwork: art });
+  navigator.mediaSession.metadata = new MediaMetadata({ title: s.name, artist: countryName(s.country), album: 'TUNO', artwork: art });
   navigator.mediaSession.setActionHandler('play', () => play(current));
   navigator.mediaSession.setActionHandler('pause', () => audio.pause());
 }
@@ -778,10 +798,10 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catc
   function show(mode) {
     if (standalone || snoozed) return;
     if (mode === 'ios') {
-      text.innerHTML = '<b>Install World Radio</b><span>Tap Share, then <b style="display:inline;font-size:inherit;color:var(--text)">Add to Home Screen</b>.</span>';
+      text.innerHTML = '<b>Install TUNO</b><span>Tap Share, then <b style="display:inline;font-size:inherit;color:var(--text)">Add to Home Screen</b>.</span>';
       go.style.display = 'none';
     } else {
-      text.innerHTML = '<b>Install World Radio</b><span>Listen from your home screen.</span>';
+      text.innerHTML = '<b>Install TUNO</b><span>Listen from your home screen.</span>';
     }
     box.classList.add('show');
   }

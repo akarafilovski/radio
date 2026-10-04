@@ -1,4 +1,4 @@
-# World Radio (web)
+# TUNO (web)
 
 The country radio apps as one web page: search a country, pick a station, listen. Plain HTML/JS, no build step.
 Station data: https://akarafilovski.github.io/tuno-data/radio/<CC>.json (daily job in tuno-data).

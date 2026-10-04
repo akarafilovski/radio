@@ -11,9 +11,9 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Radio Moldova: listen to 63 live stations online | World Radio</title>
+<title>Radio Moldova: listen to 63 live stations online | TUNO</title>
 <meta name="description" content="Listen to 63 live radio stations from Moldova online, free and without ads. Music, news, talk and sports: search, tap and play.">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#0A1020">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="canonical" href="https://axarapps.github.io/radio/moldova/">
 <link rel="icon" href="icons/app-192.png">
@@ -21,8 +21,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="World Radio">
-<meta property="og:title" content="Radio Moldova: listen to 63 live stations online | World Radio">
+<meta name="apple-mobile-web-app-title" content="TUNO">
+<meta property="og:title" content="Radio Moldova: listen to 63 live stations online | TUNO">
 <meta property="og:description" content="Listen to 63 live radio stations from Moldova online, free and without ads. Music, news, talk and sports: search, tap and play.">
 <meta property="og:image" content="https://axarapps.github.io/radio/icons/og.png">
 <meta property="og:type" content="website">
@@ -33,8 +33,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #000; --surface: #161616; --tile: #1C1C1F; --border: rgba(255,255,255,.08); --chip: rgba(255,255,255,.10);
-    --text: #fff; --muted: #A8A8B2; --dim: #555560; --accent: #FF8A3D; --on-accent: #000; --bad: #FF6B6B;
+    --bg: #0A1020; --surface: #131C32; --tile: #131C32; --border: rgba(130,160,255,.14); --chip: rgba(255,255,255,.10);
+    --text: #EEF1F8; --muted: #B5BDD3; --dim: #6B7592; --accent: #FF8A3D; --on-accent: #000; --bad: #FF6B6B;
   }
   /* plain-text copy for search engines and screen readers; the app replaces it as soon as it starts, so it is never shown */
   .prerender { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -80,7 +80,7 @@
   .app img { width: 44px; height: 44px; border-radius: 12px; box-shadow: 0 5px 14px rgba(0,0,0,.45); }
   .app b { font: 700 10.5px/1.25 'Sora', sans-serif; letter-spacing: -0.2px; width: 100%; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; min-height: 2.4em; }
   .app small { color: var(--muted); font-size: 11px; line-height: 1; }
-  .fixed { position: sticky; top: 0; z-index: 15; margin: 0 -16px; padding: max(8px, env(safe-area-inset-top)) 16px 10px; background: rgba(0,0,0,.94);  }
+  .fixed { position: sticky; top: 0; z-index: 15; margin: 0 -16px; padding: max(8px, env(safe-area-inset-top)) 16px 10px; background: rgba(10,16,32,.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
   .fixed .search { margin: 8px 0 0; }
   .fixed .support { margin: 0; }
   .lead { color: var(--muted); margin: -6px 0 16px; }
@@ -204,14 +204,29 @@
   .sleepmenu b { padding: 8px 12px 6px; font-size: 12px; letter-spacing: .6px; text-transform: uppercase; color: var(--muted); }
   .sleepmenu button { all: unset; cursor: pointer; padding: 11px 12px; border-radius: 10px; font-weight: 600; font-size: 15px; }
   .sleepmenu button:hover { background: var(--chip); } .sleepmenu .off { color: var(--muted); }
+  /* light behind the page: calm when idle, drifting while a station plays */
+  #glow { position: fixed; inset: 0; z-index: 0; pointer-events: none; transition: opacity .9s;
+    background: radial-gradient(70% 38% at 18% -4%, rgba(76,100,255,.24), transparent 70%), radial-gradient(60% 34% at 92% 2%, rgba(125,105,255,.18), transparent 68%); }
+  body.playing #glow { background: radial-gradient(70% 38% at 18% -4%, rgba(76,100,255,.40), transparent 70%), radial-gradient(60% 34% at 92% 2%, rgba(125,105,255,.34), transparent 68%);
+    animation: drift 14s linear infinite; }
+  @keyframes drift { 0%, 100% { transform: translate(0, 0) scale(1); } 25% { transform: translate(3%, 1.5%) scale(1.05); } 50% { transform: translate(0, 3%) scale(1); } 75% { transform: translate(-3%, 1.5%) scale(1.05); } }
+  .wrap { position: relative; z-index: 1; }
+  .logo { display: flex; align-items: center; gap: 2.5px; height: 28px; margin-right: 2px; }
+  .logo i { display: block; width: 3.4px; height: calc(var(--h) * 1px); border-radius: 2px; background: linear-gradient(#FFD6B4, #EB6428); }
+  body.playing .logo i { animation: bar var(--d) ease-in-out infinite alternate; }
+  @keyframes bar { from { transform: scaleY(.45); } to { transform: scaleY(1); } }
+  .top h1 { color: #FFB68C; font-weight: 900; }
+  .app img.flag, .top img.flag { border-radius: 50%; box-shadow: none; }
+  .support.open { background: #0A1020; }
   .toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--text); color: #000; padding: 10px 18px;
     border-radius: 999px; font-weight: 700; font-size: 14px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 40; max-width: 90vw; text-align: center; }
   .toast.show { opacity: 1; }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "World Radio", "item": "https://axarapps.github.io/radio/"}, {"@type": "ListItem", "position": 2, "name": "Radio Moldova", "item": "https://axarapps.github.io/radio/moldova/"}]}, {"@type": "ItemList", "name": "Radio stations in Moldova", "numberOfItems": 63, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sex Sound Radio"}, {"@type": "ListItem", "position": 2, "name": "Retro FM Moldova"}, {"@type": "ListItem", "position": 3, "name": "Hit FM 2000s HITS"}, {"@type": "ListItem", "position": 4, "name": "Kiss FM Moldova"}, {"@type": "ListItem", "position": 5, "name": "Radio Noroc Moldova"}, {"@type": "ListItem", "position": 6, "name": "Hit FM Hot Hits"}, {"@type": "ListItem", "position": 7, "name": "Hit Fm Drive Mode"}, {"@type": "ListItem", "position": 8, "name": "Radio Relax - lo-fi"}, {"@type": "ListItem", "position": 9, "name": "Radio ROKS Moldova"}, {"@type": "ListItem", "position": 10, "name": "Jurnal Fm"}, {"@type": "ListItem", "position": 11, "name": "HIT FM Eurovision Hits"}, {"@type": "ListItem", "position": 12, "name": "DeepNova Radio"}, {"@type": "ListItem", "position": 13, "name": "Radio Relax - Nature"}, {"@type": "ListItem", "position": 14, "name": "Vocea Basarabiei"}, {"@type": "ListItem", "position": 15, "name": "Radio Plai"}, {"@type": "ListItem", "position": 16, "name": "Glowwave-FM"}, {"@type": "ListItem", "position": 17, "name": "Radio ZUM4"}, {"@type": "ListItem", "position": 18, "name": "Master Class FM (MD)"}, {"@type": "ListItem", "position": 19, "name": "Radio Vintage"}, {"@type": "ListItem", "position": 20, "name": "HIT FM Русский Хит"}, {"@type": "ListItem", "position": 21, "name": "Radio Relax - Jazz & Blues"}, {"@type": "ListItem", "position": 22, "name": "Radio ZUM 1"}, {"@type": "ListItem", "position": 23, "name": "Inter FM 107.7"}, {"@type": "ListItem", "position": 24, "name": "HIT FM Tricolor de Hituri"}, {"@type": "ListItem", "position": 25, "name": "Realitatea FM"}, {"@type": "ListItem", "position": 26, "name": "CITY FM"}, {"@type": "ListItem", "position": 27, "name": "Radio Ai Noștri"}, {"@type": "ListItem", "position": 28, "name": "Muz FM Moldova"}, {"@type": "ListItem", "position": 29, "name": "Radio ZUM 2"}, {"@type": "ListItem", "position": 30, "name": "HIT FM Orchestral Classics"}, {"@type": "ListItem", "position": 31, "name": "Radio ROKS (Moldova) - Indie Rock"}, {"@type": "ListItem", "position": 32, "name": "Radio ROKS (Moldova) - Rock Tricolor"}, {"@type": "ListItem", "position": 33, "name": "Focul din Vatră"}, {"@type": "ListItem", "position": 34, "name": "Kiss FM Chișinău"}, {"@type": "ListItem", "position": 35, "name": "Megapolis FM Moldova"}, {"@type": "ListItem", "position": 36, "name": "Radio Chișinău"}, {"@type": "ListItem", "position": 37, "name": "Hit FM Summer Hits"}, {"@type": "ListItem", "position": 38, "name": "DeepNova Radio - DanceNova"}, {"@type": "ListItem", "position": 39, "name": "Radio Relax - Versiuni Acustice"}, {"@type": "ListItem", "position": 40, "name": "IMAGO.FM"}, {"@type": "ListItem", "position": 41, "name": "Radio Relax - Funk & Soul"}, {"@type": "ListItem", "position": 42, "name": "Radio Moldova Tineret"}, {"@type": "ListItem", "position": 43, "name": "Hit FM Dance"}, {"@type": "ListItem", "position": 44, "name": "RADIO MUZFM"}, {"@type": "ListItem", "position": 45, "name": "VibeFM"}, {"@type": "ListItem", "position": 46, "name": "Radio Relax - Tricolor"}, {"@type": "ListItem", "position": 47, "name": "Radio ROKS (Moldova) - Classic Rock"}, {"@type": "ListItem", "position": 48, "name": "Radio ROKS (Moldova) - Pop Rock"}, {"@type": "ListItem", "position": 49, "name": "Radio ROKS (Moldova) - New Rock"}, {"@type": "ListItem", "position": 50, "name": "Hit FM Best Hits"}, {"@type": "ListItem", "position": 51, "name": "Radio Cafe Moldova"}, {"@type": "ListItem", "position": 52, "name": "Radio ROKS (Moldova) - Hard'n'Heavy"}, {"@type": "ListItem", "position": 53, "name": "Radio ROKS (Moldova) - Workout"}, {"@type": "ListItem", "position": 54, "name": "Hit FM Chișinău 101.7 fm"}, {"@type": "ListItem", "position": 55, "name": "HIT FM Trance Hits"}, {"@type": "ListItem", "position": 56, "name": "Radio Fresh MD"}, {"@type": "ListItem", "position": 57, "name": "HIT FM K-Pop Hits"}, {"@type": "ListItem", "position": 58, "name": "HIT FM Latino Hits"}, {"@type": "ListItem", "position": 59, "name": "Radio ROKS (Moldova) - Rock Ballads"}, {"@type": "ListItem", "position": 60, "name": "RadioBEAT"}, {"@type": "ListItem", "position": 61, "name": "Smile FM"}, {"@type": "ListItem", "position": 62, "name": "Radio Relax - VinoPizza"}, {"@type": "ListItem", "position": 63, "name": "Radio RFI Moldova"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "TUNO", "item": "https://axarapps.github.io/radio/"}, {"@type": "ListItem", "position": 2, "name": "Radio Moldova", "item": "https://axarapps.github.io/radio/moldova/"}]}, {"@type": "ItemList", "name": "Radio stations in Moldova", "numberOfItems": 63, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sex Sound Radio"}, {"@type": "ListItem", "position": 2, "name": "Retro FM Moldova"}, {"@type": "ListItem", "position": 3, "name": "Hit FM 2000s HITS"}, {"@type": "ListItem", "position": 4, "name": "Kiss FM Moldova"}, {"@type": "ListItem", "position": 5, "name": "Radio Noroc Moldova"}, {"@type": "ListItem", "position": 6, "name": "Hit FM Hot Hits"}, {"@type": "ListItem", "position": 7, "name": "Hit Fm Drive Mode"}, {"@type": "ListItem", "position": 8, "name": "Radio Relax - lo-fi"}, {"@type": "ListItem", "position": 9, "name": "Radio ROKS Moldova"}, {"@type": "ListItem", "position": 10, "name": "Jurnal Fm"}, {"@type": "ListItem", "position": 11, "name": "HIT FM Eurovision Hits"}, {"@type": "ListItem", "position": 12, "name": "DeepNova Radio"}, {"@type": "ListItem", "position": 13, "name": "Radio Relax - Nature"}, {"@type": "ListItem", "position": 14, "name": "Vocea Basarabiei"}, {"@type": "ListItem", "position": 15, "name": "Radio Plai"}, {"@type": "ListItem", "position": 16, "name": "Glowwave-FM"}, {"@type": "ListItem", "position": 17, "name": "Radio ZUM4"}, {"@type": "ListItem", "position": 18, "name": "Master Class FM (MD)"}, {"@type": "ListItem", "position": 19, "name": "Radio Vintage"}, {"@type": "ListItem", "position": 20, "name": "HIT FM Русский Хит"}, {"@type": "ListItem", "position": 21, "name": "Radio Relax - Jazz & Blues"}, {"@type": "ListItem", "position": 22, "name": "Radio ZUM 1"}, {"@type": "ListItem", "position": 23, "name": "Inter FM 107.7"}, {"@type": "ListItem", "position": 24, "name": "HIT FM Tricolor de Hituri"}, {"@type": "ListItem", "position": 25, "name": "Realitatea FM"}, {"@type": "ListItem", "position": 26, "name": "CITY FM"}, {"@type": "ListItem", "position": 27, "name": "Radio Ai Noștri"}, {"@type": "ListItem", "position": 28, "name": "Muz FM Moldova"}, {"@type": "ListItem", "position": 29, "name": "Radio ZUM 2"}, {"@type": "ListItem", "position": 30, "name": "HIT FM Orchestral Classics"}, {"@type": "ListItem", "position": 31, "name": "Radio ROKS (Moldova) - Indie Rock"}, {"@type": "ListItem", "position": 32, "name": "Radio ROKS (Moldova) - Rock Tricolor"}, {"@type": "ListItem", "position": 33, "name": "Focul din Vatră"}, {"@type": "ListItem", "position": 34, "name": "Kiss FM Chișinău"}, {"@type": "ListItem", "position": 35, "name": "Megapolis FM Moldova"}, {"@type": "ListItem", "position": 36, "name": "Radio Chișinău"}, {"@type": "ListItem", "position": 37, "name": "Hit FM Summer Hits"}, {"@type": "ListItem", "position": 38, "name": "DeepNova Radio - DanceNova"}, {"@type": "ListItem", "position": 39, "name": "Radio Relax - Versiuni Acustice"}, {"@type": "ListItem", "position": 40, "name": "IMAGO.FM"}, {"@type": "ListItem", "position": 41, "name": "Radio Relax - Funk & Soul"}, {"@type": "ListItem", "position": 42, "name": "Radio Moldova Tineret"}, {"@type": "ListItem", "position": 43, "name": "Hit FM Dance"}, {"@type": "ListItem", "position": 44, "name": "RADIO MUZFM"}, {"@type": "ListItem", "position": 45, "name": "VibeFM"}, {"@type": "ListItem", "position": 46, "name": "Radio Relax - Tricolor"}, {"@type": "ListItem", "position": 47, "name": "Radio ROKS (Moldova) - Classic Rock"}, {"@type": "ListItem", "position": 48, "name": "Radio ROKS (Moldova) - Pop Rock"}, {"@type": "ListItem", "position": 49, "name": "Radio ROKS (Moldova) - New Rock"}, {"@type": "ListItem", "position": 50, "name": "Hit FM Best Hits"}, {"@type": "ListItem", "position": 51, "name": "Radio Cafe Moldova"}, {"@type": "ListItem", "position": 52, "name": "Radio ROKS (Moldova) - Hard'n'Heavy"}, {"@type": "ListItem", "position": 53, "name": "Radio ROKS (Moldova) - Workout"}, {"@type": "ListItem", "position": 54, "name": "Hit FM Chișinău 101.7 fm"}, {"@type": "ListItem", "position": 55, "name": "HIT FM Trance Hits"}, {"@type": "ListItem", "position": 56, "name": "Radio Fresh MD"}, {"@type": "ListItem", "position": 57, "name": "HIT FM K-Pop Hits"}, {"@type": "ListItem", "position": 58, "name": "HIT FM Latino Hits"}, {"@type": "ListItem", "position": 59, "name": "Radio ROKS (Moldova) - Rock Ballads"}, {"@type": "ListItem", "position": 60, "name": "RadioBEAT"}, {"@type": "ListItem", "position": 61, "name": "Smile FM"}, {"@type": "ListItem", "position": 62, "name": "Radio Relax - VinoPizza"}, {"@type": "ListItem", "position": 63, "name": "Radio RFI Moldova"}]}]}</script>
 </head>
 <body>
+<div id="glow" aria-hidden="true"></div>
 <div class="wrap" id="view"><!--prerender--><div class="prerender"><h1>Radio Moldova</h1><p>63 live radio stations from Moldova, free and without ads. <a href="./">All countries</a></p><ul><li>Sex Sound Radio · music</li><li>Retro FM Moldova · music</li><li>Hit FM 2000s HITS · music</li><li>Kiss FM Moldova · music</li><li>Radio Noroc Moldova · music</li><li>Hit FM Hot Hits · music</li><li>Hit Fm Drive Mode · music</li><li>Radio Relax - lo-fi · music</li><li>Radio ROKS Moldova · music</li><li>Jurnal Fm · news</li><li>HIT FM Eurovision Hits · music</li><li>DeepNova Radio · music</li><li>Radio Relax - Nature · music</li><li>Vocea Basarabiei · news</li><li>Radio Plai · music</li><li>Glowwave-FM · music</li><li>Radio ZUM4 · music</li><li>Master Class FM (MD) · music</li><li>Radio Vintage · music</li><li>HIT FM Русский Хит · music</li><li>Radio Relax - Jazz &amp; Blues · music</li><li>Radio ZUM 1 · music</li><li>Inter FM 107.7 · music</li><li>HIT FM Tricolor de Hituri · music</li><li>Realitatea FM · music</li><li>CITY FM · music</li><li>Radio Ai Noștri · talk</li><li>Muz FM Moldova · music</li><li>Radio ZUM 2 · music</li><li>HIT FM Orchestral Classics · music</li><li>Radio ROKS (Moldova) - Indie Rock · music</li><li>Radio ROKS (Moldova) - Rock Tricolor · music</li><li>Focul din Vatră · music</li><li>Kiss FM Chișinău · music</li><li>Megapolis FM Moldova · music</li><li>Radio Chișinău · news</li><li>Hit FM Summer Hits · music</li><li>DeepNova Radio - DanceNova · music</li><li>Radio Relax - Versiuni Acustice · music</li><li>IMAGO.FM · music</li><li>Radio Relax - Funk &amp; Soul · music</li><li>Radio Moldova Tineret · news</li><li>Hit FM Dance · music</li><li>RADIO MUZFM · music</li><li>VibeFM · music</li><li>Radio Relax - Tricolor · music</li><li>Radio ROKS (Moldova) - Classic Rock · music</li><li>Radio ROKS (Moldova) - Pop Rock · music</li><li>Radio ROKS (Moldova) - New Rock · music</li><li>Hit FM Best Hits · music</li><li>Radio Cafe Moldova · music</li><li>Radio ROKS (Moldova) - Hard&#x27;n&#x27;Heavy · music</li><li>Radio ROKS (Moldova) - Workout · music</li><li>Hit FM Chișinău 101.7 fm · music</li><li>HIT FM Trance Hits · music</li><li>Radio Fresh MD · music</li><li>HIT FM K-Pop Hits · music</li><li>HIT FM Latino Hits · music</li><li>Radio ROKS (Moldova) - Rock Ballads · music</li><li>RadioBEAT · music</li><li>Smile FM · music</li><li>Radio Relax - VinoPizza · music</li><li>Radio RFI Moldova · music</li></ul></div><!--/prerender--></div>
 
 <div class="player" id="player" aria-live="polite">
@@ -229,7 +244,7 @@
   </div>
 </div>
 
-<div class="install" id="install" role="dialog" aria-label="Install World Radio">
+<div class="install" id="install" role="dialog" aria-label="Install TUNO">
   <img src="icons/app-192.png" alt="">
   <div class="t" id="install-text"></div>
   <div class="acts">
@@ -399,12 +414,16 @@ function tunoCard() {
     <img src="icons/tuno-192.png" alt="" width="56" height="56"><span class="tx"><b>Get the TUNO app</b><small>Radio, TV and news from every country. Free, no ads.</small></span><em>Google Play</em></a>`;
 }
 
+const LOGO = '<span class="logo" aria-hidden="true">' + [[7.7, 560], [11.6, 700], [16.4, 480], [22.2, 760], [28, 600], [22.2, 720], [16.4, 520], [11.6, 660], [7.7, 580]]
+  .map(([h, d]) => `<i style="--h:${h};--d:${d}ms"></i>`).join('') + '</span>';
+const flagUrl = (c) => 'https://akarafilovski.github.io/tuno-data/flags/' + c.toLowerCase() + '.png';
+
 async function renderHome() {
   route = { code: null };
-  document.title = 'World Radio';
+  document.title = 'TUNO';
   setAccent('#FF8A3D');
   view.innerHTML = `
-    <div class="top"><img src="icons/app-192.png" alt=""><h1>World Radio</h1><a class="iconbtn about-btn" href="about.html" aria-label="About World Radio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg></a></div>
+    <div class="top">${LOGO}<h1>TUNO</h1><a class="iconbtn about-btn" href="about.html" aria-label="About TUNO"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg></a></div>
     <div class="fixed">${supportHtml()}
       <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search a country or station" autocomplete="off" aria-label="Search a country or station"></div></div>
     <div id="home-lists"><div class="empty">Loading…</div></div>
@@ -415,7 +434,7 @@ async function renderHome() {
   const q = $('q');
   const list = COUNTRIES.map((c) => app(c.code)).sort((a, b) => a.name.localeCompare(b.name));
   const card = (a) => `<a class="app" data-code="${a.code}" href="${slugOf(a.code)}/" style="--a:${a.accent}">
-        <img src="${a.icon}" alt="" loading="lazy" width="44" height="44"><b>${esc(a.name.replace(/^Radio /, ''))}</b><small>${a.stations}</small></a>`;
+        <img class="flag" src="${flagUrl(a.code)}" alt="" loading="lazy" width="44" height="44"><b>${esc(a.name.replace(/^Radio /, ''))}</b><small>${a.stations}</small></a>`;
   const draw = () => {
     const term = q.value.trim().toLowerCase();
     const match = (a) => !term || a.name.replace(/^Radio /, '').toLowerCase().includes(term) || a.name.toLowerCase().includes(term) || countryName(a.code).toLowerCase().includes(term) || a.code.toLowerCase() === term;
@@ -462,11 +481,11 @@ async function renderCountry(code) {
   if (route.code !== code) return;
   const pick = app(code);
   const name = pick.name;
-  document.title = `${name}: listen to ${pick.stations} live stations online | World Radio`;
+  document.title = `${name}: listen to ${pick.stations} live stations online | TUNO`;
   setAccent(pick.accent);
   view.innerHTML = `
     <div class="hero"><div class="top"><button class="iconbtn" id="back" type="button" aria-label="All radios">${ICON.back}</button>
-      <img src="${pick.icon}" alt=""><h1>${esc(name)}</h1></div>
+      <img class="flag" src="${flagUrl(code)}" alt=""><h1>${esc(name)}</h1></div>
     <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search stations" autocomplete="off" aria-label="Search stations"></div></div>
     <div class="chips" id="chips"></div>
     <div id="stations"><div class="empty">Loading stations…</div></div>
@@ -659,14 +678,15 @@ $('sleepmenu').addEventListener('click', (e) => {
   if (b) setSleep(Number(b.dataset.min));
 });
 document.addEventListener('click', closeSleepMenu);
-audio.addEventListener('playing', () => { setBtn('pause'); showPlayer(); redrawRows(); });
+audio.addEventListener('playing', () => { setBtn('pause'); showPlayer(); redrawRows(); document.body.classList.add('playing'); });
 audio.addEventListener('waiting', () => setBtn('loading'));
 audio.addEventListener('pause', () => { setBtn('play'); redrawRows(); });
+['pause', 'ended', 'error', 'emptied'].forEach((ev) => audio.addEventListener(ev, () => document.body.classList.remove('playing')));
 audio.addEventListener('error', () => { if (current && !hls) failed(); });
 function mediaSession(s) {
   if (!('mediaSession' in navigator)) return;
   const art = s.logoUrl ? [{ src: s.logoUrl.replace(/^http:/, 'https:'), sizes: '256x256' }] : [{ src: 'icons/app-512.png', sizes: '512x512', type: 'image/png' }];
-  navigator.mediaSession.metadata = new MediaMetadata({ title: s.name, artist: countryName(s.country), album: 'World Radio', artwork: art });
+  navigator.mediaSession.metadata = new MediaMetadata({ title: s.name, artist: countryName(s.country), album: 'TUNO', artwork: art });
   navigator.mediaSession.setActionHandler('play', () => play(current));
   navigator.mediaSession.setActionHandler('pause', () => audio.pause());
 }
@@ -778,10 +798,10 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catc
   function show(mode) {
     if (standalone || snoozed) return;
     if (mode === 'ios') {
-      text.innerHTML = '<b>Install World Radio</b><span>Tap Share, then <b style="display:inline;font-size:inherit;color:var(--text)">Add to Home Screen</b>.</span>';
+      text.innerHTML = '<b>Install TUNO</b><span>Tap Share, then <b style="display:inline;font-size:inherit;color:var(--text)">Add to Home Screen</b>.</span>';
       go.style.display = 'none';
     } else {
-      text.innerHTML = '<b>Install World Radio</b><span>Listen from your home screen.</span>';
+      text.innerHTML = '<b>Install TUNO</b><span>Listen from your home screen.</span>';
     }
     box.classList.add('show');
   }

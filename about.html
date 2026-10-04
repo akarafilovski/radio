@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>About · World Radio</title>
+<title>About · TUNO</title>
 <meta name="description" content="Live radio from 191 countries in your browser. Search a country, tap a station and listen. Free, no ads, no sign-up.">
 <link rel="canonical" href="https://axarapps.github.io/radio/about.html">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#0A1020">
 <link rel="icon" href="icons/app-192.png">
 <style>
-  :root{--bg:#000000; --text:#F3F4F8; --muted:#9CA1B5; --accent:#FF8A3D; --on-accent:#000; --panel:#161616; --line:rgba(255,255,255,.1);}
+  :root{--bg:#0A1020; --text:#EEF1F8; --muted:#B5BDD3; --accent:#FF8A3D; --on-accent:#000; --panel:#131C32; --line:rgba(130,160,255,.14);}
   body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 system-ui, sans-serif; }
   main { max-width: 680px; margin: 0 auto; padding: 0 16px 56px; }
   .bar { position: sticky; top: 0; z-index: 10; margin: 0 -16px; padding: max(10px, env(safe-area-inset-top)) 16px 10px; background: color-mix(in srgb, var(--bg) 94%, transparent);  display: flex; align-items: center; gap: 12px; }
@@ -35,7 +35,7 @@
 <body>
 <main>
   <div class="bar"><a href="./" data-back="/radio/" aria-label="All radios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg></a><span class="bt">About</span></div>
-  <h1 class="sr">World Radio</h1>
+  <h1 class="sr">TUNO</h1>
   <p>Live radio from 191 countries in your browser. Search a country, tap a station and listen. Free, no ads, no sign-up.</p>
   <div class="chips"><span class="chip">No ads</span><span class="chip">No sign-up</span><span class="chip">191 countries</span><span class="chip">Phone, tablet and computer</span></div>
   <h2>How it works</h2><p>Pick a country, then a station, and it plays right away. Star your favorites and they stay on your device. Add this page to your home screen to open it like an app.</p>
@@ -50,7 +50,7 @@
   function done(msg) { t.textContent = msg; setTimeout(function () { t.textContent = 'Share this website'; }, 2200); }
   btn.addEventListener('click', function () {
     if (navigator.share) {
-      navigator.share({ title: "World Radio", text: "Live radio from 191 countries in your browser. Search a country, tap a station and listen. Free, no ads, no sign-up.", url: url }).catch(function () {});
+      navigator.share({ title: "TUNO", text: "Live radio from 191 countries in your browser. Search a country, tap a station and listen. Free, no ads, no sign-up.", url: url }).catch(function () {});
       return;
     }
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(function () { done('Link copied'); }, function () { done(url); });
