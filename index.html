@@ -171,6 +171,23 @@ const PICKS = [
   { code: 'HU', name: 'Radio Hungary', slug: 'hungary', accent: '#5FD08A', app: 'com.axar.hungarianradios', live: false },
 ];
 const PICK = Object.fromEntries(PICKS.map((p) => [p.code, p]));
+// Every other country: generated icon and accent (countries.json, made by tools/make_icons.py).
+let COUNTRIES = [];
+const regionNames = (() => { try { return new Intl.DisplayNames(['en'], { type: 'region' }); } catch (e) { return null; } })();
+function niceName(code) {
+  try { const n = regionNames && regionNames.of(code); if (n && n !== code) return n; } catch (e) {}
+  return countryName(code);
+}
+function app(code) {
+  const p = PICK[code];
+  const c = COUNTRIES.find((x) => x.code === code);
+  if (p) return { ...p, icon: `icons/${p.slug}.png`, stations: c ? c.stations : 0 };
+  return { code, name: 'Radio ' + niceName(code), accent: (c && c.accent) || '#FF8A3D', icon: `icons/c/${code.toLowerCase()}.png`, stations: c ? c.stations : 0, live: false };
+}
+async function getCountries() {
+  if (!COUNTRIES.length) COUNTRIES = await (await fetch('countries.json')).json();
+  return COUNTRIES;
+}
 const CATEGORY = { music: 'Music', news: 'News', talk: 'Talk', sports: 'Sports', religious: 'Religious', culture: 'Culture', kids: 'Kids', local: 'Local', other: 'Other' };
 const PAGE = 60;
 
@@ -250,22 +267,27 @@ async function renderHome() {
   setAccent('#FF8A3D');
   view.innerHTML = `
     <div class="top"><img src="icons/app-192.png" alt=""><h1>aXar Radio</h1></div>
-    <p class="lead">Live radio, free and without ads. Pick a country and press play.</p>
+    <p class="lead">Live radio from 190 countries, free and without ads. Pick one and press play.</p>
     <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search a country" autocomplete="off" aria-label="Search a country"></div>
     <div id="home-lists"><div class="empty">Loading…</div></div>
     ${supportHtml()}
     <footer><span>© aXar</span><a href="privacy.html">Privacy</a><a href="https://akarafilovski.github.io/games/">Games</a><a href="mailto:akarafilovski@gmail.com">Contact</a></footer>`;
   wireSupport();
-  const all = await getIndex();
+  await Promise.all([getIndex(), getCountries()]);
   const q = $('q');
+  const ours = PICKS.map((p) => app(p.code));
+  const others = COUNTRIES.filter((c) => !PICK[c.code]).map((c) => app(c.code)).sort((a, b) => a.name.localeCompare(b.name));
+  const card = (a) => `<button class="app" data-code="${a.code}" type="button" style="--a:${a.accent}">
+        <img src="${a.icon}" alt="" loading="lazy" width="60" height="60"><b>${esc(a.name)}</b><small>${a.stations} stations</small></button>`;
   const draw = () => {
     const term = q.value.trim().toLowerCase();
-    const list = PICKS.filter((p) => !term || p.name.toLowerCase().includes(term) || countryName(p.code).toLowerCase().includes(term) || p.code.toLowerCase() === term);
-    $('home-lists').innerHTML = list.length ? `<div class="apps">${list.map((p) => {
-      const c = all.find((x) => x.code === p.code);
-      return `<button class="app" data-code="${p.code}" type="button" style="--a:${p.accent}">
-        <img src="icons/${p.slug}.png" alt=""><b>${esc(p.name)}</b><small>${c ? c.stations + ' stations' : ''}</small></button>`;
-    }).join('')}</div>` : '<div class="empty">No country found.</div>';
+    const match = (a) => !term || a.name.toLowerCase().includes(term) || countryName(a.code).toLowerCase().includes(term) || a.code.toLowerCase() === term;
+    const o = ours.filter(match);
+    const m = others.filter(match);
+    let html = '';
+    if (o.length) html += `${term ? '' : '<div class="label">Our radio apps</div>'}<div class="apps">${o.map(card).join('')}</div>`;
+    if (m.length) html += `<div class="label">${term ? 'More countries' : `More countries · ${others.length}`}</div><div class="apps">${m.map(card).join('')}</div>`;
+    $('home-lists').innerHTML = html || '<div class="empty">No country found.</div>';
     shown = [];
   };
   q.addEventListener('input', draw);
@@ -276,14 +298,14 @@ async function renderHome() {
 async function renderCountry(code) {
   route = { code };
   listState = { q: '', cat: 'all', limit: PAGE };
-  await getIndex();
-  const pick = PICK[code];
-  const name = pick ? pick.name : countryName(code);
+  await Promise.all([getIndex(), getCountries()]);
+  const pick = app(code);
+  const name = pick.name;
   document.title = name + ' · aXar Radio';
-  setAccent(pick ? pick.accent : '#FF8A3D');
+  setAccent(pick.accent);
   view.innerHTML = `
     <div class="hero"><div class="top"><button class="iconbtn" id="back" type="button" aria-label="All radios">${ICON.back}</button>
-      ${pick ? `<img src="icons/${pick.slug}.png" alt="">` : `<span class="flag">${flag(code)}</span>`}<h1>${esc(name)}</h1></div>
+      <img src="${pick.icon}" alt=""><h1>${esc(name)}</h1></div>
     <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search stations" autocomplete="off" aria-label="Search stations"></div></div>
     <div class="chips" id="chips"></div>
     <div id="stations"><div class="empty">Loading stations…</div></div>
@@ -306,7 +328,7 @@ async function renderCountry(code) {
     $('stations').innerHTML = list.length
       ? `<div class="list">${shown.map(stationRow).join('')}</div>${list.length > shown.length ? `<button class="more" id="more" type="button">Show more (${list.length - shown.length})</button>` : ''}`
       : '<div class="empty">No station found.</div>';
-    if (appOnly) $('stations').insertAdjacentHTML('beforeend', `<p class="note" style="margin-top:16px">${appOnly} more stations play only in the app${pick && pick.live ? `: <a style="color:var(--accent)" href="https://play.google.com/store/apps/details?id=${pick.app}" target="_blank" rel="noopener">${esc(name)} on Google Play</a>` : '.'}</p>`);
+    if (appOnly) $('stations').insertAdjacentHTML('beforeend', `<p class="note" style="margin-top:16px">${appOnly} more stations ${PICK[code] ? 'play only in the app' : 'cannot play in a browser'}${pick.live ? `: <a style="color:var(--accent)" href="https://play.google.com/store/apps/details?id=${pick.app}" target="_blank" rel="noopener">${esc(name)} on Google Play</a>` : '.'}</p>`);
     const more = $('more');
     if (more) more.addEventListener('click', () => { listState.limit += PAGE * 2; draw(); });
   };
