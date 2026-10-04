@@ -78,7 +78,7 @@ for c in countries:
     os.makedirs(d, exist_ok=True)
     open(os.path.join(d, 'index.html'), 'w', encoding='utf-8', newline='\n').write(page)
 
-urls = [SITE] + [f'{SITE}{c["slug"]}/' for c in sorted(countries, key=lambda c: c['slug'])]
+urls = [SITE, SITE + 'about.html'] + [f'{SITE}{c["slug"]}/' for c in sorted(countries, key=lambda c: c['slug'])]
 open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8', newline='\n').write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + ''.join(f'<url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n')
