@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>aXar Radio</title>
+<meta name="description" content="Live radio from 239 countries in your browser. Search a country, tap a station and listen. Free, no ads, no sign-up.">
+<meta name="theme-color" content="#000000">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/app-192.png">
+<link rel="apple-touch-icon" href="icons/app-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="aXar Radio">
+<meta property="og:title" content="aXar Radio">
+<meta property="og:description" content="Live radio from 239 countries. Free, no ads.">
+<meta property="og:image" content="icons/app-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #000; --surface: #161616; --tile: #1C1C1F; --border: rgba(255,255,255,.08); --chip: rgba(255,255,255,.10);
+    --text: #fff; --muted: #A8A8B2; --dim: #555560; --accent: #FF8A3D; --on-accent: #000; --bad: #FF6B6B;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 400 16px/1.45 'Figtree', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  button { font: inherit; color: inherit; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: max(14px, env(safe-area-inset-top)) 16px calc(110px + env(safe-area-inset-bottom)); }
+  h1, h2, h3 { font-family: 'Sora', sans-serif; letter-spacing: -.3px; }
+  .top { display: flex; align-items: center; gap: 12px; padding: 18px 0 14px; }
+  .top img { width: 44px; height: 44px; border-radius: 12px; }
+  .top h1 { font-size: clamp(24px, 6vw, 32px); margin: 0; flex: 1; }
+  .iconbtn { all: unset; cursor: pointer; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--chip); flex: none; }
+  .iconbtn:focus-visible, .row:focus-visible, .ctry:focus-visible, .pick:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .iconbtn svg { width: 20px; height: 20px; }
+  .search { position: relative; margin: 6px 0 18px; }
+  .search input { width: 100%; height: 50px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    padding: 0 18px 0 46px; font: 500 16px 'Figtree', sans-serif; outline: none; }
+  .search input:focus { border-color: var(--accent); }
+  .search svg { position: absolute; left: 16px; top: 15px; width: 20px; height: 20px; color: var(--muted); }
+  .label { font: 700 13px 'Figtree'; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; margin: 22px 0 10px; }
+  .picks { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
+  .pick { all: unset; cursor: pointer; display: grid; justify-items: center; gap: 6px; padding: 12px 6px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); text-align: center; }
+  .pick img { width: 56px; height: 56px; border-radius: 14px; }
+  .pick span { font-size: 13px; font-weight: 700; line-height: 1.2; }
+  .list { display: grid; gap: 2px; grid-template-columns: minmax(0, 1fr); }
+  .row, .ctry, .app, .pick { box-sizing: border-box; max-width: 100%; }
+  .apps { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(46%, 190px), 1fr)); gap: 12px; }
+  .app { all: unset; cursor: pointer; position: relative; overflow: hidden; display: grid; gap: 4px; padding: 16px; border-radius: 22px; min-height: 150px; align-content: end;
+    background: radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--a) 55%, transparent) 0%, transparent 60%), var(--surface);
+    border: 1px solid var(--border); transition: transform .15s ease, border-color .15s ease; }
+  .app:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--a) 50%, transparent); }
+  .app:active { transform: scale(.98); }
+  .app:focus-visible { outline: 2px solid var(--a); outline-offset: 2px; }
+  .app img { width: 60px; height: 60px; border-radius: 16px; margin-bottom: 8px; box-shadow: 0 8px 22px rgba(0,0,0,.45); }
+  .app b { font: 700 16px/1.2 'Sora', sans-serif; }
+  .app small { color: var(--muted); font-size: 13px; }
+  .lead { color: var(--muted); margin: -6px 0 16px; }
+  .hero { margin: 0 -16px 14px; padding: 0 16px 6px; background: radial-gradient(100% 120% at 100% 0%, color-mix(in srgb, var(--accent) 35%, transparent) 0%, transparent 65%); }
+  .ctry { all: unset; cursor: pointer; display: flex; align-items: center; gap: 14px; padding: 10px 12px; border-radius: 14px; }
+  .ctry:hover, .row:hover { background: var(--surface); }
+  .flag { width: 38px; height: 38px; border-radius: 50%; background: var(--tile); display: grid; place-items: center; font-size: 22px; flex: none; overflow: hidden; }
+  .ctry b { flex: 1; font-weight: 500; }
+  .ctry small { color: var(--muted); font-size: 13px; }
+  .yours { background: var(--surface); border: 1px solid var(--border); }
+
+  .chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin: -6px 0 12px; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { all: unset; cursor: pointer; white-space: nowrap; padding: 8px 14px; border-radius: 999px; background: var(--chip); font-size: 14px; font-weight: 500; }
+  .chip.on { background: var(--accent); color: var(--on-accent); font-weight: 700; }
+  .row { all: unset; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 14px; }
+  .row.playing { background: var(--surface); }
+  .logo { width: 48px; height: 48px; border-radius: 12px; background: var(--tile); flex: none; object-fit: cover; display: grid; place-items: center;
+    font: 700 18px 'Sora'; color: var(--muted); overflow: hidden; }
+  .row .t { flex: 1; min-width: 0; }
+  .row .t b { display: block; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .row .t small { display: block; color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .row.playing .t b { color: var(--accent); }
+  .fav { all: unset; cursor: pointer; width: 40px; height: 40px; display: grid; place-items: center; color: var(--dim); flex: none; }
+  .fav.on { color: var(--accent); }
+  .fav svg { width: 22px; height: 22px; }
+  .eq { display: inline-flex; gap: 2px; align-items: flex-end; height: 12px; margin-right: 6px; }
+  .eq i { width: 3px; background: var(--accent); border-radius: 1px; animation: eq 0.9s ease-in-out infinite; }
+  .eq i:nth-child(2) { animation-delay: .2s; } .eq i:nth-child(3) { animation-delay: .4s; }
+  @keyframes eq { 0%, 100% { height: 3px; } 50% { height: 12px; } }
+  .empty { text-align: center; color: var(--muted); padding: 40px 16px; }
+  .more { all: unset; cursor: pointer; display: block; margin: 14px auto; padding: 10px 18px; border-radius: 999px; background: var(--chip); font-weight: 700; font-size: 14px; }
+
+  .player { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(22,22,22,.92);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-top: 1px solid var(--border); display: none; }
+  .player.show { display: block; }
+  .player .in { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+  .player .t { flex: 1; min-width: 0; }
+  .player .t b { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .player .t small { color: var(--muted); font-size: 13px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .player .t small.err { color: var(--bad); }
+  .pp { all: unset; cursor: pointer; width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; flex: none; }
+  .pp svg { width: 24px; height: 24px; }
+  .spin { width: 22px; height: 22px; border: 3px solid rgba(0,0,0,.25); border-top-color: #000; border-radius: 50%; animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .support { border-radius: 20px; background: var(--surface); border: 1px solid var(--border); overflow: hidden; margin-top: 30px; }
+  .support > button { all: unset; box-sizing: border-box; cursor: pointer; width: 100%; display: flex; align-items: center; gap: 12px; padding: 16px; }
+  .support .t { flex: 1; } .support .t b { display: block; } .support .t span { font-size: 13.5px; color: var(--muted); }
+  .support .chev { color: var(--accent); transition: transform .2s; } .support.open .chev { transform: rotate(180deg); }
+  .support .body { display: none; padding: 0 16px 16px; } .support.open .body { display: grid; gap: 12px; }
+  .token { background: var(--bg); border-radius: 14px; padding: 12px; display: grid; gap: 6px; }
+  .token .k { font-size: 13px; font-weight: 700; color: var(--accent); }
+  .token .r { display: flex; align-items: center; gap: 8px; }
+  .token code { flex: 1; font: 500 13px/1.4 ui-monospace, Menlo, monospace; word-break: break-all; }
+  .token button { all: unset; cursor: pointer; padding: 8px 12px; border-radius: 999px; background: var(--chip); font-size: 13px; font-weight: 700; }
+  .note { font-size: 13px; color: var(--muted); margin: 0; }
+  footer { margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  footer a { color: var(--muted); }
+
+  .install { position: fixed; left: 12px; right: 12px; bottom: calc(84px + env(safe-area-inset-bottom)); max-width: 520px; margin: 0 auto; z-index: 30;
+    background: #222226; border: 1px solid var(--border); border-radius: 20px; padding: 14px; box-shadow: 0 18px 50px rgba(0,0,0,.6); display: none; gap: 12px; align-items: center; }
+  .install.show { display: flex; }
+  .install img { width: 48px; height: 48px; border-radius: 12px; }
+  .install .t { flex: 1; font-size: 14px; } .install .t b { display: block; font-size: 15px; } .install .t span { color: var(--muted); }
+  .install .acts { display: flex; flex-direction: column; gap: 6px; }
+  .btn { all: unset; cursor: pointer; text-align: center; padding: 9px 14px; border-radius: 999px; font-weight: 700; font-size: 14px; }
+  .btn.main { background: var(--accent); color: var(--on-accent); } .btn.ghost { color: var(--muted); font-weight: 500; font-size: 13px; padding: 4px 10px; }
+  .toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--text); color: #000; padding: 10px 18px;
+    border-radius: 999px; font-weight: 700; font-size: 14px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 40; max-width: 90vw; text-align: center; }
+  .toast.show { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="view"></div>
+
+<div class="player" id="player" aria-live="polite">
+  <div class="in">
+    <div class="logo" id="p-logo"></div>
+    <div class="t"><b id="p-name"></b><small id="p-sub"></small></div>
+    <button class="pp" id="p-btn" type="button" aria-label="Play"></button>
+  </div>
+</div>
+
+<div class="install" id="install" role="dialog" aria-label="Install aXar Radio">
+  <img src="icons/app-192.png" alt="">
+  <div class="t" id="install-text"></div>
+  <div class="acts">
+    <button class="btn main" id="install-go" type="button">Install</button>
+    <button class="btn ghost" id="install-later" type="button">Not now</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<audio id="audio" preload="none"></audio>
+
+<script>
+const DATA = 'https://akarafilovski.github.io/tuno-data/radio/';
+const WALLET = '8x1G15KgVzHdTeVhULGPThfVfP68FeLiuTEy4AFmJRrT';
+// Our own radio apps: icon, accent color, and the Play link for the ones that are live.
+const PICKS = [
+  { code: 'HR', name: 'Radio Croatia', slug: 'croatia', accent: '#EF4B55', app: 'com.axar.croatianradios', live: true },
+  { code: 'RS', name: 'Radio Serbia', slug: 'serbia', accent: '#F0586A', app: 'com.axar.serbianradios', live: true },
+  { code: 'MK', name: 'Radio MK', slug: 'mk', accent: '#FFA43A', app: 'com.axar.makmedia', live: false },
+  { code: 'SI', name: 'Radio Slovenia', slug: 'slovenia', accent: '#4C9BFF', app: 'com.axar.slovenianradios', live: true },
+  { code: 'BG', name: 'Radio Bulgaria', slug: 'bulgaria', accent: '#3DD68C', app: 'com.axar.bulgarianradios', live: true },
+  { code: 'RO', name: 'Radio Romania', slug: 'romania', accent: '#FFD23F', app: 'com.axar.romanianradios', live: true },
+  { code: 'NL', name: 'Radio Netherlands', slug: 'netherlands', accent: '#FF8A3D', app: 'com.axar.dutchradios', live: true },
+  { code: 'GR', name: 'Radio Greece', slug: 'greece', accent: '#4DB0FF', app: 'com.axar.greekradios', live: false },
+  { code: 'ME', name: 'Radio Montenegro', slug: 'montenegro', accent: '#E8B93A', app: 'com.axar.montenegrinradios', live: false },
+  { code: 'BA', name: 'Radio Bosnia', slug: 'bosnia', accent: '#5B8DEF', app: 'com.axar.bosnianradios', live: false },
+  { code: 'TR', name: 'Radio Turkey', slug: 'turkey', accent: '#FF5252', app: 'com.axar.turkishradios', live: false },
+  { code: 'HU', name: 'Radio Hungary', slug: 'hungary', accent: '#5FD08A', app: 'com.axar.hungarianradios', live: false },
+];
+const PICK = Object.fromEntries(PICKS.map((p) => [p.code, p]));
+const CATEGORY = { music: 'Music', news: 'News', talk: 'Talk', sports: 'Sports', religious: 'Religious', culture: 'Culture', kids: 'Kids', local: 'Local', other: 'Other' };
+const PAGE = 60;
+
+const $ = (id) => document.getElementById(id);
+const view = $('view');
+const audio = $('audio');
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+function load(key, def) { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch (e) { return def; } }
+function save(key, v) { try { localStorage.setItem(key, JSON.stringify(v)); } catch (e) {} }
+function flag(code) { return code.toUpperCase().replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt(0))); }
+function toast(text) { const t = $('toast'); t.textContent = text; t.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('show'), 2200); }
+const ICON = {
+  search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+  back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+  star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.2l2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.5l6-.8z"/></svg>',
+  play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.2v13.6a1 1 0 0 0 1.5.86l11-6.8a1 1 0 0 0 0-1.72l-11-6.8A1 1 0 0 0 8 5.2z"/></svg>',
+  pause: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>',
+  chev: '<svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+};
+
+// ---------- data ----------
+let index = null;
+const countryCache = {};
+async function getIndex() {
+  if (!index) index = (await (await fetch(DATA + 'index.json')).json()).countries;
+  return index;
+}
+async function getCountry(code) {
+  if (!countryCache[code]) countryCache[code] = (await (await fetch(DATA + code + '.json')).json()).stations;
+  return countryCache[code];
+}
+function countryName(code) {
+  const c = (index || []).find((x) => x.code === code);
+  return c ? c.name : code;
+}
+function userCountry() {
+  const langs = navigator.languages || [navigator.language || ''];
+  for (const l of langs) { const m = /[-_]([A-Za-z]{2})$/.exec(l); if (m) return m[1].toUpperCase(); }
+  return null;
+}
+
+// ---------- favorites & recent ----------
+let favs = load('radio.favs', []);
+let recent = load('radio.recent', []);
+const slim = (s) => ({ id: s.id, name: s.name, country: s.country, category: s.category, region: s.region, logoUrl: s.logoUrl, stream: s.stream });
+const isFav = (id) => favs.some((f) => f.id === id);
+function toggleFav(s) {
+  favs = isFav(s.id) ? favs.filter((f) => f.id !== s.id) : [slim(s), ...favs];
+  save('radio.favs', favs);
+}
+
+// ---------- rendering ----------
+function logoHtml(s) {
+  const letter = esc((s.name || '?').replace(/[^\p{L}\p{N}]/gu, '').charAt(0).toUpperCase() || '?');
+  if (!s.logoUrl) return `<div class="logo">${letter}</div>`;
+  const url = s.logoUrl.replace(/^http:/, 'https:');
+  return `<div class="logo"><img src="${esc(url)}" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover"
+    onerror="this.parentNode.textContent='${letter}'"></div>`;
+}
+function stationRow(s) {
+  const sub = [s.region, CATEGORY[s.category] || '', s.country && route.code !== s.country ? countryName(s.country) : ''].filter(Boolean).join(' · ');
+  const playing = current && current.id === s.id;
+  return `<div class="row${playing ? ' playing' : ''}" role="button" tabindex="0" data-id="${esc(s.id)}">
+    ${logoHtml(s)}
+    <div class="t"><b>${playing && !audio.paused ? '<span class="eq"><i></i><i></i><i></i></span>' : ''}${esc(s.name)}</b><small>${esc(sub)}</small></div>
+    <button class="fav${isFav(s.id) ? ' on' : ''}" type="button" data-fav="${esc(s.id)}" aria-label="Favorite">${ICON.star}</button>
+  </div>`;
+}
+
+let route = { code: null };
+let shown = [];       // stations currently in the list, for click lookup
+let listState = { q: '', cat: 'all', limit: PAGE };
+
+async function renderHome() {
+  route = { code: null };
+  document.title = 'aXar Radio';
+  setAccent('#FF8A3D');
+  view.innerHTML = `
+    <div class="top"><img src="icons/app-192.png" alt=""><h1>aXar Radio</h1></div>
+    <p class="lead">Live radio, free and without ads. Pick a country and press play.</p>
+    <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search a country" autocomplete="off" aria-label="Search a country"></div>
+    <div id="home-lists"><div class="empty">Loading…</div></div>
+    ${supportHtml()}
+    <footer><span>© aXar</span><a href="privacy.html">Privacy</a><a href="https://akarafilovski.github.io/games/">Games</a><a href="mailto:akarafilovski@gmail.com">Contact</a></footer>`;
+  wireSupport();
+  const all = await getIndex();
+  const q = $('q');
+  const draw = () => {
+    const term = q.value.trim().toLowerCase();
+    const list = PICKS.filter((p) => !term || p.name.toLowerCase().includes(term) || countryName(p.code).toLowerCase().includes(term) || p.code.toLowerCase() === term);
+    $('home-lists').innerHTML = list.length ? `<div class="apps">${list.map((p) => {
+      const c = all.find((x) => x.code === p.code);
+      return `<button class="app" data-code="${p.code}" type="button" style="--a:${p.accent}">
+        <img src="icons/${p.slug}.png" alt=""><b>${esc(p.name)}</b><small>${c ? c.stations + ' stations' : ''}</small></button>`;
+    }).join('')}</div>` : '<div class="empty">No country found.</div>';
+    shown = [];
+  };
+  q.addEventListener('input', draw);
+  draw();
+  window.scrollTo(0, 0);
+}
+
+async function renderCountry(code) {
+  route = { code };
+  listState = { q: '', cat: 'all', limit: PAGE };
+  await getIndex();
+  const pick = PICK[code];
+  const name = pick ? pick.name : countryName(code);
+  document.title = name + ' · aXar Radio';
+  setAccent(pick ? pick.accent : '#FF8A3D');
+  view.innerHTML = `
+    <div class="hero"><div class="top"><button class="iconbtn" id="back" type="button" aria-label="All radios">${ICON.back}</button>
+      ${pick ? `<img src="icons/${pick.slug}.png" alt="">` : `<span class="flag">${flag(code)}</span>`}<h1>${esc(name)}</h1></div>
+    <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search stations" autocomplete="off" aria-label="Search stations"></div></div>
+    <div class="chips" id="chips"></div>
+    <div id="stations"><div class="empty">Loading stations…</div></div>
+`;
+  $('back').addEventListener('click', () => { location.hash = ''; });
+  window.scrollTo(0, 0);
+  let stations;
+  try { stations = await getCountry(code); } catch (e) { $('stations').innerHTML = '<div class="empty">Could not load the stations. Check your connection.</div>'; return; }
+  // Browsers block old http streams on a secure page, so only https stations are listed here (all of them play in the apps).
+  const appOnly = stations.filter((s) => !s.stream.url.startsWith('https:')).length;
+  stations = stations.filter((s) => s.stream.url.startsWith('https:'));
+  const cats = ['all', ...Object.keys(CATEGORY).filter((k) => stations.some((s) => s.category === k))];
+  const chips = $('chips');
+  const drawChips = () => { chips.innerHTML = cats.length > 2 ? cats.map((c) => `<button class="chip${listState.cat === c ? ' on' : ''}" data-cat="${c}" type="button">${c === 'all' ? 'All' : CATEGORY[c]}</button>`).join('') : ''; };
+  const draw = () => {
+    const term = listState.q.toLowerCase();
+    const list = stations.filter((s) => (listState.cat === 'all' || s.category === listState.cat) &&
+      (!term || s.name.toLowerCase().includes(term) || (s.region || '').toLowerCase().includes(term)));
+    shown = list.slice(0, listState.limit);
+    $('stations').innerHTML = list.length
+      ? `<div class="list">${shown.map(stationRow).join('')}</div>${list.length > shown.length ? `<button class="more" id="more" type="button">Show more (${list.length - shown.length})</button>` : ''}`
+      : '<div class="empty">No station found.</div>';
+    if (appOnly) $('stations').insertAdjacentHTML('beforeend', `<p class="note" style="margin-top:16px">${appOnly} more stations play only in the app${pick && pick.live ? `: <a style="color:var(--accent)" href="https://play.google.com/store/apps/details?id=${pick.app}" target="_blank" rel="noopener">${esc(name)} on Google Play</a>` : '.'}</p>`);
+    const more = $('more');
+    if (more) more.addEventListener('click', () => { listState.limit += PAGE * 2; draw(); });
+  };
+  chips.addEventListener('click', (e) => { const c = e.target.closest('.chip'); if (!c) return; listState.cat = c.dataset.cat; listState.limit = PAGE; drawChips(); draw(); });
+  $('q').addEventListener('input', (e) => { listState.q = e.target.value.trim(); listState.limit = PAGE; draw(); });
+  drawChips();
+  draw();
+}
+function redrawRows() {
+  document.querySelectorAll('.row').forEach((el) => {
+    const s = shown.find((x) => x.id === el.dataset.id) || favs.find((x) => x.id === el.dataset.id);
+    if (s) el.outerHTML = stationRow(s);
+  });
+}
+function setAccent(c) { document.documentElement.style.setProperty('--accent', c); }
+
+view.addEventListener('click', (e) => {
+  const favBtn = e.target.closest('[data-fav]');
+  if (favBtn) {
+    e.stopPropagation();
+    const s = shown.find((x) => x.id === favBtn.dataset.fav) || favs.find((x) => x.id === favBtn.dataset.fav);
+    if (s) { toggleFav(s); favBtn.classList.toggle('on', isFav(s.id)); toast(isFav(s.id) ? 'Added to favorites' : 'Removed from favorites'); }
+    return;
+  }
+  const c = e.target.closest('[data-code]');
+  if (c) { location.hash = '#/' + c.dataset.code; return; }
+  const row = e.target.closest('.row');
+  if (row) {
+    const s = shown.find((x) => x.id === row.dataset.id) || favs.find((x) => x.id === row.dataset.id);
+    if (s) (current && current.id === s.id) ? togglePlay() : play(s);
+  }
+});
+view.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('row')) { e.preventDefault(); e.target.click(); } });
+
+// ---------- player ----------
+let current = null;
+let hls = null;
+let attempt = 0;
+function streamUrls(s) {
+  const u = s.stream.url;
+  return [u];
+}
+function loadHls() {
+  if (window.Hls) return Promise.resolve();
+  return new Promise((ok, fail) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.min.js';
+    s.onload = ok; s.onerror = fail;
+    document.head.appendChild(s);
+  });
+}
+async function play(s) {
+  current = s;
+  attempt++;
+  const my = attempt;
+  if (hls) { hls.destroy(); hls = null; }
+  recent = [slim(s), ...recent.filter((r) => r.id !== s.id)].slice(0, 20);
+  save('radio.recent', recent);
+  showPlayer('Connecting…');
+  setBtn('loading');
+  const url = streamUrls(s)[0];
+  try {
+    const isHls = url.includes('.m3u8') || s.stream.format === 'hls';
+    if (isHls && !audio.canPlayType('application/vnd.apple.mpegurl')) {
+      await loadHls();
+      if (my !== attempt) return;
+      if (!window.Hls.isSupported()) throw new Error('hls');
+      hls = new window.Hls();
+      hls.on(window.Hls.Events.ERROR, (_, d) => { if (d.fatal && my === attempt) failed(); });
+      hls.loadSource(url);
+      hls.attachMedia(audio);
+    } else {
+      audio.src = url;
+    }
+    await audio.play();
+  } catch (e) {
+    if (my === attempt && e.name !== 'AbortError') failed();
+  }
+  mediaSession(s);
+  redrawRows();
+}
+function failed() {
+  setBtn('play');
+  showPlayer("This station can't play in the browser right now.", true);
+  redrawRows();
+}
+function togglePlay() {
+  if (!current) return;
+  if (audio.paused) {
+    if (!audio.src && !hls) return play(current);
+    // live radio: resume from now, not from where it was paused
+    play(current);
+  } else {
+    audio.pause();
+  }
+}
+function setBtn(state) {
+  const b = $('p-btn');
+  b.innerHTML = state === 'loading' ? '<span class="spin"></span>' : state === 'pause' ? ICON.pause : ICON.play;
+  b.setAttribute('aria-label', state === 'pause' ? 'Pause' : 'Play');
+}
+function showPlayer(sub, err) {
+  $('player').classList.add('show');
+  $('p-logo').outerHTML = logoHtml(current).replace('class="logo"', 'class="logo" id="p-logo"');
+  $('p-name').textContent = current.name;
+  const el = $('p-sub');
+  el.textContent = sub || [CATEGORY[current.category], countryName(current.country)].filter(Boolean).join(' · ');
+  el.classList.toggle('err', !!err);
+}
+$('p-btn').addEventListener('click', togglePlay);
+audio.addEventListener('playing', () => { setBtn('pause'); showPlayer(); redrawRows(); });
+audio.addEventListener('waiting', () => setBtn('loading'));
+audio.addEventListener('pause', () => { setBtn('play'); redrawRows(); });
+audio.addEventListener('error', () => { if (current && !hls) failed(); });
+function mediaSession(s) {
+  if (!('mediaSession' in navigator)) return;
+  const art = s.logoUrl ? [{ src: s.logoUrl.replace(/^http:/, 'https:'), sizes: '256x256' }] : [{ src: 'icons/app-512.png', sizes: '512x512', type: 'image/png' }];
+  navigator.mediaSession.metadata = new MediaMetadata({ title: s.name, artist: countryName(s.country), album: 'aXar Radio', artwork: art });
+  navigator.mediaSession.setActionHandler('play', () => play(current));
+  navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+}
+
+// ---------- support ----------
+function supportHtml() {
+  const token = (k, min) => `<div class="token"><span class="k">${k}</span><div class="r"><code>${WALLET}</code><button type="button" class="copy">Copy</button></div><p class="note">Minimum &gt;${min}. Solana addresses are case sensitive.</p></div>`;
+  return `<div class="support" id="support">
+    <button type="button" aria-expanded="false"><span class="t"><b>Support our work</b><span>Free, no ads. A small tip helps us keep it running.</span></span>${ICON.chev}</button>
+    <div class="body">${token('Solana · SOL', '0.001 SOL')}${token('USD Coin · USDC (Solana network)', '0.001 USDC')}
+      <p class="note">Double-check every character of the address before sending. Crypto transfers cannot be reversed.</p></div></div>`;
+}
+function wireSupport() {
+  const s = $('support');
+  s.querySelector('button').addEventListener('click', (e) => { const o = s.classList.toggle('open'); e.currentTarget.setAttribute('aria-expanded', String(o)); });
+  s.querySelectorAll('.copy').forEach((b) => b.addEventListener('click', () => {
+    const done = () => toast('Address copied');
+    if (navigator.clipboard) navigator.clipboard.writeText(WALLET).then(done, done); else done();
+  }));
+}
+
+// ---------- routing ----------
+function routeNow() {
+  const m = /^#\/([A-Z]{2})$/.exec(location.hash);
+  if (m) renderCountry(m[1]); else renderHome();
+}
+window.addEventListener('hashchange', routeNow);
+routeNow();
+
+// ---------- install ----------
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+(function () {
+  const box = $('install');
+  const text = $('install-text');
+  const go = $('install-go');
+  const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  let snoozed = false;
+  try { snoozed = Date.now() < parseInt(localStorage.getItem('radio.installSnooze') || '0', 10); } catch (e) {}
+  let deferred = null;
+  function show(mode) {
+    if (standalone || snoozed) return;
+    if (mode === 'ios') {
+      text.innerHTML = '<b>Install aXar Radio</b><span>Tap Share, then <b style="display:inline;font-size:inherit;color:var(--text)">Add to Home Screen</b>.</span>';
+      go.style.display = 'none';
+    } else {
+      text.innerHTML = '<b>Install aXar Radio</b><span>Listen from your home screen.</span>';
+    }
+    box.classList.add('show');
+  }
+  window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferred = e; setTimeout(() => show('android'), 8000); });
+  if (ios && !standalone) setTimeout(() => show('ios'), 8000);
+  go.addEventListener('click', async () => { box.classList.remove('show'); if (!deferred) return; deferred.prompt(); await deferred.userChoice.catch(() => {}); deferred = null; });
+  $('install-later').addEventListener('click', () => { box.classList.remove('show'); try { localStorage.setItem('radio.installSnooze', String(Date.now() + 5 * 86400000)); } catch (e) {} });
+  window.addEventListener('appinstalled', () => box.classList.remove('show'));
+})();
+</script>
+</body>
+</html>
