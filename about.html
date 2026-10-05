@@ -14,6 +14,7 @@
   main { max-width: 680px; margin: 0 auto; padding: 0 16px 56px; }
   .bar { position: sticky; top: 0; z-index: 10; margin: 0 -16px; padding: max(10px, env(safe-area-inset-top)) 16px 10px; background: color-mix(in srgb, var(--bg) 94%, transparent);  display: flex; align-items: center; gap: 12px; }
   .bt { font-size: 20px; font-weight: 700; }
+  .mk { display: flex; align-items: center; gap: 2px; height: 24px; margin-left: 4px; } .mk i { display: block; width: 3px; height: calc(var(--h) * .85px); border-radius: 2px; background: linear-gradient(#FFD6B4, #EB6428); }
   .bar a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--panel); border: 1px solid var(--line); color: var(--text); }
   .bar svg { width: 22px; height: 22px; }
   .bar a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -34,7 +35,7 @@
 </head>
 <body>
 <main>
-  <div class="bar"><a href="./" data-back="/radio/" aria-label="All radios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg></a><span class="bt">About</span></div>
+  <div class="bar"><a href="./" data-back="/radio/" aria-label="All radios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg></a><span class="mk" aria-hidden="true"><i style="--h:7.7"></i><i style="--h:11.6"></i><i style="--h:16.4"></i><i style="--h:22.2"></i><i style="--h:28"></i><i style="--h:22.2"></i><i style="--h:16.4"></i><i style="--h:11.6"></i><i style="--h:7.7"></i></span><span class="bt">About</span></div>
   <h1 class="sr">TUNO</h1>
   <p>Live radio from 191 countries in your browser. Search a country, tap a station and listen. Free, no ads, no sign-up.</p>
   <div class="chips"><span class="chip">No ads</span><span class="chip">No sign-up</span><span class="chip">191 countries</span><span class="chip">Phone, tablet and computer</span></div>
