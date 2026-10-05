@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App privacy - TUNO</title>
+<meta name="theme-color" content="#0A1020">
+<link rel="icon" href="icons/app-192.png">
+<style>
+  :root { --bg: #0A1020; --text: #EEF1F8; --muted: #B5BDD3; --panel: #131C32; --line: rgba(130,160,255,.14); --accent: #FF8A3D; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 system-ui, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 0 16px 56px; }
+  .bar { position: sticky; top: 0; z-index: 10; margin: 0 -16px; padding: max(10px, env(safe-area-inset-top)) 16px 10px; background: color-mix(in srgb, var(--bg) 94%, transparent);  display: flex; align-items: center; gap: 12px; }
+  .bt { font-size: 20px; font-weight: 700; }
+  .mk { display: flex; align-items: center; gap: 2px; height: 24px; margin-left: 4px; } .mk i { display: block; width: 3px; height: calc(var(--h) * .85px); border-radius: 2px; background: linear-gradient(#FFD6B4, #EB6428); }
+  .bar a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--panel); border: 1px solid var(--line); color: var(--text); }
+  .bar svg { width: 22px; height: 22px; }
+  .bar a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  h1 { font-size: 28px; margin: 0 0 4px; }
+  h2 { font-size: 18px; margin: 28px 0 6px; }
+  p, li { color: var(--muted); }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <div class="bar"><a href="./" data-back="/radio/" aria-label="All radios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg></a><span class="mk" aria-hidden="true"><i style="--h:7.7"></i><i style="--h:11.6"></i><i style="--h:16.4"></i><i style="--h:22.2"></i><i style="--h:28"></i><i style="--h:22.2"></i><i style="--h:16.4"></i><i style="--h:11.6"></i><i style="--h:7.7"></i></span><span class="bt">App privacy</span></div>
+  
+  <p>This policy is for the TUNO Android app (com.axar.tuno). The TUNO website has its own <a href="privacy.html">privacy page</a>.</p>
+  <p>Last updated: October 5, 2026</p>
+
+  <h2>What we collect</h2>
+  <p>Nothing. TUNO has no accounts, no ads, no analytics, no crash reporting and no tracking. We do not receive any data from you.</p>
+
+  <h2>What stays on your device</h2>
+  <p>Your favorite stations, recently played stations, recently opened countries, theme choice and sleep timer are saved only on your device. They are never sent to us. Uninstalling the app deletes them.</p>
+
+  <h2>Your country</h2>
+  <p>To show your country first, the app reads your phone's SIM or network country, time zone and language region. This is done on the device and is not sent anywhere. TUNO does not ask for your location.</p>
+
+  <h2>Radio, TV and news</h2>
+  <p>The list of stations, channels and headlines is loaded from public files hosted on GitHub Pages (akarafilovski.github.io/tuno-data), so GitHub may see your IP address like any website you visit. When you play a station or channel, the app connects directly to that broadcaster's own server, and loads logos from their websites. Those servers also see your IP address. Headlines open in your browser on the publisher's website.</p>
+
+  <h2>Permissions</h2>
+  <p>Notifications: used only to show the playback controls (play, pause, next) while something is playing. Internet access is needed to play streams. TUNO also works in the car (Android Auto) and on Android TV with the same rules.</p>
+
+  <h2>Tips</h2>
+  <p>The Support screen shows a public Solana address and a QR code. If you choose to send a tip, the transfer happens in your own wallet app and is recorded on the public Solana blockchain. The app itself does not see it.</p>
+
+  <h2>Children</h2>
+  <p>We do not knowingly collect personal information from anyone, including children.</p>
+
+  <h2>Contact</h2>
+  <p><a href="mailto:akarafilovski@gmail.com">akarafilovski@gmail.com</a></p>
+</main>
+<script>document.addEventListener('click',function(e){var a=e.target.closest('a[data-back]');if(!a||e.metaKey||e.ctrlKey||e.shiftKey)return;try{var r=new URL(document.referrer);if(r.origin===location.origin&&r.pathname.indexOf(a.dataset.back)===0&&history.length>1){e.preventDefault();history.back();}}catch(_){}});</script>
+</body>
+</html>
