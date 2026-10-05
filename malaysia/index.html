@@ -211,13 +211,47 @@
     animation: drift 14s linear infinite; }
   @keyframes drift { 0%, 100% { transform: translate(0, 0) scale(1); } 25% { transform: translate(3%, 1.5%) scale(1.05); } 50% { transform: translate(0, 3%) scale(1); } 75% { transform: translate(-3%, 1.5%) scale(1.05); } }
   .wrap { position: relative; z-index: 1; }
-  .logo { display: flex; align-items: center; gap: 2.5px; height: 28px; margin-right: 2px; }
-  .logo i { display: block; width: 3.4px; height: calc(var(--h) * 1px); border-radius: 2px; background: linear-gradient(#FFD6B4, #EB6428); }
-  body.playing .logo i { animation: bar var(--d) ease-in-out infinite alternate; }
+  .tmark { display: flex; align-items: center; gap: 2.5px; height: 28px; margin-right: 2px; }
+  .tmark i { display: block; width: 3.4px; height: calc(var(--h) * 1px); border-radius: 2px; background: linear-gradient(#FFD6B4, #EB6428); }
+  body.playing .tmark i { animation: bar var(--d) ease-in-out infinite alternate; }
   @keyframes bar { from { transform: scaleY(.45); } to { transform: scaleY(1); } }
   .top h1 { color: #FFB68C; font-weight: 900; }
   .app img.flag, .top img.flag { border-radius: 50%; box-shadow: none; }
   .support.open { background: #0A1020; }
+  /* Welcome and country home, like the app */
+  .tiles { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px 4px; }
+  .tiles::-webkit-scrollbar { display: none; }
+  .tile { all: unset; cursor: pointer; flex: none; width: calc(var(--s) * 1px); text-align: center; }
+  .tile .logo { width: calc(var(--s) * 1px); height: calc(var(--s) * 1px); border-radius: 16px; }
+  .tile b { display: block; margin-top: 6px; font: 600 12.5px 'Figtree', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tile.on b { color: var(--accent); }
+  .tile:focus-visible, .slot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 14px; }
+  .slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 9px; }
+  .slot { all: unset; cursor: pointer; display: flex; align-items: center; background: var(--surface); border-radius: 14px; overflow: hidden; height: 62px; min-width: 0; }
+  .slot .logo { width: 62px; height: 62px; border-radius: 0; }
+  .slot b { flex: 1; min-width: 0; padding: 0 12px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .slot svg { width: 20px; height: 20px; margin-right: 14px; color: var(--accent); flex: none; }
+  .slot.on b { color: var(--accent); }
+  .yourc { display: flex; align-items: center; gap: 14px; margin: 8px 0 4px; padding: 14px; border-radius: 20px; background: var(--surface);
+    border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); text-decoration: none; color: inherit; cursor: pointer; }
+  .yourc img.flag { width: 56px; height: 56px; border-radius: 50%; flex: none; }
+  .yourc .tx { flex: 1; min-width: 0; }
+  .yourc small { display: block; color: var(--accent); font: 800 11.5px 'Figtree', sans-serif; letter-spacing: .8px; text-transform: uppercase; }
+  .yourc b { display: block; font: 700 20px 'Sora', sans-serif; }
+  .yourc em { font-style: normal; color: var(--muted); font-size: 13px; }
+  .yourc .go { background: var(--accent); color: var(--on-accent); font-weight: 700; border-radius: 999px; padding: 9px 18px; flex: none; }
+  .nrow { display: flex; gap: 12px; align-items: center; padding: 8px 2px; text-decoration: none; color: inherit; border-radius: 12px; }
+  .nrow:hover { background: var(--surface); }
+  .nrow .ni { width: 44px; height: 44px; border-radius: 12px; background: var(--surface); display: grid; place-items: center; color: var(--muted); flex: none; }
+  .nrow .ni svg { width: 22px; height: 22px; }
+  .nrow .nt { flex: 1; min-width: 0; }
+  .nrow .nt b { display: block; font-weight: 700; line-height: 1.3; }
+  .nrow .nt small { color: var(--muted); font-size: 13px; }
+  .ctabs { display: flex; gap: 8px; margin: 2px 0 12px; }
+  .ctabs button { all: unset; cursor: pointer; padding: 8px 18px; border-radius: 999px; background: var(--chip); font-weight: 600; }
+  .ctabs button.on { background: var(--accent); color: var(--on-accent); font-weight: 700; }
+  .ctabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .quick { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 8px; }
   .toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--text); color: #000; padding: 10px 18px;
     border-radius: 999px; font-weight: 700; font-size: 14px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 40; max-width: 90vw; text-align: center; }
   .toast.show { opacity: 1; }
@@ -404,7 +438,7 @@ const findStation = (id) => shown.find((x) => x.id === id) || favs.find((x) => x
 let homeDraw = null;
 let recentOpen = load('radio.recentOpen', true);
 let favsOpen = load('radio.favsOpen', true);
-let countriesOpen = load('radio.countriesOpen', true);
+let countriesOpen = load('radio.countriesOpen2', false);
 let countryDraw = null;
 let shown = [];       // stations currently in the list, for click lookup
 let listState = { q: '', cat: 'all', limit: PAGE };
@@ -414,9 +448,37 @@ function tunoCard() {
     <img src="icons/tuno-192.png" alt="" width="56" height="56"><span class="tx"><b>Get the TUNO app</b><small>Radio, TV and news from every country. Free, no ads.</small></span><em>Google Play</em></a>`;
 }
 
-const LOGO = '<span class="logo" aria-hidden="true">' + [[7.7, 560], [11.6, 700], [16.4, 480], [22.2, 760], [28, 600], [22.2, 720], [16.4, 520], [11.6, 660], [7.7, 580]]
+const LOGO = '<span class="tmark" aria-hidden="true">' + [[7.7, 560], [11.6, 700], [16.4, 480], [22.2, 760], [28, 600], [22.2, 720], [16.4, 520], [11.6, 660], [7.7, 580]]
   .map(([h, d]) => `<i style="--h:${h};--d:${d}ms"></i>`).join('') + '</span>';
 const flagUrl = (c) => 'https://akarafilovski.github.io/tuno-data/flags/' + c.toLowerCase() + '.png';
+
+// ---------- welcome helpers (country, recent countries, news) ----------
+let recentCountries = load('radio.recentCountries', []);
+function noteCountry(code) { recentCountries = [code, ...recentCountries.filter((c) => c !== code)].slice(0, 8); save('radio.recentCountries', recentCountries); }
+let TZ = null;
+async function detectCountry() {
+  if (!TZ) { try { TZ = await (await fetch('tz.json')).json(); } catch (e) { TZ = {}; } }
+  let code = null;
+  try { code = TZ[Intl.DateTimeFormat().resolvedOptions().timeZone] || null; } catch (e) {}
+  code = code || userCountry() || 'US';
+  return COUNTRIES.some((c) => c.code === code) ? code : 'US';
+}
+const newsCache = {};
+async function getNews(code) {
+  if (!newsCache[code]) {
+    try { newsCache[code] = (await (await fetch('https://akarafilovski.github.io/tuno-data/news/' + code + '.json')).json()).headlines || []; } catch (e) { newsCache[code] = []; }
+  }
+  return newsCache[code];
+}
+function ago(ms) {
+  const m = Math.max(1, Math.round((Date.now() - ms) / 60000));
+  return m < 60 ? m + 'm ago' : m < 1440 ? Math.round(m / 60) + 'h ago' : Math.round(m / 1440) + 'd ago';
+}
+ICON.news = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11"/></svg>';
+const newsRow = (h) => `<a class="nrow" href="${esc(h.url)}" target="_blank" rel="noopener noreferrer"><span class="ni">${ICON.news}</span><span class="nt"><b>${esc(h.title)}</b><small>${esc(h.source || '')}${h.publishedAtEpochMillis ? ' · ' + ago(h.publishedAtEpochMillis) : ''}</small></span></a>`;
+const tile = (s, size) => `<button type="button" class="tile${current && current.id === s.id ? ' on' : ''}" data-id="${esc(s.id)}" data-size="${size}" style="--s:${size}">${logoHtml(s)}<b>${esc(s.name)}</b></button>`;
+const slot = (s) => `<button type="button" class="slot${current && current.id === s.id ? ' on' : ''}" data-id="${esc(s.id)}">${logoHtml(s)}<b>${esc(s.name)}</b>${ICON.play}</button>`;
+const yourCountry = (code) => `<a class="yourc" data-code="${code}" href="${slugOf(code)}/"><img class="flag" src="${flagUrl(code)}" alt="" width="56" height="56"><span class="tx"><small>Your country</small><b>${esc(countryName(code))}</b><em>Radio and news</em></span><span class="go">Open</span></a>`;
 
 async function renderHome() {
   route = { code: null };
@@ -431,30 +493,42 @@ async function renderHome() {
   wireSupport();
   await Promise.all([getIndex(), getCountries()]);
   if (route.code !== null) return;   // the user already moved on while this loaded
+  const mine = await detectCountry();
+  if (route.code !== null) return;
+  let starters = [];
+  getCountry(mine).then((l) => {
+    starters = l.filter((st) => st.stream.url.startsWith('https:')).slice(0, 6);
+    if (route.code === null && homeDraw) homeDraw();
+  }).catch(() => {});
   const q = $('q');
   const list = COUNTRIES.map((c) => app(c.code)).sort((a, b) => a.name.localeCompare(b.name));
   const card = (a) => `<a class="app" data-code="${a.code}" href="${slugOf(a.code)}/" style="--a:${a.accent}">
         <img class="flag" src="${flagUrl(a.code)}" alt="" loading="lazy" width="44" height="44"><b>${esc(a.name.replace(/^Radio /, ''))}</b><small>${a.stations}</small></a>`;
   const draw = () => {
     const term = q.value.trim().toLowerCase();
-    const match = (a) => !term || a.name.replace(/^Radio /, '').toLowerCase().includes(term) || a.name.toLowerCase().includes(term) || countryName(a.code).toLowerCase().includes(term) || a.code.toLowerCase() === term;
+    const match = (a) => !term || a.name.toLowerCase().includes(term) || countryName(a.code).toLowerCase().includes(term) || a.code.toLowerCase() === term;
     const m = list.filter(match);
+    const rec = recent.filter((r) => !isFav(r.id)).slice(0, 8);
+    const returning = favs.length > 0 || recent.length > 0 || recentCountries.length > 0;
+    const start = !recent.length && starters.length ? `<div class="label">Start listening</div><div class="slots">${starters.map(slot).join('')}</div>` : '';
     let html = '';
     if (!term) {
-      html += `<button type="button" class="label fold${favsOpen ? ' open' : ''}" data-toggle="favs" aria-expanded="${favsOpen}">Favorites${favs.length ? `<span>${favs.length}</span>` : ''}${ICON.chev}</button>`;
-      if (favsOpen) html += favs.length
-        ? `<div class="list">${favs.map(stationRow).join('')}</div>`
-        : `<div class="favempty"><span>${ICON.star}</span><p>Your favorite stations will be here.<br>Tap the star next to a station to add it.</p></div>`;
-    }
-    const rec = recent.filter((r) => !isFav(r.id)).slice(0, 6);
-    if (!term && rec.length) {
-      html += `<button type="button" class="label fold${recentOpen ? ' open' : ''}" data-toggle="recent" aria-expanded="${recentOpen}">Recently played<span>${rec.length}</span>${ICON.chev}</button>`;
-      if (recentOpen) html += `<div class="list">${rec.map(stationRow).join('')}</div>`;
+      if (!returning) html += yourCountry(mine) + start;
+      html += `<div class="label">Favorites</div>`;
+      html += favs.length ? `<div class="tiles">${favs.map((f) => tile(f, 84)).join('')}</div>`
+        : returning ? '' : `<div class="favempty"><span>${ICON.star}</span><p>Your favorite stations will be here.<br>Tap the star next to a station to add it.</p></div>`;
+      if (returning && !favs.length) html = html.replace('<div class="label">Favorites</div>', '');
+      if (rec.length) html += `<div class="label">Recent</div><div class="tiles">${rec.map((r) => tile(r, 72)).join('')}</div>`;
+      if (returning) html += start + '<div id="home-news"></div>';
     }
     if (m.length) {
       if (term) html += '<div class="label">Countries</div>';
       else html += `<button type="button" class="label fold${countriesOpen ? ' open' : ''}" data-toggle="countries" aria-expanded="${countriesOpen}">Countries<span>${m.length}</span>${ICON.chev}</button>`;
       if (term || countriesOpen) html += `<div class="apps">${m.map(card).join('')}</div>`;
+      else {
+        const quick = [...new Set([mine, ...recentCountries])].slice(0, 6).map((c) => list.find((x) => x.code === c)).filter(Boolean);
+        html += `<div class="quick">${quick.map(card).join('')}</div>`;
+      }
     }
     if (!term && TUNO.live) html += tunoCard();
     let hits = [];
@@ -465,7 +539,11 @@ async function renderHome() {
       if (loading && hits.length) html += `<p class="note" style="text-align:center">Still searching: ${prefetchState.done} of ${prefetchState.total} countries</p>`;
     }
     $('home-lists').innerHTML = html || '<div class="empty">Nothing found.</div>';
-    shown = hits.concat(favs, rec, recent);
+    shown = hits.concat(favs, rec, recent, starters);
+    if (!term && returning) getNews(mine).then((n) => {
+      const box = $('home-news');
+      if (box && route.code === null && n.length) box.innerHTML = '<div class="label">News</div>' + n.slice(0, 2).map(newsRow).join('');
+    });
   };
   homeDraw = draw;
   q.addEventListener('input', () => { if (q.value.trim().length >= 2) prefetchAll(() => { if (q.isConnected && q.value.trim().length >= 2) draw(); }); draw(); });
@@ -476,28 +554,31 @@ async function renderHome() {
 
 async function renderCountry(code) {
   route = { code };
+  noteCountry(code);
   listState = { q: '', cat: 'all', limit: PAGE };
   await Promise.all([getIndex(), getCountries()]);
   if (route.code !== code) return;
   const pick = app(code);
   const name = pick.name;
   document.title = `${name}: listen to ${pick.stations} live stations online | TUNO`;
-  setAccent(pick.accent);
+  setAccent('#FF8A3D');   // one accent everywhere, like the app
   view.innerHTML = `
     <div class="hero"><div class="top"><button class="iconbtn" id="back" type="button" aria-label="All radios">${ICON.back}</button>
       <img class="flag" src="${flagUrl(code)}" alt=""><h1>${esc(name)}</h1></div>
-    <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search stations" autocomplete="off" aria-label="Search stations"></div></div>
-    <div class="chips" id="chips"></div>
-    <div id="stations"><div class="empty">Loading stations…</div></div>
+    </div>
+    <div class="ctabs" id="ctabs"><button type="button" data-tab="home" class="on">Home</button><button type="button" data-tab="radio">Radio</button><button type="button" data-tab="news">News</button></div>
+    <div id="ctab"><div class="empty">Loading…</div></div>
 `;
   $('back').addEventListener('click', () => goBack());
   window.scrollTo(0, 0);
   let stations;
-  try { stations = await getCountry(code); if (route.code !== code) return; } catch (e) { if (route.code !== code) return; $('stations').innerHTML = '<div class="empty">Could not load the stations. Check your connection.</div>'; return; }
+  try { stations = await getCountry(code); if (route.code !== code) return; } catch (e) { if (route.code !== code) return; $('ctab').innerHTML = '<div class="empty">Could not load the stations. Check your connection.</div>'; return; }
   // Browsers block old http streams on a secure page, so only https stations are listed here (all of them play in the apps).
   const appOnly = stations.filter((s) => !s.stream.url.startsWith('https:')).length;
   stations = stations.filter((s) => s.stream.url.startsWith('https:'));
   const cats = ['all', 'fav', ...Object.keys(CATEGORY).filter((k) => stations.some((s) => s.category === k))];
+  function radioTab() {
+  $('ctab').innerHTML = `<div class="search">${ICON.search}<input id="q" type="search" placeholder="Search stations" autocomplete="off" aria-label="Search stations" value="${esc(listState.q)}"></div><div class="chips" id="chips"></div><div id="stations"></div>`;
   const chips = $('chips');
   const drawChips = () => { chips.innerHTML = cats.map((c) => `<button class="chip${listState.cat === c ? ' on' : ''}" data-cat="${c}" type="button">${c === 'all' ? 'All' : c === 'fav' ? '★ Favorites' : CATEGORY[c]}</button>`).join(''); };
   const draw = () => {
@@ -517,12 +598,47 @@ async function renderCountry(code) {
   drawChips();
   draw();
   countryDraw = draw;
+  }
+  const starters = stations.slice(0, 6);
+  let tab = 'home';
+  function homeTab() {
+    countryDraw = null;
+    const rec = recent.filter((r) => !isFav(r.id)).slice(0, 8);
+    let h = '';
+    if (favs.length) h += `<div class="label">Favorites</div><div class="tiles">${favs.map((f) => tile(f, 84)).join('')}</div>`;
+    if (rec.length) h += `<div class="label">Recent</div><div class="tiles">${rec.map((r) => tile(r, 72)).join('')}</div>`;
+    if (!recent.length && starters.length) h += `<div class="label">Start listening</div><div class="slots">${starters.map(slot).join('')}</div>`;
+    h += '<div id="c-news"></div>';
+    $('ctab').innerHTML = h;
+    shown = favs.concat(rec, starters, recent);
+    getNews(code).then((n) => {
+      const box = $('c-news');
+      if (box && route.code === code && tab === 'home' && n.length) box.innerHTML = '<div class="label">News</div>' + n.slice(0, 2).map(newsRow).join('');
+    });
+  }
+  function newsTab() {
+    countryDraw = null;
+    $('ctab').innerHTML = '<div class="empty">Loading…</div>';
+    getNews(code).then((n) => {
+      if (route.code !== code || tab !== 'news') return;
+      $('ctab').innerHTML = n.length ? n.map(newsRow).join('') : '<div class="empty">No headlines for this country yet.</div>';
+    });
+  }
+  function showTab(t) {
+    tab = t;
+    document.querySelectorAll('#ctabs button').forEach((b) => b.classList.toggle('on', b.dataset.tab === t));
+    (t === 'radio' ? radioTab : t === 'news' ? newsTab : homeTab)();
+  }
+  $('ctabs').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) showTab(b.dataset.tab); });
+  showTab('home');
 }
 function redrawRows() {
   document.querySelectorAll('.row').forEach((el) => {
     const s = findStation(el.dataset.id);
     if (s) el.outerHTML = stationRow(s);
   });
+  document.querySelectorAll('.tile').forEach((el) => { const s = findStation(el.dataset.id); if (s) el.outerHTML = tile(s, el.dataset.size); });
+  document.querySelectorAll('.slot').forEach((el) => { const s = findStation(el.dataset.id); if (s) el.outerHTML = slot(s); });
 }
 function setAccent(c) { document.documentElement.style.setProperty('--accent', c); }
 
@@ -530,7 +646,7 @@ view.addEventListener('click', (e) => {
   const fold = e.target.closest('[data-toggle]');
   if (fold) {
     if (fold.dataset.toggle === 'recent') { recentOpen = !recentOpen; save('radio.recentOpen', recentOpen); }
-    else if (fold.dataset.toggle === 'countries') { countriesOpen = !countriesOpen; save('radio.countriesOpen', countriesOpen); }
+    else if (fold.dataset.toggle === 'countries') { countriesOpen = !countriesOpen; save('radio.countriesOpen2', countriesOpen); }
     else { favsOpen = !favsOpen; save('radio.favsOpen', favsOpen); }
     if (homeDraw) homeDraw();
     return;
@@ -553,7 +669,7 @@ view.addEventListener('click', (e) => {
     if (c.tagName === 'A' && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) return;
     e.preventDefault(); go(c.dataset.code); return;
   }
-  const row = e.target.closest('.row');
+  const row = e.target.closest('.row, .tile, .slot');
   if (row) {
     const s = findStation(row.dataset.id);
     if (s) (current && current.id === s.id) ? togglePlay() : play(s);
