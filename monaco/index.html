@@ -324,6 +324,10 @@
   }
   .btn.play { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--chip); }
   .btn.play svg { width: 18px; height: 18px; flex: none; }
+  .shim { background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.15), rgba(255,255,255,.06)); background-size: 200% 100%; animation: shim 1.3s linear infinite; border-radius: 14px; }
+  @keyframes shim { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+  .skslots { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 9px; } .skslots .shim { height: 62px; }
+  .sknews { display: flex; gap: 12px; align-items: center; padding: 8px 2px; } .sknews > .shim { width: 44px; height: 44px; flex: none; border-radius: 12px; } .sknews > div { flex: 1; display: grid; gap: 8px; } .sknews > div > .shim { height: 14px; border-radius: 7px; } .sknews > div > .shim + .shim { width: 60%; height: 12px; border-radius: 6px; }
   .quick { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 8px; }
   .toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--text); color: #000; padding: 10px 18px;
     border-radius: 999px; font-weight: 700; font-size: 14px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 40; max-width: 90vw; text-align: center; }
@@ -573,10 +577,10 @@ async function renderHome() {
   const mine = await detectCountry();
   if (route.code !== null) return;
   let starters = [];
+  let startersLoaded = false;
   getCountry(mine).then((l) => {
     starters = l.filter((st) => st.stream.url.startsWith('https:')).slice(0, 6);
-    if (route.code === null && homeDraw) homeDraw();
-  }).catch(() => {});
+  }).catch(() => {}).finally(() => { startersLoaded = true; if (route.code === null && homeDraw) homeDraw(); });
   const q = $('q');
   const list = COUNTRIES.map((c) => app(c.code)).sort((a, b) => a.name.localeCompare(b.name));
   const card = (a) => `<a class="app" data-code="${a.code}" href="${slugOf(a.code)}/" style="--a:${a.accent}">
@@ -587,7 +591,8 @@ async function renderHome() {
     const m = list.filter(match);
     const rec = recent.filter((r) => !isFav(r.id)).slice(0, 8);
     const returning = favs.length > 0 || recent.length > 0 || recentCountries.length > 0;
-    const start = !recent.length && starters.length ? `<div class="label">Start listening</div><div class="slots">${starters.map(slot).join('')}</div>` : '';
+    const sk = '<div class="skslots">' + '<div class="shim"></div>'.repeat(6) + '</div>';
+    const start = !recent.length && (starters.length || !startersLoaded) ? `<div class="label">Start listening</div>` + (starters.length ? `<div class="slots">${starters.map(slot).join('')}</div>` : sk) : '';
     let html = '';
     if (!term) {
       if (!returning) html += yourCountry(mine) + start;
@@ -598,7 +603,7 @@ async function renderHome() {
       if (rec.length) html += `<div class="label">Recent</div><div class="tiles">${rec.map((r) => tile(r, 72)).join('')}</div>`;
       // discovery (start listening, news) steps aside once you have played something and have your own content
       const discovery = !(recent.length > 0 && (favs.length > 0 || rec.length > 0));
-      if (returning && discovery) html += start + '<div id="home-news"></div>';
+      if (returning && discovery) html += start + '<div id="home-news"><div class="label">News</div>' + '<div class="sknews"><div class="shim"></div><div><div class="shim"></div><div class="shim"></div></div></div>'.repeat(2) + '</div>';
     }
     if (m.length) {
       if (term) html += '<div class="label">Countries</div>';
@@ -621,7 +626,7 @@ async function renderHome() {
     shown = hits.concat(favs, rec, recent, starters);
     if (!term && returning) getNews(mine).then((n) => {
       const box = $('home-news');
-      if (box && route.code === null && n.length) box.innerHTML = '<div class="label">News</div>' + n.slice(0, 2).map(newsRow).join('');
+      if (box && route.code === null) box.innerHTML = n.length ? '<div class="label">News</div>' + n.slice(0, 2).map(newsRow).join('') : '';
     });
   };
   homeDraw = draw;
