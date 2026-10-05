@@ -306,6 +306,21 @@
     .pv-back { display: none !important; }
     .pbgfade { background: linear-gradient(rgba(10,16,32,.5), rgba(10,16,32,.92)); }
   }
+  @media (min-width: 600px) and (max-width: 899px) and (orientation: portrait) {
+    /* portrait tablet: the list on top, the player as a strip at the bottom (cover on the left) */
+    .pview { top: auto; left: 0; right: 0; bottom: 0; height: 340px; z-index: 5; transform: none; visibility: visible; border-top: 1px solid var(--border); background: var(--bg); }
+    .player { display: none !important; }
+    .wrap { padding-bottom: 360px !important; }
+    .pv-back { display: none !important; }
+    .pin { width: 100%; max-width: none; display: grid; grid-template-columns: 230px 1fr; grid-template-rows: auto auto auto 1fr; column-gap: 24px; padding: 10px 24px 12px; }
+    .pcov { grid-column: 1; grid-row: 1 / 5; width: 200px; height: 200px; margin: auto; }
+    .ptopr { grid-column: 2; grid-row: 1; min-height: 0; }
+    .pname { grid-column: 2; grid-row: 2; margin: 4px 0 0; }
+    .pchips { grid-column: 2; grid-row: 3; }
+    .pctlwrap { grid-column: 2; grid-row: 4; margin: auto; padding-top: 6px; }
+    .pvlogo { display: none; }
+    .pempty { grid-column: 1 / 3; }
+  }
   .btn.play { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--chip); }
   .btn.play svg { width: 18px; height: 18px; flex: none; }
   .quick { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 8px; }
@@ -926,7 +941,7 @@ function renderPv() {
   </div></div>`;
 }
 function openPv() {
-  if (!current || matchMedia('(min-width: 900px)').matches) return;
+  if (!current || matchMedia('(min-width: 900px), (min-width: 600px) and (orientation: portrait)').matches) return;
   renderPv();
   pvOpen = true;
   $('pview').classList.add('show');
