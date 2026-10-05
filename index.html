@@ -250,8 +250,8 @@
   .ctabs button { all: unset; cursor: pointer; padding: 8px 18px; border-radius: 999px; background: var(--chip); font-weight: 600; }
   .ctabs button.on { background: var(--accent); color: var(--on-accent); font-weight: 700; }
   .ctabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .playbtn { background: var(--chip); }
-  .playbtn svg { width: 22px; height: 22px; }
+  .btn.play { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--chip); }
+  .btn.play svg { width: 18px; height: 18px; flex: none; }
   .quick { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 8px; }
   .toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--text); color: #000; padding: 10px 18px;
     border-radius: 999px; font-weight: 700; font-size: 14px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 40; max-width: 90vw; text-align: center; }
@@ -283,6 +283,7 @@
   <div class="t" id="install-text"></div>
   <div class="acts">
     <button class="btn main" id="install-go" type="button">Install</button>
+    <a class="btn play" id="install-play" href="#" target="_blank" rel="noopener" aria-label="Get the TUNO app on Google Play"></a>
     <button class="btn ghost" id="install-later" type="button">Not now</button>
   </div>
 </div>
@@ -451,7 +452,6 @@ function tunoCard() {
 const LOGO = '<span class="tmark" aria-hidden="true">' + [[7.7, 560], [11.6, 700], [16.4, 480], [22.2, 760], [28, 600], [22.2, 720], [16.4, 520], [11.6, 660], [7.7, 580]]
   .map(([h, d]) => `<i style="--h:${h};--d:${d}ms"></i>`).join('') + '</span>';
 const PLAY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#2D9CFF" d="M4 2.5 13 12 4 21.5z"/><path fill="#34D17A" d="M4 2.5 17.6 10.1 13 12z"/><path fill="#FFC83D" d="M17.6 10.1 21 12 17.6 13.9z"/><path fill="#F0525C" d="M4 21.5 13 12 17.6 13.9z"/></svg>';
-const playBtn = () => `<a class="iconbtn playbtn" href="https://play.google.com/store/apps/details?id=${TUNO.app}" data-play target="_blank" rel="noopener" aria-label="Get the TUNO app on Google Play">${PLAY_ICON}</a>`;
 const flagUrl = (c) => 'https://akarafilovski.github.io/tuno-data/flags/' + c.toLowerCase() + '.png';
 
 // ---------- welcome helpers (country, recent countries, news) ----------
@@ -487,7 +487,7 @@ async function renderHome() {
   document.title = 'TUNO';
   setAccent('#FF8A3D');
   view.innerHTML = `
-    <div class="top">${LOGO}<h1>TUNO</h1>${playBtn()}<a class="iconbtn about-btn" href="about.html" aria-label="About TUNO"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg></a></div>
+    <div class="top">${LOGO}<h1>TUNO</h1><a class="iconbtn about-btn" href="about.html" aria-label="About TUNO"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg></a></div>
     <div class="fixed">${supportHtml()}
       <div class="search">${ICON.search}<input id="q" type="search" placeholder="Search a country or station" autocomplete="off" aria-label="Search a country or station"></div></div>
     <div id="home-lists"><div class="empty">Loading…</div></div>
@@ -566,7 +566,7 @@ async function renderCountry(code) {
   setAccent('#FF8A3D');   // one accent everywhere, like the app
   view.innerHTML = `
     <div class="hero"><div class="top"><button class="iconbtn" id="back" type="button" aria-label="All radios">${ICON.back}</button>
-      <img class="flag" src="${flagUrl(code)}" alt=""><h1>${esc(name)}</h1>${playBtn()}</div>
+      <img class="flag" src="${flagUrl(code)}" alt=""><h1>${esc(name)}</h1></div>
     </div>
     <div class="ctabs" id="ctabs"><button type="button" data-tab="home" class="on">Home</button><button type="button" data-tab="radio">Radio</button><button type="button" data-tab="news">News</button></div>
     <div id="ctab"><div class="empty">Loading…</div></div>
@@ -645,7 +645,6 @@ function redrawRows() {
 function setAccent(c) { document.documentElement.style.setProperty('--accent', c); }
 
 view.addEventListener('click', (e) => {
-  if (e.target.closest('[data-play]') && !TUNO.live) { e.preventDefault(); toast('The TUNO app is coming soon to Google Play'); return; }
   const fold = e.target.closest('[data-toggle]');
   if (fold) {
     if (fold.dataset.toggle === 'recent') { recentOpen = !recentOpen; save('radio.recentOpen', recentOpen); }
@@ -909,6 +908,11 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catc
   const box = $('install');
   const text = $('install-text');
   const go = $('install-go');
+  const playLink = $('install-play');
+  playLink.innerHTML = PLAY_ICON + 'Google Play';
+  playLink.href = 'https://play.google.com/store/apps/details?id=' + TUNO.app;
+  // until the app is listed the button only says so
+  playLink.addEventListener('click', (e) => { if (!TUNO.live) { e.preventDefault(); toast('The TUNO app is coming soon to Google Play'); } });
   const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
   const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   let snoozed = false;
@@ -919,6 +923,7 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catc
     if (mode === 'ios') {
       text.innerHTML = '<b>Install TUNO</b><span>Tap Share, then <b style="display:inline;font-size:inherit;color:var(--text)">Add to Home Screen</b>.</span>';
       go.style.display = 'none';
+      playLink.style.display = 'none';   // no Google Play on iPhone
     } else {
       text.innerHTML = '<b>Install TUNO</b><span>Listen from your home screen.</span>';
     }
