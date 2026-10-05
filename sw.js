@@ -1,7 +1,7 @@
 // Offline support. Pages, scripts, styles and the app manifest are checked with the network first (a cached copy is used
 // only when offline); big static files (wasm, images, fonts) come from the cache and are refreshed in the background.
 // Bump the cache name to clear everything old on the next visit.
-const CACHE = 'axar-radio-v5';
+const CACHE = 'axar-radio-v6';
 
 self.addEventListener('install', () => self.skipWaiting());
 // The sites on this domain share one cache storage, so each one only cleans up its own old caches.
