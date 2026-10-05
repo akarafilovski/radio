@@ -596,7 +596,9 @@ async function renderHome() {
         : returning ? '' : `<div class="favempty"><span>${ICON.star}</span><p>Your favorite stations will be here.<br>Tap the star next to a station to add it.</p></div>`;
       if (returning && !favs.length) html = html.replace('<div class="label">Favorites</div>', '');
       if (rec.length) html += `<div class="label">Recent</div><div class="tiles">${rec.map((r) => tile(r, 72)).join('')}</div>`;
-      if (returning) html += start + '<div id="home-news"></div>';
+      // discovery (start listening, news) steps aside once you have played something and have your own content
+      const discovery = !(recent.length > 0 && (favs.length > 0 || rec.length > 0));
+      if (returning && discovery) html += start + '<div id="home-news"></div>';
     }
     if (m.length) {
       if (term) html += '<div class="label">Countries</div>';
@@ -685,7 +687,7 @@ async function renderCountry(code) {
     if (favs.length) h += `<div class="label">Favorites</div><div class="tiles">${favs.map((f) => tile(f, 84)).join('')}</div>`;
     if (rec.length) h += `<div class="label">Recent</div><div class="tiles">${rec.map((r) => tile(r, 72)).join('')}</div>`;
     if (!recent.length && starters.length) h += `<div class="label">Start listening</div><div class="slots">${starters.map(slot).join('')}</div>`;
-    h += '<div id="c-news"></div>';
+    if (!(recent.length > 0 && (favs.length > 0 || rec.length > 0))) h += '<div id="c-news"></div>';
     $('ctab').innerHTML = h;
     shown = favs.concat(rec, starters, recent);
     getNews(code).then((n) => {
