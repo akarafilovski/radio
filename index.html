@@ -685,14 +685,17 @@ async function renderCountry(code) {
   let tab = 'home';
   function homeTab() {
     countryDraw = null;
-    const rec = recent.filter((r) => !isFav(r.id)).slice(0, 8);
+    // a country's Home is that country's page: only its favorites and recent stations (Welcome shows all of them), and its
+    // radio and news always, like the app
+    const mine = favs.filter((f) => f.country === code);
+    const rec = recent.filter((r) => r.country === code && !isFav(r.id)).slice(0, 8);
     let h = '';
-    if (favs.length) h += `<div class="label">Favorites</div><div class="tiles">${favs.map((f) => tile(f, 84)).join('')}</div>`;
+    if (mine.length) h += `<div class="label">Favorites</div><div class="tiles">${mine.map((f) => tile(f, 84)).join('')}</div>`;
     if (rec.length) h += `<div class="label">Recent</div><div class="tiles">${rec.map((r) => tile(r, 72)).join('')}</div>`;
-    if (!recent.length && starters.length) h += `<div class="label">Start listening</div><div class="slots">${starters.map(slot).join('')}</div>`;
-    if (!(recent.length > 0 && (favs.length > 0 || rec.length > 0))) h += '<div id="c-news"></div>';
+    if (starters.length) h += `<div class="label">Start listening</div><div class="slots">${starters.map(slot).join('')}</div>`;
+    h += '<div id="c-news"></div>';
     $('ctab').innerHTML = h;
-    shown = favs.concat(rec, starters, recent);
+    shown = mine.concat(rec, starters, favs, recent);
     getNews(code).then((n) => {
       const box = $('c-news');
       if (box && route.code === code && tab === 'home' && n.length) box.innerHTML = '<div class="label">News</div>' + n.slice(0, 2).map(newsRow).join('');
